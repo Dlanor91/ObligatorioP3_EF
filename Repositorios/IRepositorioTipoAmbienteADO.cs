@@ -7,7 +7,7 @@ using Dominio.InterfacesRepositorio;
 
 namespace Repositorios
 {
-    class IRepositorioTipoAmbienteADO
+    public class IRepositorioTipoAmbienteADO
     {
     }
 }
