@@ -8,9 +8,7 @@ using Dominio.InterfacesRepositorio;
 namespace Repositorios
 {
 
-    public class RepositorioTipoPlantaADO : IRepositorioTipoPlanta
-
-    class RepositorioTipoPlantaADO : IRepositorioTipoPlanta
+    public class RepositorioTipoPlantaADO : IRepositorioTipoPlanta   
 
     {
         public bool Add(TipoPlanta obj)
