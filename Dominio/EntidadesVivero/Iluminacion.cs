@@ -5,11 +5,9 @@ using System.Text;
 namespace Dominio.EntidadesVivero
 
 
-public class Compra
+public class Iluminacion
 {
+	public int id { get; set; }
 
-    class Compra
-    {
-    }
-
+	public string tipoIluminacion { get; set; }
 }
