@@ -8,8 +8,4 @@ namespace Dominio.EntidadesVivero
 public class Compra
 {
 
-    class Compra
-    {
-    }
-
 }
