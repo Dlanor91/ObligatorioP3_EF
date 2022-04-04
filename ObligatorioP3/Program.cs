@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Dominio.EntidadesVivero;
+using Dominio.InterfacesRepositorio;
+using LogicaDeAplicacion;
+using System;
+using Repositorios;
 
 namespace ObligatorioP3
 {
@@ -6,7 +10,16 @@ namespace ObligatorioP3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IManejadorTipoPlantas manejadorTP = FabricaDeManejadores.ObtenerManejadorPlanta();
+
+            TipoPlanta tp = new TipoPlanta()
+            {                
+                nombre = "Planta2",
+                descripcionTipo = "Descrip2",
+                
+            };
+            bool ok = manejadorTP.AgregarTipoPlanta(tp);
+            Console.WriteLine(ok);            
             Console.ReadLine();
         }
     }

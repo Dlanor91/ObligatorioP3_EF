@@ -4,6 +4,7 @@ using System.Text;
 using System.Data;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using Microsoft.Data.SqlClient;
 
 namespace Repositorios
 {
@@ -13,7 +14,39 @@ namespace Repositorios
     {
         public bool Add(TipoPlanta obj)
         {
-            throw new NotImplementedException();
+            bool listo = false;
+
+            SqlConnection conect = Conexion.ObtenerConexion();
+            string sql = "INSERT INTO TipoPlanta VALUES(@nombre,@desc);";
+            SqlCommand com = new SqlCommand(sql, conect);
+
+            com.Parameters.AddWithValue("@nombre",obj.nombre);
+            com.Parameters.AddWithValue("@desc", obj.descripcionTipo);
+
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                Conexion.AbrirConexion(conect);
+                transaccion = conect.BeginTransaction();
+                com.Transaction = transaccion;
+                int filasAfectadas = com.ExecuteNonQuery();
+                listo = filasAfectadas == 1;
+                transaccion.Commit();
+                Conexion.CerrarConexion(conect);
+
+            }
+            catch
+            {
+                if (transaccion != null) transaccion.Rollback();
+               
+            }
+            finally 
+            {
+                Conexion.CerrarYDisposeConexion(conect);
+            }
+
+            return listo;
         }
         
         public TipoPlanta buscarTipoPlanta(string nombreTipo)
@@ -23,7 +56,8 @@ namespace Repositorios
 
         public bool eliminarTipoPlanta(string nombreTipo)
         {
-            throw new NotImplementedException();
+            bool listo = false;
+            return listo;
         }
 
         public IEnumerable<TipoPlanta> FindAll()
