@@ -37,17 +37,27 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Create
         public ActionResult Create()
         {
-            return View();
+            TipoPlanta tpNew = new TipoPlanta();
+            return View(tpNew);
         }
 
         // POST: TipoPlantaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(TipoPlanta tpNew)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
+
+                if (altaTP)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else {
+                    ViewBag.Error("No fue posible el alta de un nuevo Tipo de Planta.");
+                    return View();
+                }
             }
             catch
             {
