@@ -39,6 +39,7 @@ namespace Repositorios
             catch
             {
                 if (transaccion != null) transaccion.Rollback();
+                listo = false;
                
             }
             finally 
@@ -58,6 +59,40 @@ namespace Repositorios
         {
             bool listo = false;
             return listo;
+        }
+
+        public bool existeNombre(string nombreTipoPlanta)
+        {
+            bool tipoPlantaBuscadaNombre = false;
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            string sql = "SELECT * FROM TipoPlanta WHERE nombre=@nombreTipoPlanta;";
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@nombreTipoPlanta", nombreTipoPlanta);
+
+            try
+            {
+                Conexion.AbrirConexion(con);
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    tipoPlantaBuscadaNombre = true;
+                }
+
+                Conexion.CerrarConexion(con);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDisposeConexion(con);
+            }
+
+            return tipoPlantaBuscadaNombre;
         }
 
         public IEnumerable<TipoPlanta> FindAll()

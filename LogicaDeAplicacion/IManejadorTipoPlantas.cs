@@ -10,5 +10,7 @@ namespace LogicaDeAplicacion
     {
         public IEnumerable<TipoPlanta> MostrarTodosTiposPlantas();
         bool AgregarTipoPlanta(TipoPlanta tp);
+        bool ValidarNombreUnico(string nombreTP);
+        bool ValidarFormatoNombre(string nombreTP);
     }
 }
