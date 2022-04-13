@@ -48,14 +48,48 @@ namespace Vivero.Controllers
         {
             try
             {
-                bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
+                bool validarNewTp = tpNew.Validar();                
 
-                if (altaTP)
+                if (validarNewTp)
                 {
-                    return RedirectToAction(nameof(Index));
+                    bool verificarFormatoNombre = ManejadorTipoPlantas.ValidarFormatoNombre(tpNew.nombre);
+                    if (verificarFormatoNombre)
+                    {
+                        bool existeNombre = ManejadorTipoPlantas.ValidarNombreUnico(tpNew.nombre);
+                        if (!existeNombre)
+                        {
+                            bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
+                            if (altaTP)
+                            {
+                                if (tpNew.descripcionTipo.Length >=10 && tpNew.descripcionTipo.Length <=200)
+                                {
+                                    return RedirectToAction(nameof(Index));
+                                }
+                                else
+                                {
+                                    ViewBag.Error = "En el campo descripción debe estar entre 10 y 200 caracteres.";
+                                    return View();
+                                }
+                            }
+                            else
+                            {
+                                ViewBag.Error = "No fue posible el alta de un nuevo Tipo de Planta.";
+                                return View();
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Error = "El nombre del Tipo de Planta ya existe en la base de datos, ingrese otro.";
+                            return View();
+                        }
+                    }
+                    else {
+                        ViewBag.Error = "El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifiquelo.";
+                        return View();
+                    }                    
                 }
                 else {
-                    ViewBag.Error("No fue posible el alta de un nuevo Tipo de Planta.");
+                    ViewBag.Error = "Complete todos los campos.";
                     return View();
                 }
             }

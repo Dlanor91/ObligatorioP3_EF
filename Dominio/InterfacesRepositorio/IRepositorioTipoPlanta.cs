@@ -10,5 +10,8 @@ namespace Dominio.InterfacesRepositorio
         TipoPlanta buscarTipoPlanta(string nombreTipo);
         bool eliminarTipoPlanta(string nombreTipo);
         bool modificarDesripcionTipoPlanta(string nombreTipo);
+
+        bool existeNombre(string nombreTipoPlanta);
+        
     }
 }
