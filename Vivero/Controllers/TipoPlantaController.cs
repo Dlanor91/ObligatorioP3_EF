@@ -52,28 +52,28 @@ namespace Vivero.Controllers
 
                 if (validarNewTp)
                 {
-                    bool verificarFormatoNombre = ManejadorTipoPlantas.ValidarFormatoNombre(tpNew.nombre);
-                    if (verificarFormatoNombre)
+                    bool errorNombre = ManejadorTipoPlantas.ValidarFormatoNombre(tpNew.nombre);
+                    if (!errorNombre)
                     {
                         bool existeNombre = ManejadorTipoPlantas.ValidarNombreUnico(tpNew.nombre);
-                        if (!existeNombre)
+                        if (!existeNombre)                        
                         {
-                            bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
-                            if (altaTP)
+                            if (tpNew.descripcionTipo.Length >=10 && tpNew.descripcionTipo.Length <=200)
                             {
-                                if (tpNew.descripcionTipo.Length >=10 && tpNew.descripcionTipo.Length <=200)
+                                bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
+                                if (altaTP)
                                 {
                                     return RedirectToAction(nameof(Index));
                                 }
                                 else
                                 {
-                                    ViewBag.Error = "En el campo descripción debe estar entre 10 y 200 caracteres.";
+                                    ViewBag.Error = "No fue posible el alta de un nuevo Tipo de Planta.";
                                     return View();
                                 }
                             }
                             else
                             {
-                                ViewBag.Error = "No fue posible el alta de un nuevo Tipo de Planta.";
+                                ViewBag.Error = "El campo descripción debe estar entre 10 y 200 caracteres.";
                                 return View();
                             }
                         }
@@ -84,7 +84,7 @@ namespace Vivero.Controllers
                         }
                     }
                     else {
-                        ViewBag.Error = "El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifiquelo.";
+                        ViewBag.Error = "El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifíquelo.";
                         return View();
                     }                    
                 }

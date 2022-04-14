@@ -33,22 +33,21 @@ namespace LogicaDeAplicacion
 
         public bool ValidarFormatoNombre(string nombreTP)
         {
-            bool nombreBien = false;
+            bool errorFormato = false;
 
             if (nombreTP.Substring(0,1) ==" " || nombreTP.Substring(nombreTP.Length-1, 1) ==" ")
             {
-                nombreBien = false;
+                errorFormato = true;
             }
-            else {
-                nombreBien = true;                
-                for (int i=0;i<nombreTP.Length && nombreBien; i++) {
-                    if (Convert.ToInt32(nombreTP[i]) >= 0 && Convert.ToInt32(nombreTP[i]) <= 9) {
-                        nombreBien = false;
+            else {                               
+                for (int i=0;i<nombreTP.Length && !errorFormato; i++) {
+                    if (Char.IsNumber(nombreTP[i]) && Char.IsNumber(nombreTP[i])) {
+                        errorFormato = true;
                     }                    
                 }                
             }
 
-            return nombreBien;
+            return errorFormato;
         }
     }
 }
