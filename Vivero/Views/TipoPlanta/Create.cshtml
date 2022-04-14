@@ -43,14 +43,37 @@
 
             let nombre = document.querySelector("#nombre").value;
             let descripcionTipo = document.querySelector("#descripcionTipo").value;
+            let nombreConNum = false;
 
             if (nombre != "" && descripcionTipo != "") {
-                if (descripcionTipo.length >= 10 && descripcionTipo.length <= 200) {
-                    document.querySelector("#pMensaje").innerHTML = "";
-                    this.submit();
+
+                if (nombre.charAt(0) != " " && nombre.charAt(nombre.length - 1) != " ") {
+
+                    nombre = nombre.replace(" ", "_");
+                    
+                    for (let i = 0; i < nombre.length;i++)
+                    {
+                        if (Number(nombre[i]) >= 0 || Number(nombre[i]) <= 9) {
+                            nombreConNum = true;
+                            break;
+                        }                        
+                    }
+                    if (!nombreConNum) {
+                        if (descripcionTipo.length >= 10 && descripcionTipo.length <= 200) {
+                            document.querySelector("#pMensaje").innerHTML = "";
+                            this.submit();
+                        }
+                        else {
+                            document.querySelector("#pMensaje").innerHTML = "El campo descripción debe estar entre 10 y 200 caracteres.";
+                        }
+                    }
+                    else {
+                        document.querySelector("#pMensaje").innerHTML = "El nombre del Tipo de Planta tiene números, verifíquelo.";
+                    }
+                    
                 }
                 else {
-                    document.querySelector("#pMensaje").innerHTML = "En el campo descripción debe estar entre 10 y 200 caracteres.";
+                    document.querySelector("#pMensaje").innerHTML = "El nombre del Tipo de Planta tiene espacios embebidos, verifíquelo.";
                 }
                 
             } else {
