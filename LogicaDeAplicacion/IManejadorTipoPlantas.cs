@@ -12,5 +12,6 @@ namespace LogicaDeAplicacion
         bool AgregarTipoPlanta(TipoPlanta tp);
         bool ValidarNombreUnico(string nombreTP);
         bool ValidarFormatoNombre(string nombreTP);
+        public TipoPlanta buscarUnaPlanta(int id);
     }
 }

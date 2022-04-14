@@ -43,6 +43,8 @@
 
             let nombre = document.querySelector("#nombre").value;
             let descripcionTipo = document.querySelector("#descripcionTipo").value;
+            descripcionTipo = descripcionTipo.trim();
+            nombre = nombre.trim();
             let nombreConNum = false;
 
             if (nombre != "" && descripcionTipo != "") {

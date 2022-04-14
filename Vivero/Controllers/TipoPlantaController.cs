@@ -102,7 +102,8 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            TipoPlanta tpEdit = ManejadorTipoPlantas.buscarUnaPlanta(id);
+            return View(tpEdit);
         }
 
         // POST: TipoPlantaController/Edit/5
