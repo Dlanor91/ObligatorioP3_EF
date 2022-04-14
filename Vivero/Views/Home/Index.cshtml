@@ -3,6 +3,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h3 class="display-4">Sistema de Gestion de Plantas del Vivero</h3>
+    @*@if (Context.Session.GetString("datosUsuario") != null)
+    {
+        
+    }
+    else
+    {
+        <p class="text-center">Si desea acceder a todas las funciones de nuestra página debe <a asp-controller="Home" asp-action="Registro" class="text-decoration-none">Registrarse</a> o <a asp-controller="Home" asp-action="Login" class="text-decoration-none">Loguearse</a> </p>
+    }*@
 </div>

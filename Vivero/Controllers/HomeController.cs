@@ -23,7 +23,20 @@ namespace Vivero.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(string nombreUsuario, string contrasenna)
+        {
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult CerrarSession()
         {
             return View();
         }

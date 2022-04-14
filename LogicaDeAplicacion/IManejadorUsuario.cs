@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data;
-using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using Dominio.EntidadesVivero;
 
-namespace Repositorios
+namespace LogicaDeAplicacion
 {
-    public class IRepositorioTipoAmbienteADO
+    public interface IManejadorUsuario
     {
     }
 }
