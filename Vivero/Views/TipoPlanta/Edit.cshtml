@@ -1,0 +1,57 @@
+﻿@model Dominio.EntidadesVivero.TipoPlanta
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h3>Editar</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" id="EditTP">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label">Nombre</label>
+                <input asp-for="nombre" class="form-control" readonly/>
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcionTipo" class="control-label">Descripción</label>
+                <input asp-for="descripcionTipo" class="form-control" id="descripcionTipo"/>
+                <span asp-validation-for="descripcionTipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar a la Lista</a>
+</div>
+<p id="pMensaje">@ViewBag.Error</p>
+@section Scripts {
+    <script>
+        document.querySelector("#EditTP").addEventListener('submit', Editar)
+
+        function Editar(evento) {
+            evento.preventDefault();
+            let descripcionTipo = document.querySelector("#descripcionTipo").value;
+            descripcionTipo = descripcionTipo.trim();
+
+            if (descripcionTipo != "") {
+                if (descripcionTipo.length >= 10 && descripcionTipo.length <= 200) {
+                    document.querySelector("#pMensaje").innerHTML = "";
+                    this.submit();
+                }
+                else {
+                    document.querySelector("#pMensaje").innerHTML = "El campo descripción debe estar entre 10 y 200 caracteres.";
+                }
+            } else {
+                document.querySelector("#pMensaje").innerHTML = "Complete todos los campos.";
+            }
+        }
+
+    </script>
+}

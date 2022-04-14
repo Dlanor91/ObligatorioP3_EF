@@ -6,15 +6,24 @@
 
 <h1>Tipos de Planta</h1>
 
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
+<div class="row">
+    <div class="col-sm text-sm-left">
+        <p>
+            <a asp-action="Create">Crear Nuevo</a>
+        </p>
+    </div>
+    <div class="col-sm text-sm-right">
+        <form asp-controller="TiPoPlanta">
+            <input type="search" id="campoNombre" placeholder="Buscar..." />            
+            <a asp-action="" class="text-decoration-none">Buscar</a>
+            <a asp-action="Index" class="text-decoration-none">Mostrar Todos</a>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Id
-            </th>
+        <tr>            
             <th>
                Nombre
             </th>
@@ -26,10 +35,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
+        <tr>            
             <td>
                 @Html.DisplayFor(modelItem => item.nombre)
             </td>
@@ -37,8 +43,8 @@
                 @Html.DisplayFor(modelItem => item.descripcionTipo)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |               
-                @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new { id = item.id}) |               
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
             </td>
         </tr>
 }

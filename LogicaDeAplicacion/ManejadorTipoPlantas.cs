@@ -49,5 +49,10 @@ namespace LogicaDeAplicacion
 
             return errorFormato;
         }
+
+        public TipoPlanta buscarUnaPlanta(int id)
+        {
+            return RepoTipoPlantas.FindById(id);
+        }
     }
 }
