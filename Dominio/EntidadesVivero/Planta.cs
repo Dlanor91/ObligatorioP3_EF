@@ -22,7 +22,7 @@ namespace Dominio.EntidadesVivero
 
         public decimal temperatura { get; set; }
 
-        public TipoPlanta tipoPlante { get; set; }
+        public TipoPlanta tipoPlanta { get; set; }
 
         public Iluminacion tipoIlumincacion { get; set; }
 
