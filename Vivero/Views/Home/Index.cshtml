@@ -1,15 +1,16 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h3 class="display-4">Sistema de Gestion de Plantas del Vivero</h3>
-    @*@if (Context.Session.GetString("datosUsuario") != null)
+    @if (Context.Session.GetString("datosNombreUsuario") != null)
     {
-        
+        <p>Tiene total acceso al sistema </p>
     }
     else
     {
-        <p class="text-center">Si desea acceder a todas las funciones de nuestra página debe <a asp-controller="Home" asp-action="Registro" class="text-decoration-none">Registrarse</a> o <a asp-controller="Home" asp-action="Login" class="text-decoration-none">Loguearse</a> </p>
-    }*@
+        <p class="text-center">Si desea acceder a todas las funciones de nuestra página debe <a asp-controller="Usuario" asp-action="Register" class="text-decoration-none">Registrarse</a> o <a asp-controller="Usuario" asp-action="Login" class="text-decoration-none">Loguearse</a> </p>
+    }
 </div>

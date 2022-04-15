@@ -26,13 +26,18 @@ namespace Vivero
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();                     
+            services.AddControllersWithViews();
+
+            //para uso de sesiones
+            services.AddSession();
 
             //servicios de repositorios
             services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaADO>();
+            services.AddScoped<IRepositorioUsuario, RepositorioUsuarioADO>();
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
+            services.AddScoped<IManejadorUsuario, ManejadorUsuario>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +51,11 @@ namespace Vivero
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //para uso de sesiones
+            app.UseSession();
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

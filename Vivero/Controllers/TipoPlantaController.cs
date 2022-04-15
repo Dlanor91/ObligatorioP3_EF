@@ -24,8 +24,16 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController, en el index listamos todos los tipos de planta disponible
         public ActionResult Index()
         {
-            IEnumerable<TipoPlanta> tp = ManejadorTipoPlantas.MostrarTodosTiposPlantas();
-            return View(tp);
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                IEnumerable<TipoPlanta> tp = ManejadorTipoPlantas.MostrarTodosTiposPlantas();
+                return View(tp);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: TipoPlantaController/Details/5
@@ -37,8 +45,16 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Create
         public ActionResult Create()
         {
-            TipoPlanta tpNew = new TipoPlanta();
-            return View(tpNew);
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                TipoPlanta tpNew = new TipoPlanta();
+                return View(tpNew);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: TipoPlantaController/Create
@@ -102,8 +118,16 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
-            TipoPlanta tpEdit = ManejadorTipoPlantas.buscarUnaPlanta(id);
-            return View(tpEdit);
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                TipoPlanta tpEdit = ManejadorTipoPlantas.buscarUnaPlanta(id);
+                return View(tpEdit);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: TipoPlantaController/Edit/5

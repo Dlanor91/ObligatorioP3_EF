@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using Microsoft.Data.SqlClient;
 
 namespace Repositorios
 {
@@ -21,6 +22,46 @@ namespace Repositorios
         public Usuario FindById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Usuario Ingreso(string usuario, string contrasenia)
+        {
+            Usuario ingresado = null;
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            string sql = "SELECT * FROM Usuarios WHERE Usuario = @usuario and Contrasenia = @contrasenia;";
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@usuario", usuario);
+            com.Parameters.AddWithValue("@contrasenia", contrasenia);
+
+            try
+            {
+                Conexion.AbrirConexion(con);
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ingresado = new Usuario()
+                    {
+                        nombreUsuario = reader.GetString(1),
+                        Nombre = reader.GetString(4),
+                        Apellido = reader.GetString(5),
+                    };
+                }
+
+                Conexion.CerrarConexion(con);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDisposeConexion(con);
+            }
+
+            return ingresado;
         }
 
         public bool Remove(int id)
