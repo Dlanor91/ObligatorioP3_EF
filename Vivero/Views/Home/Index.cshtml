@@ -4,10 +4,12 @@
 }
 
 <div class="text-center">
-    <h3 class="display-4">Sistema de Gestion de Plantas del Vivero</h3>
+    <h3 class="display-4">Sistema de Gestión de Plantas del Vivero</h3>
     @if (Context.Session.GetString("datosNombreUsuario") != null)
     {
-        <p>Tiene total acceso al sistema </p>
+        <figure>
+            <img class="img-thumbnail" src="~/jpg/Vivero.jpg"/>
+        </figure>
     }
     else
     {

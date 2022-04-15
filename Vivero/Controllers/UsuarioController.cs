@@ -134,7 +134,7 @@ namespace Vivero.Controllers
         }
         public IActionResult CerrarSession()
         {
-            if (HttpContext.Session.GetString("datosNombreUsuario") == null)
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
             {
                 return View();
             }
