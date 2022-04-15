@@ -136,6 +136,7 @@ namespace Vivero.Controllers
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
             {
+                HttpContext.Session.Clear();
                 return View();
             }
             else

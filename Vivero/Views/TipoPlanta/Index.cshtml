@@ -23,8 +23,7 @@
             </th>
             <th>
                 Descripción
-            </th>
-            <th></th>
+            </th>            
         </tr>
     </thead>
     <tbody>
@@ -36,10 +35,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.descripcionTipo)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.id}) |               
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>
