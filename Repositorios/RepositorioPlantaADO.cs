@@ -4,6 +4,7 @@ using System.Text;
 using System.Data;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using Microsoft.Data.SqlClient;
 
 namespace Repositorios
 {
@@ -41,7 +42,62 @@ namespace Repositorios
 
         public IEnumerable<Planta> FindAll()
         {
-            throw new NotImplementedException();
+            List<Planta> plantas = new List<Planta>();
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            string sql = "select " +
+                         " pl.id, " +
+                         " pl.nombreCientifico," + 
+                         " pl.descripcionPlanta," +
+                         " pl.alturaMax," + 
+                         " pl.foto, " + 
+                         " ta.tipoAmbiente, " +
+                         " pl.frecuenciaRiego, " +
+                         " pl.temperatura, " + 
+                         " tp.nombre, " +
+                         " il.tipoIluminacion, " + 
+                         " pl.nombreVulgares " +
+                         "  from Planta pl " +
+            " left join TipoAmbiente ta on pl.tipoAmbiente = ta.id " +
+            " left join TipoPlanta tp on pl.tipoPlanta = tp.id " +
+            " left join Iluminacion il on pl.tipoIluminacion = il.id";
+            SqlCommand com = new SqlCommand(sql, con);
+
+            try
+            {
+                Conexion.AbrirConexion(con);
+                SqlDataReader reader = com.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Planta p = new Planta();
+                    p.id = reader.GetInt32(0);
+                    p.nombreCientifico = reader.GetString(1);
+                    p.descripcionPlanta = reader.GetString(2);
+                    p.alturaMax = reader.GetDecimal(3);
+                    p.foto = reader.GetString(4);
+                    p.frecuenciaRiego = reader.GetString(6);
+                    p.temperatura = reader.GetDecimal(7);
+                    p.nombresVulgares = reader.GetString(10);
+                    p.tipoAmbiente = CrearTipoAmbiente(reader);
+                    p.tipoPlanta = CrearTipoPlanta(reader);
+                    p.tipoIlumincacion = CrearIluminacion(reader);
+                    plantas.Add(p);   
+                }
+
+                Conexion.CerrarConexion(con);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(con);
+            }
+
+            return plantas;
         }
 
         public Planta FindById(int id)
