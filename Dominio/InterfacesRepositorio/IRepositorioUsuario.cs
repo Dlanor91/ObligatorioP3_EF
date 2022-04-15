@@ -7,5 +7,6 @@ namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioUsuario:IRepositorio<Usuario>
     {
+        public Usuario Ingreso(string usuario, string contrasenia);
     }
 }

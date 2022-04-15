@@ -7,7 +7,18 @@ using Repositorios;
 
 namespace LogicaDeAplicacion
 {
-    public class ManejadorUsuario
+    public class ManejadorUsuario : IManejadorUsuario
     {
+        public IRepositorioUsuario RepoUsuario { get; set; }
+
+        public ManejadorUsuario(IRepositorioUsuario repoUsuario)
+        {
+            RepoUsuario=repoUsuario;
+        }
+                
+        public Usuario IngresoExitoso(string nombreUsuario, string contrasenia)
+        {
+            return RepoUsuario.Ingreso(nombreUsuario, contrasenia);
+        }
     }
 }
