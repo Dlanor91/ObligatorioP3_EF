@@ -71,15 +71,7 @@ namespace Repositorios
 
                 while (reader.Read())
                 {
-                    Planta p = new Planta();
-                    p.id = reader.GetInt32(0);
-                    p.nombreCientifico = reader.GetString(1);
-                    p.descripcionPlanta = reader.GetString(2);
-                    p.alturaMax = reader.GetDecimal(3);
-                    p.foto = reader.GetString(4);
-                    p.frecuenciaRiego = reader.GetString(6);
-                    p.temperatura = reader.GetDecimal(7);
-                    p.nombresVulgares = reader.GetString(10);
+                    Planta p = CrearPlanta(reader);                    
                     p.tipoAmbiente = CrearTipoAmbiente(reader);
                     p.tipoPlanta = CrearTipoPlanta(reader);
                     p.tipoIlumincacion = CrearIluminacion(reader);
@@ -100,8 +92,45 @@ namespace Repositorios
             return plantas;
         }
 
+        private Iluminacion CrearIluminacion(SqlDataReader reader)
+        {
+            return new Iluminacion()
+            {
+                tipoIluminacion = reader.GetString(9)
+            };
+        }
+
+        private TipoPlanta CrearTipoPlanta(SqlDataReader reader)
+        {
+            return new TipoPlanta() {
+                nombre = reader.GetString(8)
+            };
+        }
+
+        private TipoAmbiente CrearTipoAmbiente(SqlDataReader reader)
+        {
+            return new TipoAmbiente()
+            {
+                tipoAmbiente = reader.GetString(5)
+            };
+        }
+
+        private Planta CrearPlanta(SqlDataReader reader)
+        {
+            Planta p = null;
+            p.id = reader.GetInt32(0);
+            p.nombreCientifico = reader.GetString(1);
+            p.descripcionPlanta = reader.GetString(2);
+            p.alturaMax = reader.GetDecimal(3);
+            p.foto = reader.GetString(4);
+            p.frecuenciaRiego = reader.GetString(6);
+            p.temperatura = reader.GetDecimal(7);
+            p.nombresVulgares = reader.GetString(10);
+            return p;
+        }
         public Planta FindById(int id)
-        { 
+        {
+            Planta plantaEncontrada = new Planta();
             SqlConnection con = Conexion.ObtenerConexion();
 
             string sql = "select pl.id, pl.nombreCientifico, pl.descripcionPlanta, pl.alturaMax, pl.foto, ta.tipoAmbiente, pl.frecuenciaRiego, pl.temperatura, tp.nombre,il.tipoIluminacion,pl.nombreVulgares from Planta pl " +
@@ -123,6 +152,7 @@ namespace Repositorios
                     pl.tipoAmbiente = CrearTipoAmbiente(reader);
                     pl.tipoPlanta = CrearTipoPlanta(reader);
                     pl.tipoIlumincacion = CrearIluminacion(reader);
+                    plantaEncontrada = pl;
                 }
 
                 Conexion.CerrarConexion(con);
@@ -137,9 +167,9 @@ namespace Repositorios
                 Conexion.CerrarYDisposeConexion(con);
             }
 
-            return plantaBuscada;
+            return plantaEncontrada;
         }
-             
+
 
         public bool Remove(int id)
         {
