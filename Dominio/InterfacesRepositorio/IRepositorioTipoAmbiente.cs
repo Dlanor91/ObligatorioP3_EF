@@ -7,5 +7,6 @@ namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioTipoAmbiente:IRepositorio<TipoAmbiente>
     {
+        
     }
 }
