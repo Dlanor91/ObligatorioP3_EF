@@ -16,9 +16,9 @@ namespace LogicaDeAplicacion
             RepoUsuario=repoUsuario;
         }
                 
-        public Usuario IngresoExitoso(string nombreUsuario, string contrasenia)
+        public Usuario IngresoExitoso(string emailUsuario, string contrasenia)
         {
-            return RepoUsuario.Ingreso(nombreUsuario, contrasenia);
+            return RepoUsuario.Ingreso(emailUsuario, contrasenia);
         }
     }
 }

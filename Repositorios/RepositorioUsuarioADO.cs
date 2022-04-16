@@ -24,15 +24,15 @@ namespace Repositorios
             throw new NotImplementedException();
         }
 
-        public Usuario Ingreso(string usuario, string contrasenia)
+        public Usuario Ingreso(string email, string contrasenia)
         {
             Usuario ingresado = null;
 
             SqlConnection con = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Usuarios WHERE Usuario = @usuario and Contrasenia = @contrasenia;";
+            string sql = "SELECT * FROM Usuarios WHERE Email = @email and Contrasenia = @contrasenia;";
             SqlCommand com = new SqlCommand(sql, con);
-            com.Parameters.AddWithValue("@usuario", usuario);
+            com.Parameters.AddWithValue("@email", email);
             com.Parameters.AddWithValue("@contrasenia", contrasenia);
 
             try
@@ -45,6 +45,7 @@ namespace Repositorios
                     ingresado = new Usuario()
                     {
                         nombreUsuario = reader.GetString(1),
+                        Email = reader.GetString(2),
                         Nombre = reader.GetString(4),
                         Apellido = reader.GetString(5),
                     };
