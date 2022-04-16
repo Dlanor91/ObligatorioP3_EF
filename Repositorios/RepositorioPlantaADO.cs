@@ -22,7 +22,7 @@ namespace Repositorios
 
         public IEnumerable<Planta> buscarPlantaMayorAlt(decimal altura)
         {
-            List<Planta> plantasMenores = new List<Planta>();
+            List<Planta> plantasMayores = new List<Planta>();
 
             SqlConnection con = Conexion.ObtenerConexion();
 
@@ -44,7 +44,7 @@ namespace Repositorios
                     p.tipoAmbiente = CrearTipoAmbiente(reader);
                     p.tipoPlanta = CrearTipoPlanta(reader);
                     p.tipoIlumincacion = CrearIluminacion(reader);
-                    plantasMenores.Add(p);
+                    plantasMayores.Add(p);
                 }
 
                 Conexion.CerrarConexion(con);
@@ -58,7 +58,7 @@ namespace Repositorios
                 Conexion.CerrarConexion(con);
             }
 
-            return plantasMenores;
+            return plantasMayores;
         }
 
         public IEnumerable<Planta> buscarPlantaMenorAlt(decimal altura)
