@@ -21,5 +21,10 @@ namespace LogicaDeAplicacion
         {
             return RepoPlantas.FindAll();
         }
+
+        public IEnumerable<Planta> BusquedaNombre(string nombreBusqPlanta)
+        {
+            return RepoPlantas.buscarPlantaNombre(nombreBusqPlanta);
+        }
     }
 }

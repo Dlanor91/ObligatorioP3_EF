@@ -59,18 +59,27 @@ namespace Vivero.Controllers
         }
 
         [HttpPost]
-        public ActionResult BusqPorNombre(string nombrePlanta)
+        public ActionResult BusqPorNombre(string nombreBusqPlanta)
         {
             
             try
             {
-                if (nombrePlanta == null)
+                if (nombreBusqPlanta == null)
                 {
-                    throw new Exception("Complete todos los campos.");
+                    throw new Exception("Complete el campo de búsqueda.");                    
                 }
                 else
                 {
-                    return RedirectToAction(nameof(BusqPorNombre));
+                    IEnumerable<Planta> plEncontradas = ManejadorPlanta.BusquedaNombre(nombreBusqPlanta);
+                    if (plEncontradas.Count() == 0)
+                    {
+                        throw new Exception("No se encontraron coincidencias con " + nombreBusqPlanta);
+                    }
+                    else
+                    {
+                        return View(plEncontradas);
+                    }
+                    
                 }
             }
             catch(Exception ex)
