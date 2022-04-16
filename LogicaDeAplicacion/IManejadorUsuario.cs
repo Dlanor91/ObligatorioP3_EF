@@ -8,6 +8,6 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorUsuario
     {
-        public Usuario IngresoExitoso(string nombreUsuario, string contrasenia);
+        public Usuario IngresoExitoso(string emailUsuario, string contrasenia);
     }
 }

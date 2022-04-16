@@ -6,8 +6,8 @@
     <div class="col-md-4">
         <form id="formLogin" method="post">
             <div class="form-group">
-                <label for="nombreUsuario" class="control-label">Usuario</label>
-                <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" />
+                <label for="emailUsuario" class="control-label">Email</label>
+                <input type="email" id="emailUsuario" name="emailUsuario" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="contrasenna" class="control-label">Contraseña</label>
@@ -26,10 +26,10 @@
 
     function evaluarLogin(evento) {
             evento.preventDefault();
-            let nombreUsuario = document.querySelector("#nombreUsuario").value;
+            let emailUsuario = document.querySelector("#emailUsuario").value;
             let contrasenia = document.querySelector("#contrasenia").value;
-            @*Validacion nombre de usuario*@
-            if (nombreUsuario != "") {
+            @*Validacion email de usuario*@
+            if (emailUsuario != "") {
                 @*Validacion contraseña*@
                 if (contrasenia == "") {
                     document.querySelector("#pMensaje").innerHTML = "Complete el campo contraseña.";

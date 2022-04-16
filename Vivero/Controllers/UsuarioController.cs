@@ -106,11 +106,11 @@ namespace Vivero.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Login(string nombreUsuario, string contrasenia)
+        public IActionResult Login(string emailUsuario, string contrasenia)
         {
             try
             {
-                if (nombreUsuario == null || contrasenia == null)
+                if (emailUsuario == null || contrasenia == null)
                 {
                     throw new Exception("Complete todos los campos.");
                 }
@@ -120,7 +120,7 @@ namespace Vivero.Controllers
                         throw new Exception("La contraseña debe tener un mínimo de 6 caracteres.");
                     }
                     else {
-                        Usuario logueado = ManejadorUsuario.IngresoExitoso(nombreUsuario, contrasenia);
+                        Usuario logueado = ManejadorUsuario.IngresoExitoso(emailUsuario, contrasenia);
                         if (logueado !=null)
                         {
                             HttpContext.Session.SetString("datosNombreUsuario", logueado.nombreUsuario);
@@ -129,7 +129,7 @@ namespace Vivero.Controllers
                         }
                         else
                         {
-                            throw new Exception("El usuario o contraseña ingresado no están en nuestra base de batos.");
+                            throw new Exception("El email ingresado no está en nuestra base de batos o la contraseña es incorrecta, verifíquelo.");
                         }
                     }
                 }
