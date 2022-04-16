@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Búsqueda - Nombre";
+}
+
+<h2>Búsqueda de Plantas por Nombre</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="formBusqNombre">
+            <div class="form-group">
+                <input type="text" id="nombreBusqPlanta" name="nombreBusqPlanta" class="form-control" />
+            </div>
+            <input type="submit" value="Buscar" />
+        </form>
+    </div>
+</div>
+
+<p>@ViewBag.Error</p>
