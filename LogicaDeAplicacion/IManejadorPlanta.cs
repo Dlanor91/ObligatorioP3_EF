@@ -9,5 +9,6 @@ namespace LogicaDeAplicacion
     public interface IManejadorPlanta
     {
         public IEnumerable<Planta> MostrarTodasPlantas();
+        public IEnumerable<Planta> BusquedaNombre(string nombreBusqPlanta);
     }
 }

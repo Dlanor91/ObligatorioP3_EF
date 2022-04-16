@@ -7,7 +7,7 @@ namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioPlantas:IRepositorio<Planta>
     {
-        IEnumerable<Planta> buscarPlantaNombre(string nombre);
+        IEnumerable<Planta> buscarPlantaNombre(string nombreBusqPlanta);
         IEnumerable<Planta> buscarTipoPlanta(int TipoPlanta);
         IEnumerable<Planta> buscarAmbiente(int tipoAmbiente);
         IEnumerable<Planta> buscarPlantaMenorAlt(decimal altura);

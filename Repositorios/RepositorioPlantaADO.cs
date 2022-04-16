@@ -30,9 +30,46 @@ namespace Repositorios
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Planta> buscarPlantaNombre(string nombre)
+        public IEnumerable<Planta> buscarPlantaNombre(string nombreBusqPlanta)
         {
-            throw new NotImplementedException();
+            List<Planta> plantas = new List<Planta>();
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            string sql = "select pl.id, pl.nombreCientifico, pl.descripcionPlanta, pl.alturaMax, pl.foto, ta.tipoAmbiente, pl.frecuenciaRiego, pl.temperatura, tp.nombre,il.tipoIluminacion,pl.nombreVulgares from Planta pl " +
+                         "left join TipoAmbiente ta on pl.tipoAmbiente = ta.id " +
+                         "left join TipoPlanta tp on pl.tipoPlanta = tp.id " +
+                         "left join Iluminacion il on pl.tipoIluminacion = il.id " +
+                         "where pl.nombreCientifico like @nombreBusqPlanta or pl.nombreVulgares like @nombreBusqPlanta;";
+            SqlCommand com = new SqlCommand(sql, con);
+            nombreBusqPlanta = "%" + nombreBusqPlanta + "%";
+            com.Parameters.AddWithValue("@nombreBusqPlanta", nombreBusqPlanta);
+            try
+            {
+                Conexion.AbrirConexion(con);
+                SqlDataReader reader = com.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Planta p = CrearPlanta(reader);
+                    p.tipoAmbiente = CrearTipoAmbiente(reader);
+                    p.tipoPlanta = CrearTipoPlanta(reader);
+                    p.tipoIlumincacion = CrearIluminacion(reader);
+                    plantas.Add(p);
+                }
+
+                Conexion.CerrarConexion(con);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(con);
+            }
+
+            return plantas;
         }
 
         public IEnumerable<Planta> buscarTipoPlanta(int TipoPlanta)
