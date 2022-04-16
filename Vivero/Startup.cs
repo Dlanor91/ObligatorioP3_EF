@@ -35,11 +35,13 @@ namespace Vivero
             services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaADO>();
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarioADO>();
             services.AddScoped<IRepositorioPlantas, RepositorioPlantaADO>();
+            services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionADO>();
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
             services.AddScoped<IManejadorUsuario, ManejadorUsuario>();
             services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
+            services.AddScoped<IManejadorIluminacion, ManejadorIluminacion>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
