@@ -16,7 +16,7 @@ namespace LogicaDeAplicacion
             RepoTipoAmbiente=repoTipoAmbiente;
         }
 
-        public IEnumerable<TipoAmbiente> MostrarTodasTipoAmbiente()
+        public IEnumerable<TipoAmbiente> MostrarTodosTipoAmbiente()
         {
             return RepoTipoAmbiente.FindAll();
         }
