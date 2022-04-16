@@ -4,11 +4,16 @@
     ViewData["Title"] = "Plantas";
 }
 
-<h1>Index</h1>
+<h1>Plantas</h1>
+<div class="row">
+    <div class="col-sm text-sm-left">
+        <p>
+            <a asp-action="Create">Crear Nuevo</a>
+            <a asp-action="">Buscar</a>
+        </p>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 @if (Model.Count() == 0)
 {
     <p>No hay registros para mostrar.</p>
@@ -19,65 +24,77 @@ else
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.id)
+                    Nombre Científico
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.nombreCientifico)
+                    Descripción
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.descripcionPlanta)
+                    Altura Máxima
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.alturaMax)
+                    Frecuencia de Riego
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.foto)
+                    Tipo de Ambiente
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.frecuenciaRiego)
+                    Temperatura
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.temperatura)
+                    Tipo de Planta
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.nombresVulgares)
+                    Tipo de Ilumincación
+                </th>
+                <th>
+                    Nombres Vulgares
+                </th>
+                <th>
+                    Foto
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombreCientifico)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.descripcionPlanta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.alturaMax)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.foto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.frecuenciaRiego)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.temperatura)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombresVulgares)
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreCientifico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcionPlanta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alturaMax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.frecuenciaRiego)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoAmbiente.tipoAmbiente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temperatura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoPlanta.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoIlumincacion.tipoIluminacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombresVulgares)
+                </td>
+                <td>
+                    <img src="~/jpg/@item.foto" alt="@item.nombreCientifico" title="@item.nombreCientifico" width="200" height="200"/>                    
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.EntidadesVivero
 {
-    public class Planta
+    public class Planta :IValidar
     {
         public int id { get; set; }
 
@@ -28,6 +28,9 @@ namespace Dominio.EntidadesVivero
 
         public string nombresVulgares { get; set; }
 
-
+        public bool Validar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

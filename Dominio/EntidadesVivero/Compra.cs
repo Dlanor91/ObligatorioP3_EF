@@ -10,6 +10,7 @@ namespace Dominio.EntidadesVivero
         public DateTime fechaCompra { get; set; }
         public List<Item> items { get; set; }
 
-        public abstract decimal PrecioFinal(); 
+        public abstract decimal PrecioFinal();
+        
     }
 }
