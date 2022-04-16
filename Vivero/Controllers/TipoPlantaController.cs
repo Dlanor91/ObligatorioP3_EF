@@ -83,34 +83,30 @@ namespace Vivero.Controllers
                                 }
                                 else
                                 {
-                                    ViewBag.Error = "No fue posible el alta de un nuevo Tipo de Planta.";
-                                    return View();
+                                    throw new Exception("No fue posible el alta de un nuevo Tipo de Planta.");                                    
                                 }
                             }
                             else
                             {
-                                ViewBag.Error = "El campo descripción debe estar entre 10 y 200 caracteres.";
-                                return View();
+                                throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");                                
                             }
                         }
                         else
                         {
-                            ViewBag.Error = "El nombre del Tipo de Planta ya existe en la base de datos, ingrese otro.";
-                            return View();
+                            throw new Exception("El nombre del Tipo de Planta ya existe en la base de datos, ingrese otro.");                           
                         }
                     }
                     else {
-                        ViewBag.Error = "El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifíquelo.";
-                        return View();
+                        throw new Exception("El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifíquelo.");                        
                     }                    
                 }
                 else {
-                    ViewBag.Error = "Complete todos los campos.";
-                    return View();
+                    throw new Exception("Complete todos los campos.");                    
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }

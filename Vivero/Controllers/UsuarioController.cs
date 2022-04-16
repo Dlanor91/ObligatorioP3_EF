@@ -108,18 +108,38 @@ namespace Vivero.Controllers
         [HttpPost]
         public IActionResult Login(string nombreUsuario, string contrasenia)
         {
-            Usuario logueado = ManejadorUsuario.IngresoExitoso(nombreUsuario, contrasenia);
-            if (logueado !=null)
+            try
             {
-                HttpContext.Session.SetString("datosNombreUsuario", logueado.nombreUsuario);
-                HttpContext.Session.SetString("datosNombreCompleto", logueado.Nombre + " " + logueado.Apellido);
-                return RedirectToAction("Index", "Home");
+                if (nombreUsuario == null || contrasenia == null)
+                {
+                    throw new Exception("Complete todos los campos.");
+                }
+                else
+                {
+                    if (contrasenia.Length<6) {
+                        throw new Exception("La contraseña debe tener un mínimo de 6 caracteres.");
+                    }
+                    else {
+                        Usuario logueado = ManejadorUsuario.IngresoExitoso(nombreUsuario, contrasenia);
+                        if (logueado !=null)
+                        {
+                            HttpContext.Session.SetString("datosNombreUsuario", logueado.nombreUsuario);
+                            HttpContext.Session.SetString("datosNombreCompleto", logueado.Nombre + " " + logueado.Apellido);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            throw new Exception("El usuario o contraseña ingresado no están en nuestra base de batos.");
+                        }
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewBag.Error = "El usuario o contraseña ingresado no están en nuestra base de batos.";
+                ViewBag.Error = ex.Message;
                 return View();
             }
+            
         }
         public IActionResult Register()
         {

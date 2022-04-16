@@ -34,6 +34,51 @@ namespace Vivero.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        public ActionResult Busquedas()
+        {
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {                
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult BusqPorNombre()
+        {
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BusqPorNombre(string nombrePlanta)
+        {
+            
+            try
+            {
+                if (nombrePlanta == null)
+                {
+                    throw new Exception("Complete todos los campos.");
+                }
+                else
+                {
+                    return RedirectToAction(nameof(BusqPorNombre));
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+        }
 
         // GET: PlantaController/Details/5
         public ActionResult Details(int id)
