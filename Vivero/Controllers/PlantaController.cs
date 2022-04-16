@@ -46,6 +46,7 @@ namespace Vivero.Controllers
             }
         }
 
+        //Busqueda de Plantas por Nombre de Planta
         public ActionResult BusqPorNombre()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
@@ -73,7 +74,7 @@ namespace Vivero.Controllers
                     IEnumerable<Planta> plEncontradas = ManejadorPlanta.BusquedaNombre(nombreBusqPlanta);
                     if (plEncontradas.Count() == 0)
                     {
-                        throw new Exception("No se encontraron coincidencias con " + nombreBusqPlanta);
+                        throw new Exception("No se encontraron coincidencias con " + nombreBusqPlanta + " .");
                     }
                     else
                     {
@@ -83,6 +84,48 @@ namespace Vivero.Controllers
                 }
             }
             catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+        }
+
+        //Busqueda de Plantas por Altura menor que ciertas Plantas
+        public ActionResult BusqMenorAltura()
+        {
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BusqMenorAltura(int busqAlturaMinima)
+        {
+            try
+            {
+                if (busqAlturaMinima == 0)
+                {
+                    throw new Exception("Complete el campo de búsqueda.");
+                }
+                else
+                {
+                    IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMenoresAlt(busqAlturaMinima);
+                    if (plEncontradas.Count() == 0)
+                    {
+                       throw new Exception("No se encontraron plantas menor que " + busqAlturaMinima + " cm.");
+                    }
+                    else
+                    {
+                       return View(plEncontradas);
+                    }                    
+                }
+            }
+            catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View();

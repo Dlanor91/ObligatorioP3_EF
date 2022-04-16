@@ -26,5 +26,10 @@ namespace LogicaDeAplicacion
         {
             return RepoPlantas.buscarPlantaNombre(nombreBusqPlanta);
         }
+
+        public IEnumerable<Planta> buscarPlantasMenoresAlt(decimal alturaBuscar)
+        {
+            return RepoPlantas.buscarPlantaMenorAlt(alturaBuscar);
+        }
     }
 }
