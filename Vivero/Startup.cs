@@ -35,12 +35,13 @@ namespace Vivero
             services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaADO>();
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarioADO>();
             services.AddScoped<IRepositorioPlantas, RepositorioPlantaADO>();
+            services.AddScoped<IRepositorioTipoAmbiente, RepositorioTipoAmbienteADO>();
             services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionADO>();
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
             services.AddScoped<IManejadorUsuario, ManejadorUsuario>();
-            services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
+            services.AddScoped<IManejadorTipoAmbiente, ManejadorTipoAmbiente>();
             services.AddScoped<IManejadorIluminacion, ManejadorIluminacion>();
         }
 
