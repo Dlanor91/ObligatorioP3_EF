@@ -120,7 +120,8 @@ namespace Vivero.Controllers
                         bool existeNombre = ManejadorTipoPlantas.ValidarNombreUnico(tpNew.nombre);
                         if (!existeNombre)                        
                         {
-                            if (tpNew.descripcionTipo.Length >=10 && tpNew.descripcionTipo.Length <=200)
+                            bool descripcionValida = tpNew.ValidarDescripcion(tpNew.descripcionTipo);
+                            if (descripcionValida)
                             {
                                 bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
                                 if (altaTP)

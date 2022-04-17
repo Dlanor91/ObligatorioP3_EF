@@ -25,7 +25,11 @@ namespace Dominio.EntidadesVivero
 
         public bool ValidarDescripcion(string descripcion)
         {
-            throw new NotImplementedException();
+            bool descripcionValida = false;
+            if (descripcion.Length>=10 && descripcion.Length<=200) {
+                descripcionValida = true;
+            } 
+            return descripcionValida;
         }
 
         public bool ValidarFormatoNombre(string nombre)
