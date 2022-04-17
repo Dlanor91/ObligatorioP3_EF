@@ -22,6 +22,29 @@ namespace Dominio.EntidadesVivero
 
             return valido;
         }
+
+        public bool ValidarFormatoNombre(string nombre)
+        {
+          bool errorFormato = false;
+
+            if (nombre.Substring(0, 1) ==" " || nombre.Substring(nombre.Length-1, 1) ==" ")
+            {
+                errorFormato = true;
+            }
+            else
+            {
+                for (int i = 0; i<nombre.Length && !errorFormato; i++)
+                {
+                    if (Char.IsNumber(nombre[i]) && Char.IsNumber(nombre[i]))
+                    {
+                        errorFormato = true;
+                    }
+                }
+            }
+
+            return errorFormato;
+        }
+
     }
     
 }

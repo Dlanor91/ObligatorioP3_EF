@@ -32,5 +32,10 @@ namespace Dominio.EntidadesVivero
         {
             throw new NotImplementedException();
         }
+
+        public bool ValidarFormatoNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

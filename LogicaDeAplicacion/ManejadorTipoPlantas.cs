@@ -29,26 +29,7 @@ namespace LogicaDeAplicacion
         public bool ValidarNombreUnico(string nombreTP)
         {
             return RepoTipoPlantas.existeNombre(nombreTP);
-        }
-
-        public bool ValidarFormatoNombre(string nombreTP)
-        {
-            bool errorFormato = false;
-
-            if (nombreTP.Substring(0,1) ==" " || nombreTP.Substring(nombreTP.Length-1, 1) ==" ")
-            {
-                errorFormato = true;
-            }
-            else {                               
-                for (int i=0;i<nombreTP.Length && !errorFormato; i++) {
-                    if (Char.IsNumber(nombreTP[i]) && Char.IsNumber(nombreTP[i])) {
-                        errorFormato = true;
-                    }                    
-                }                
-            }
-
-            return errorFormato;
-        }
+        }        
 
         public TipoPlanta buscarUnaPlanta(int id)
         {
