@@ -199,7 +199,7 @@ namespace Vivero.Controllers
             {
                 if (busqAlturaMaxima == 0)
                 {
-                    throw new Exception("Complete el campo de búsqueda.");
+                    throw new Exception("Complete el campo de búsqueda o introduzca una altura mayor que 0.");
                 }
                 else
                 {
