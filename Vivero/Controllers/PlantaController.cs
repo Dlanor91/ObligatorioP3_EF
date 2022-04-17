@@ -379,6 +379,9 @@ namespace Vivero.Controllers
             }
             catch (Exception ex)
             {
+                MostrarIluminacion();
+                MostrarTipoAmbiente();
+                MostrarTipoPlanta();
                 ViewBag.Error = ex.Message;
                 return View();
             }
