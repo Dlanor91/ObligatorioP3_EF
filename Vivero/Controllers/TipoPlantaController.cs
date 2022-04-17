@@ -214,7 +214,15 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                TipoPlanta tpEdit = ManejadorTipoPlantas.buscarUnaPlanta(id);
+                return View(tpEdit);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // POST: TipoPlantaController/Delete/5
