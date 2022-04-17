@@ -14,9 +14,9 @@ namespace Repositorios
         {
             bool listo = false;
 
-            SqlConnection conect = Conexion.ObtenerConexion();
+            SqlConnection con = Conexion.ObtenerConexion();
             string sql = "INSERT INTO Iluminacion VALUES(@tipoIluminacion);";
-            SqlCommand com = new SqlCommand(sql, conect);
+            SqlCommand com = new SqlCommand(sql, con);
 
             com.Parameters.AddWithValue("@tipoIluminacion", obj.tipoIluminacion);            
 
@@ -24,13 +24,13 @@ namespace Repositorios
 
             try
             {
-                Conexion.AbrirConexion(conect);
-                transaccion = conect.BeginTransaction();
+                Conexion.AbrirConexion(con);
+                transaccion = con.BeginTransaction();
                 com.Transaction = transaccion;
                 int filasAfectadas = com.ExecuteNonQuery();
                 listo = filasAfectadas == 1;
                 transaccion.Commit();
-                Conexion.CerrarConexion(conect);
+                Conexion.CerrarConexion(con);
             }
             catch
             {
@@ -40,7 +40,7 @@ namespace Repositorios
             }
             finally
             {
-                Conexion.CerrarYDisposeConexion(conect);
+                Conexion.CerrarYDisposeConexion(con);
             }
 
             return listo;
