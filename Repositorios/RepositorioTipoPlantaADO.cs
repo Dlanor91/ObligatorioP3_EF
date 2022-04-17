@@ -180,7 +180,31 @@ namespace Repositorios
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            string sql = "DELETE FROM TipoPlanta WHERE Id=@id;";
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                Conexion.AbrirConexion(con);
+                int filasAfectadas = com.ExecuteNonQuery();
+                ok = filasAfectadas == 1;
+                Conexion.CerrarConexion(con);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDisposeConexion(con);
+            }
+
+            return ok;
         }
 
         public bool Update(TipoPlanta obj)
