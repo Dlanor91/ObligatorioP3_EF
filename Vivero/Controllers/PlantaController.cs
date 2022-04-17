@@ -97,9 +97,7 @@ namespace Vivero.Controllers
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
             {
-                ViewModelPlanta VMTipoPlantas = new ViewModelPlanta();
-                VMTipoPlantas.TipoPlanta = ManejadorPlanta.TraerTodosTiposPlantas();
-                ViewBag.Plantas = VMTipoPlantas;
+                MostrarTipoPlanta();
                 return View();
             }
             else
@@ -123,10 +121,12 @@ namespace Vivero.Controllers
                     IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasTipoPlanta(busqTipoPlanta);
                     if (plEncontradas.Count() == 0)
                     {
-                        throw new Exception("No se encontraron coincidencias con " + busqTipoPlanta + " .");
+                        MostrarTipoPlanta();
+                        throw new Exception("No se encontraron coincidencias con ese criterio de búsqueda.");
                     }
                     else
                     {
+                        MostrarTipoPlanta();
                         return View(plEncontradas);
                     }
 
@@ -137,6 +137,13 @@ namespace Vivero.Controllers
                 ViewBag.Error = ex.Message;
                 return View();
             }
+        }
+
+        private void MostrarTipoPlanta()
+        {
+            ViewModelPlanta VMTipoPlantas = new ViewModelPlanta();
+            VMTipoPlantas.TipoPlanta = ManejadorPlanta.TraerTodosTiposPlantas();
+            ViewBag.TipoPlantas = VMTipoPlantas.TipoPlanta;
         }
 
         //busqueda por tipo de ambiente

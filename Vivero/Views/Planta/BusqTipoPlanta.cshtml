@@ -10,7 +10,8 @@
         <form method="post" id="formBusqTipoPlanta">
             <div class="form-group">
                 <select name="busqTipoPlanta" id="busqTipoPlanta">
-                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.Plantas)
+                    <option value="0">Seleccione Tipo de Planta</option>
+                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
                     {
                         <option value="@tp.id">@tp.nombre</option>
                     }
