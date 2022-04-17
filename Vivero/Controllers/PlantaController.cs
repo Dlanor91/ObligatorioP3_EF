@@ -152,19 +152,24 @@ namespace Vivero.Controllers
             {
                  if (busqAlturaMinima == 0)
                 {
-                    throw new Exception("Complete el campo de búsqueda.");
+                    throw new Exception("Complete el campo de búsqueda o introduzca una altura mayor que 0.");
                 }
                 else
                 {
-                    IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMenoresAlt(busqAlturaMinima);
-                    if (plEncontradas.Count() == 0)
-                    {
-                       throw new Exception("No se encontraron plantas menor que " + busqAlturaMinima + " cm.");
-                    }
-                    else
-                    {
-                       return View(plEncontradas);
-                    }                    
+                    if (busqAlturaMinima<0) {
+                        throw new Exception("Introduzca una altura mayor que 0.");
+                    } 
+                    else {
+                        IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMenoresAlt(busqAlturaMinima);
+                        if (plEncontradas.Count() == 0)
+                        {
+                            throw new Exception("No se encontraron plantas menor que " + busqAlturaMinima + " cm.");
+                        }
+                        else
+                        {
+                            return View(plEncontradas);
+                        }
+                    }                                       
                 }
             }
             catch (Exception ex)
@@ -198,15 +203,22 @@ namespace Vivero.Controllers
                 }
                 else
                 {
-                    IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMayoresAlt(busqAlturaMaxima);
-                    if (plEncontradas.Count() == 0)
+                    if (busqAlturaMaxima<0)
                     {
-                        throw new Exception("No se encontraron plantas mayor que " + busqAlturaMaxima + " cm.");
+                        throw new Exception("Introduzca una altura mayor que 0.");
                     }
                     else
                     {
-                        return View(plEncontradas);
-                    }                    
+                        IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMayoresAlt(busqAlturaMaxima);
+                        if (plEncontradas.Count() == 0)
+                        {
+                            throw new Exception("No se encontraron plantas mayor que " + busqAlturaMaxima + " cm.");
+                        }
+                        else
+                        {
+                            return View(plEncontradas);
+                        }
+                    }                   
                 }
             }
             catch (Exception ex)
