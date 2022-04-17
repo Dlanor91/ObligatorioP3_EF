@@ -330,13 +330,13 @@ namespace Vivero.Controllers
         // POST: PlantaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Planta plNew)
+        public ActionResult Create(Planta plNew, ViewModelPlanta VMPlanta)
         {
             try
             {
                 bool validarNewTp = plNew.Validar();
 
-                if (validarNewTp)
+                if (!validarNewTp && VMPlanta.idIluminacion == 0 && VMPlanta.idTipoAmbiente == 0 && VMPlanta.idTipoPlanta == 0)
                 {
                     bool errorNombre = plNew.ValidarFormatoNombre(plNew.nombreCientifico);
                     if (!errorNombre)

@@ -12,5 +12,8 @@ namespace Vivero.Models
         public IEnumerable<TipoPlanta> TipoPlanta { get; set; }
         public IEnumerable<TipoAmbiente> TipoAmbiente { get; set; }
         public IEnumerable<Iluminacion> Iluminacion { get; set; }
+        public int idTipoPlanta { get; set; }
+        public int idTipoAmbiente { get; set; }
+        public int idIluminacion { get; set; }
     }
 }

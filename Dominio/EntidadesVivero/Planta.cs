@@ -32,7 +32,7 @@ namespace Dominio.EntidadesVivero
         {
             bool plantaValida = false;
 
-            if (nombreCientifico != null && descripcionPlanta != null && alturaMax > 0 && foto != null && tipoAmbiente != null && frecuenciaRiego != null && tipoPlanta != null && tipoIlumincacion != null && nombresVulgares != null)
+            if (nombreCientifico != null && descripcionPlanta != null && alturaMax > 0 && foto != null && frecuenciaRiego != null && nombresVulgares != null)
             {
                 plantaValida = true;
             }
