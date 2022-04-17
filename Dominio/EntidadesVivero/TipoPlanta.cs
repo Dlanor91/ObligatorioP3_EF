@@ -23,6 +23,11 @@ namespace Dominio.EntidadesVivero
             return valido;
         }
 
+        public bool ValidarDescripcion(string descripcion)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool ValidarFormatoNombre(string nombre)
         {
           bool errorFormato = false;

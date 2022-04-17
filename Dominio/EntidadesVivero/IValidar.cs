@@ -8,5 +8,6 @@ namespace Dominio.EntidadesVivero
     {
         bool Validar();
         bool ValidarFormatoNombre(string nombre);
+        bool ValidarDescripcion(string descripcion);
     }
 }
