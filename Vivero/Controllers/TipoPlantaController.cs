@@ -36,6 +36,7 @@ namespace Vivero.Controllers
             
         }
 
+        //Busqueda por Tipo de Planta - Nombre
         public ActionResult Busqueda()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
@@ -174,14 +175,37 @@ namespace Vivero.Controllers
         // POST: TipoPlantaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(TipoPlanta tpAct)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (tpAct.descripcionTipo == null)
+                {
+                    throw new Exception("El campo descripción no puede estar vacío.");
+                }
+                else
+                {
+                    if (tpAct.descripcionTipo.Length >=10 && tpAct.descripcionTipo.Length <=200)
+                    {
+                        bool actTipoPlanta = ManejadorTipoPlantas.actDescripcionTipoPlanta(tpAct);
+                        if (actTipoPlanta)
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            throw new Exception("No fue posible actualizar la descripcion del Tipo de Planta seleccionado.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }

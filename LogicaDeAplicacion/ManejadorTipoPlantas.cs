@@ -59,5 +59,10 @@ namespace LogicaDeAplicacion
         {
             return RepoTipoPlantas.buscarTipoPlanta(nombreTP);
         }
+
+        public bool actDescripcionTipoPlanta(TipoPlanta tp)
+        {
+            return RepoTipoPlantas.Update(tp);
+        }
     }
 }

@@ -37,20 +37,7 @@ else
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.descripcionTipo)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
-
-                    @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tbody>           
                 <tr>                    
                     <td>
                         @Html.DisplayFor(modelItem => Model.nombre)
