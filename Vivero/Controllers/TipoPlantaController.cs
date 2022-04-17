@@ -250,13 +250,13 @@ namespace Vivero.Controllers
                     }
                     else
                     {
-                        throw new Exception("No fue posible eliminar el tipo de planta ");
+                        throw new Exception("No fue posible eliminar el tipo de planta.");
 
                     }
                 }
                 else
                 {
-                    throw new Exception("No fue posible eliminar el tipo de planta porque está en uso");
+                    throw new Exception("No fue posible eliminar el tipo de planta porque está en uso.");
 
                 }
             }
