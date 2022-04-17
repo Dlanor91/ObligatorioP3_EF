@@ -7,5 +7,6 @@ namespace Dominio.EntidadesVivero
     public interface IValidar
     {
         bool Validar();
+        bool ValidarFormatoNombre(string nombre);
     }
 }
