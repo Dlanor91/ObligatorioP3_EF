@@ -43,6 +43,7 @@ namespace Vivero
             services.AddScoped<IManejadorUsuario, ManejadorUsuario>();
             services.AddScoped<IManejadorTipoAmbiente, ManejadorTipoAmbiente>();
             services.AddScoped<IManejadorIluminacion, ManejadorIluminacion>();
+            services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
