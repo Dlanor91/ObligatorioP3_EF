@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Dominio.EntidadesVivero.Planta>
+
 @{
     ViewData["Title"] = "Búsqueda - Tipo Planta";
 }
@@ -9,7 +10,7 @@
         <form method="post" id="formBusqTipoPlanta">
             <div class="form-group">
                 <select name="busqTipoPlanta" id="busqTipoPlanta">
-                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in Model)
+                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.Plantas)
                     {
                         <option value="@tp.id">@tp.nombre</option>
                     }

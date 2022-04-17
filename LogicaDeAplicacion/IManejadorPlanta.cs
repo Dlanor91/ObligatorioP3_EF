@@ -14,5 +14,7 @@ namespace LogicaDeAplicacion
         public IEnumerable<Planta> buscarPlantasMayoresAlt(decimal alturaBuscar);
         public IEnumerable<Planta> buscarPlantasTipoAmbiente(int idTipoAmbiente);
         public IEnumerable<Planta> buscarPlantasTipoPlanta(int idTipoPlanta);
+        public IEnumerable<TipoPlanta> TraerTodosTiposPlantas();
+        public IEnumerable<TipoAmbiente> TraerTodosTiposAmbientes();
     }
 }

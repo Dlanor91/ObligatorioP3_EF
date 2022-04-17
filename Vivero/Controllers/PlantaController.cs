@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using LogicaDeAplicacion;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using Microsoft.AspNetCore.Hosting;
+using Vivero.Models;
 
 namespace Vivero.Controllers
 {
@@ -95,6 +97,9 @@ namespace Vivero.Controllers
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
             {
+                ViewModelPlanta VMTipoPlantas = new ViewModelPlanta();
+                VMTipoPlantas.TipoPlanta = ManejadorPlanta.TraerTodosTiposPlantas();
+                ViewBag.Plantas = VMTipoPlantas;
                 return View();
             }
             else
