@@ -22,7 +22,7 @@ namespace Dominio.EntidadesVivero
 
             return valido;
         }
-
+               
         public bool ValidarDescripcion(string descripcion)
         {
             bool descripcionValida = false;
