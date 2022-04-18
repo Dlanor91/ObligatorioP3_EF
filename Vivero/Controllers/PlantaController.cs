@@ -336,7 +336,6 @@ namespace Vivero.Controllers
             {
                 bool validarNewTp = plNew.Validar();
 
-
                 if (validarNewTp && VMPlanta.idIluminacion != 0 && VMPlanta.idTipoAmbiente != 0 && VMPlanta.idTipoPlanta != 0)  
                 {
                     if (plNew.alturaMax <= 0) {
