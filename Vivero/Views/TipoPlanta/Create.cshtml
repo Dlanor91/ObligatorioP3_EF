@@ -17,8 +17,8 @@
                 <span asp-validation-for="nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="descripcionTipo" class="control-label">Descripción</label>
-                <input asp-for="descripcionTipo" class="form-control" id="descripcionTipo" />
+                <label asp-for="descripcionTipo" class="control-label">Descripción</label>                
+                <textarea asp-for="descripcionTipo" class="form-control" id="descripcionTipo" rows="10" cols="10"></textarea>
                 <span asp-validation-for="descripcionTipo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,6 +34,11 @@
 
 <p id="pMensaje">@ViewBag.Error</p>
 
+<style>
+    textarea {
+        resize: none;
+    }
+</style>
 
 @section Scripts {
     <script>
