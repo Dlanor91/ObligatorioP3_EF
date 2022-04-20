@@ -31,7 +31,6 @@ namespace Dominio.EntidadesVivero
                 error = -4; //no cumple los requisitos de validacion de contrasenia
             }
 
-
             return error;
         }
 
