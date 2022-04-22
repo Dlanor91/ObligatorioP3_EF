@@ -391,7 +391,7 @@ namespace Vivero.Controllers
                         throw new Exception("Complete todos los campos.");
                     }
                 } else {
-                    throw new Exception("La frecuencia de riego no puede ser negativa.");
+                    throw new Exception("La frecuencia de riego no puede ser negativa y seleccione una unidad de tiempo.");
                 }
                 
             }
