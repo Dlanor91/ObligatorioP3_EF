@@ -5,11 +5,19 @@ using System.Data;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
 using Microsoft.Data.SqlClient;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositorios
 {
-    public class RepositorioPlantaADO : IRepositorioPlantas
+    public class RepositorioPlantaEF : IRepositorioPlantas
     {
+        public ViveroContext Contexto { get; set; }
+        public RepositorioPlantaEF(ViveroContext cont) 
+        {
+            Contexto = cont;
+        }
         public bool Add(Planta obj)
         {
             bool agregar = false;
