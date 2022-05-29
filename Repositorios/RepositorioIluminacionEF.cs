@@ -5,10 +5,13 @@ using System.Data;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
 using Microsoft.Data.SqlClient;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositorios
 {
-    public class RepositorioIluminacionADO : IRepositorioIluminacion
+    public class RepositorioIluminacionEF : IRepositorioIluminacion
     {
         public bool Add(Iluminacion obj)
         {

@@ -11,6 +11,7 @@ using Dominio.InterfacesRepositorio;
 using Dominio.EntidadesVivero;
 using LogicaDeAplicacion;
 using Repositorios;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vivero
 {
@@ -32,11 +33,11 @@ namespace Vivero
             services.AddSession();
 
             //servicios de repositorios
-            services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaADO>();
-            services.AddScoped<IRepositorioUsuario, RepositorioUsuarioADO>();
-            services.AddScoped<IRepositorioPlantas, RepositorioPlantaADO>();
-            services.AddScoped<IRepositorioTipoAmbiente, RepositorioTipoAmbienteADO>();
-            services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionADO>();
+            services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaEF>();
+            services.AddScoped<IRepositorioUsuario, RepositorioUsuarioEF>();
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
+            services.AddScoped<IRepositorioTipoAmbiente, RepositorioTipoAmbienteEF>();
+            services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionEF>();
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
@@ -44,6 +45,13 @@ namespace Vivero
             services.AddScoped<IManejadorTipoAmbiente, ManejadorTipoAmbiente>();
             services.AddScoped<IManejadorIluminacion, ManejadorIluminacion>();
             services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
+
+            //servicios para DbContext
+            services.AddDbContext<ViveroContext>
+                (opciones => opciones
+                    .UseSqlServer(Configuration.GetConnectionString("ConexionEF"))
+                );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
