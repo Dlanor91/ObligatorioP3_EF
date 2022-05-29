@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.EntidadesVivero
 {
-   public abstract class Compra 
+    [Table("Compra")]
+    public abstract class Compra 
     {
-        public int id { get; set; }
-        public DateTime fechaCompra { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public DateTime Fecha { get; set; }
         public List<Item> items { get; set; }
 
         public abstract decimal PrecioFinal();

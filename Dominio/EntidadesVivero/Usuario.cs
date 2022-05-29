@@ -1,14 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Dominio.EntidadesVivero
 {
+    [Table("Usuario")]
     public class Usuario
     {
-        public int id { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Contrasenia { get; set; }
+
+        public bool Equals([AllowNull] Usuario other)
+        {
+            if (other ==null)
+                return false;
+            return other.Email.ToUpper().Trim()
+                .Equals(this.Email.ToUpper().Trim());
+        }
 
         public int ValidarUsuario() {
 
