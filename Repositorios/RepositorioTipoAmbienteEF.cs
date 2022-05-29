@@ -9,99 +9,44 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Repositorios
+namespace Repositorios 
 {
     public class RepositorioTipoAmbienteEF : IRepositorioTipoAmbiente
     {
+        
+        public ViveroContext Contexto { get; set; }
+
+        public RepositorioTipoAmbienteEF(ViveroContext cont)
+        {
+            Contexto = cont;
+        }
+     
         public bool Add(TipoAmbiente obj)
         {
-            throw new NotImplementedException();
+            Contexto.TipoAmbientes.Add(obj);
+            return Contexto.SaveChanges() >=1;
         }
+
 
         public IEnumerable<TipoAmbiente> FindAll()
         {
-            List<TipoAmbiente> tipoAmbiente = new List<TipoAmbiente>();
-
-            SqlConnection con = Conexion.ObtenerConexion();
-
-            string sql = "SELECT * FROM TipoAmbiente;";
-            SqlCommand com = new SqlCommand(sql, con);
-
-            try
-            {
-                Conexion.AbrirConexion(con);
-                SqlDataReader reader = com.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    TipoAmbiente unTipoAmbiente = new TipoAmbiente()
-                    {
-                        id = reader.GetInt32(0),
-                        tipoAmbiente = reader.GetString(1)
-                    };
-                    tipoAmbiente.Add(unTipoAmbiente);
-                }
-
-                Conexion.CerrarConexion(con);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Conexion.CerrarYDisposeConexion(con);
-            }
-
-            return tipoAmbiente;
+            return Contexto.TipoAmbientes.ToList();
         }
 
         public TipoAmbiente FindById(int id)
         {
-            TipoAmbiente tipoAmbienteBuscado = null;
-
-            SqlConnection con = Conexion.ObtenerConexion();
-
-            string sql = "SELECT * FROM TipoAmbiente WHERE id=@id;";
-            SqlCommand com = new SqlCommand(sql, con);
-            com.Parameters.AddWithValue("@id", id);
-
-            try
-            {
-                Conexion.AbrirConexion(con);
-                SqlDataReader reader = com.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    tipoAmbienteBuscado = new TipoAmbiente()
-                    {
-                        id = reader.GetInt32(0),
-                        tipoAmbiente = reader.GetString(1)                        
-                    };
-                }
-
-                Conexion.CerrarConexion(con);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Conexion.CerrarYDisposeConexion(con);
-            }
-
-            return tipoAmbienteBuscado;
+            return Contexto.TipoAmbientes.Find(id);
         }
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
-        }
+            Contexto.TipoAmbientes.Remove(new TipoAmbiente() { Id = id});
+            return Contexto.SaveChanges() >=1;        }
 
         public bool Update(TipoAmbiente obj)
         {
-            throw new NotImplementedException();
+            Contexto.TipoAmbientes.Update(obj);
+            return Contexto.SaveChanges()>=1;
         }
     }
 }
