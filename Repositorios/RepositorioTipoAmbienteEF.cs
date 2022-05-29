@@ -9,7 +9,7 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Repositorios
+namespace Repositorios 
 {
     public class RepositorioTipoAmbienteEF : IRepositorioTipoAmbiente
     {
