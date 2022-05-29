@@ -1,38 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+
 
 namespace Dominio.EntidadesVivero
 {
+    [Table("Planta")]
     public class Planta :IValidar
     {
-        public int id { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public string NombreCientifico { get; set; }
+        [Required] [StringLength(500, MinimumLength = 10, ErrorMessage = "La descripción debe estar entre 10 y 500 caracteres.")]
+        public string Descripcion { get; set; }
+        [Required]
+        public decimal AlturaMax { get; set; }
+        [Required]
+        public string Foto { get; set; }
+        [Required] [ForeignKey("Id")]
+        public TipoAmbiente TipoAmbiente { get; set; }
+        [Required]
+        public string FrecuenciaRiego { get; set; }
+        [Required]
+        public decimal Temperatura { get; set; }
+        [Required] [ForeignKey("Id")]
+        public TipoPlanta TipoPlanta { get; set; }
+        [Required] [ForeignKey("Id")]
+        public Iluminacion TipoIlumincacion { get; set; }
+        [Required]
+        public string NombresVulgares { get; set; }
 
-        public string nombreCientifico { get; set; }
-
-        public string descripcionPlanta { get; set; }
-
-        public decimal alturaMax { get; set; }
-
-        public string foto { get; set; }
-
-        public TipoAmbiente tipoAmbiente { get; set; }
-
-        public string frecuenciaRiego { get; set; }
-
-        public decimal temperatura { get; set; }
-
-        public TipoPlanta tipoPlanta { get; set; }
-
-        public Iluminacion tipoIlumincacion { get; set; }
-
-        public string nombresVulgares { get; set; }       
+        public bool Equals([AllowNull] Planta other)
+        {
+            if (other ==null)
+                return false;
+            return other.NombreCientifico.ToUpper().Trim()
+                .Equals(this.NombreCientifico.ToUpper().Trim());
+        }
 
         public bool Validar()
         {
             bool plantaValida = false;
 
-            if (nombreCientifico != null && descripcionPlanta != null && frecuenciaRiego != null && nombresVulgares != null)
+            if (NombreCientifico != null && Descripcion != null && FrecuenciaRiego != null && NombresVulgares != null)
             {
                 plantaValida = true;
             }

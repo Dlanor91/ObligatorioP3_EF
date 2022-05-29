@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Dominio.EntidadesVivero
-{ 
+{
+	[Table("Item")]
 	public class Item
 	{
-	public int id { get; set; }
+	[Key]
+	public int Id { get; set; }
 
-	public int cantidad { get; set; }
+	public int Cantidad { get; set; }
 
-	public decimal precioUnitario { get; set; }
-
-	public Planta planta { get; set; }
+	public decimal PrecioUnitario { get; set; }
+	[ForeignKey("Id")]	
+	public Planta Planta { get; set; }
 
 	}
 }
