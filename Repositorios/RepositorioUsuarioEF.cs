@@ -11,20 +11,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Repositorios
 {
     public class RepositorioUsuarioEF : IRepositorioUsuario
+
     {
-        public bool Add(Usuario obj)
+        public ViveroContext Contexto { get; set; }
+        public RepositorioUsuarioEF(ViveroContext cont)
         {
-            throw new NotImplementedException();
+            Contexto = cont;
+        }
+
+        public bool Add(Usuario nuevoAutor)
+        {
+            Contexto.Usuarios.Add(nuevoAutor);
+            return Contexto.SaveChanges() >= 1;
         }
 
         public IEnumerable<Usuario> FindAll()
         {
-            throw new NotImplementedException();
+            return Contexto.Usuarios.ToList();
         }
 
         public Usuario FindById(int id)
         {
-            throw new NotImplementedException();
+            return Contexto.Usuarios.Find(id);
         }
 
         public Usuario Ingreso(string email, string contrasenia)
@@ -67,12 +75,14 @@ namespace Repositorios
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Contexto.Usuarios.Remove(new Usuario() { Id = id });
+            return Contexto.SaveChanges() >= 1;
         }
 
         public bool Update(Usuario obj)
         {
-            throw new NotImplementedException();
+            Contexto.Usuarios.Update(obj);
+            return Contexto.SaveChanges() >= 1;
         }
     }
 }
