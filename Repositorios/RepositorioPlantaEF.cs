@@ -13,6 +13,7 @@ namespace Repositorios
 {
     public class RepositorioPlantaEF : IRepositorioPlantas
     {
+        
         public ViveroContext Contexto { get; set; }
         public RepositorioPlantaEF(ViveroContext cont) 
         {
@@ -394,31 +395,8 @@ namespace Repositorios
 
         public bool Remove(int id)
         {
-            bool ok = false;
-
-            SqlConnection con = Conexion.ObtenerConexion();
-
-            string sql = "DELETE FROM Planta WHERE Id=@id;";
-            SqlCommand com = new SqlCommand(sql, con);
-            com.Parameters.AddWithValue("@id", id);
-
-            try
-            {
-                Conexion.AbrirConexion(con);
-                int filasAfectadas = com.ExecuteNonQuery();
-                ok = filasAfectadas == 1;
-                Conexion.CerrarConexion(con);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Conexion.CerrarYDisposeConexion(con);
-            }
-
-            return ok;
+            Contexto.Plantas.Remove(new Planta() { Id = id });
+            return Contexto.SaveChanges() >=1;
         }
 
         public bool Update(Planta obj)
