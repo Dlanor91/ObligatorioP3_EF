@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.EntidadesVivero
 {
+    [Table("Importacion")]
     public class Importacion:Compra
     {
-        public static decimal tasaImportacionDGI { get; set; }
+        public static decimal TasaImportacionDGI { get; set; }
 
-        public bool origenAmericaSur { get; set; }
+        public bool OrigenAmericaSur { get; set; }
 
-        public static decimal descuentoAmericaSur { get; set; }
+        public static decimal DescuentoAmericaSur { get; set; }
 
-        public string descripcionSanitaria { get; set; }
+        public string DescripcionSanitaria { get; set; }
 
         public override decimal PrecioFinal()
         {
