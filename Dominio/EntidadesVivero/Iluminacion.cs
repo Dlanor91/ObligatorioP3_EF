@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.EntidadesVivero
 {
+	[Table("Iluminacion")]
 	public class Iluminacion
 	{
-		public int id { get; set; }
+		[Key]
+		public int Id { get; set; }
 
-		public string tipoIluminacion { get; set; }
+		[Required]
+		public string TipoIluminacion { get; set; }
     }
 }
