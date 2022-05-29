@@ -37,40 +37,7 @@ namespace Repositorios
 
         public Usuario Ingreso(string email, string contrasenia)
         {
-            Usuario ingresado = null;
-
-            SqlConnection con = Conexion.ObtenerConexion();
-
-            string sql = "SELECT * FROM Usuarios WHERE Email = @email and Contrasenia = @contrasenia;";
-            SqlCommand com = new SqlCommand(sql, con);
-            com.Parameters.AddWithValue("@email", email);
-            com.Parameters.AddWithValue("@contrasenia", contrasenia);
-
-            try
-            {
-                Conexion.AbrirConexion(con);
-                SqlDataReader reader = com.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    ingresado = new Usuario()
-                    {
-                        Email = reader.GetString(1),                       
-                    };
-                }
-
-                Conexion.CerrarConexion(con);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Conexion.CerrarYDisposeConexion(con);
-            }
-
-            return ingresado;
+            return Contexto.Usuarios.Where(us => us.Email == email && us.Contrasenia == contrasenia).SingleOrDefault();
         }
 
         public bool Remove(int id)
