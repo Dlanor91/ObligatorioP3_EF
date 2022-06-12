@@ -33,14 +33,6 @@ namespace Repositorios
             return Contexto.TipoPlantas.Where(tp => tp.Nombre == nombreTipo).SingleOrDefault(); 
         }          
 
-        //public bool existeNombre(string nombreTipoPlanta)
-        //{
-        //    bool existe = false;
-
-        //    Contexto.TipoPlantas.Where(tp => tp.Nombre == nombreTipoPlanta);
-        //    return true;
-        //}
-
         public IEnumerable<TipoPlanta> FindAll()
         {
             return Contexto.TipoPlantas.ToList();

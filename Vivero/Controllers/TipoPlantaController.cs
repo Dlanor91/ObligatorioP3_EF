@@ -119,7 +119,7 @@ namespace Vivero.Controllers
                     {
                         tpNew.Nombre = tpNew.Nombre.Trim();
                         TipoPlanta existeNombre = ManejadorTipoPlantas.buscarPlantaNombre(tpNew.Nombre);
-                        if (existeNombre != null)
+                        if (existeNombre == null)
                         {
                             tpNew.Descripcion = tpNew.Descripcion.Trim();
                             bool descripcionValida = tpNew.ValidarDescripcion(tpNew.Descripcion, 10, 200);
