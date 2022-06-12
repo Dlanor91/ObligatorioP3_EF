@@ -111,8 +111,7 @@ namespace Vivero.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View();
-            }
-            return View();
+            }            
         }
     }
 }

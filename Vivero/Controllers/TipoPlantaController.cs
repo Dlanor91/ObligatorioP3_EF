@@ -108,58 +108,59 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TipoPlanta tpNew)
         {
-            //try
-            //{
-            //    bool validarNewTp = tpNew.Validar();                
+            try
+            {
+                bool validarNewTp = tpNew.Validar();
 
-            //    if (validarNewTp)
-            //    {
-            //        bool errorNombre = tpNew.ValidarFormatoNombre(tpNew.nombre);
-            //        if (!errorNombre)
-            //        {
-            //            tpNew.nombre = tpNew.nombre.Trim();
-            //            bool existeNombre = ManejadorTipoPlantas.ValidarNombreUnico(tpNew.nombre);
-            //            if (!existeNombre)                        
-            //            {
-            //                tpNew.descripcionTipo = tpNew.descripcionTipo.Trim();
-            //                bool descripcionValida = tpNew.ValidarDescripcion(tpNew.descripcionTipo,10,200);
-            //                if (descripcionValida)
-            //                {
-            //                    bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
-            //                    if (altaTP)
-            //                    {
-            //                        return RedirectToAction(nameof(Index));
-            //                    }
-            //                    else
-            //                    {
-            //                        throw new Exception("No fue posible el alta de un nuevo Tipo de Planta.");                                    
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");                                
-            //                }
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("El nombre del Tipo de Planta ya existe en la base de datos, ingrese otro.");                           
-            //            }
-            //        }
-            //        else {
-            //            throw new Exception("El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifíquelo.");                        
-            //        }                    
-            //    }
-            //    else {
-            //        throw new Exception("Complete todos los campos.");                    
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ViewBag.Error = ex.Message;
-            //    return View();
-            //}
-
-            return View();
+                if (validarNewTp)
+                {
+                    bool errorNombre = tpNew.ValidarFormatoNombre(tpNew.Nombre);
+                    if (!errorNombre)
+                    {
+                        tpNew.Nombre = tpNew.Nombre.Trim();
+                        TipoPlanta existeNombre = ManejadorTipoPlantas.buscarPlantaNombre(tpNew.Nombre);
+                        if (existeNombre != null)
+                        {
+                            tpNew.Descripcion = tpNew.Descripcion.Trim();
+                            bool descripcionValida = tpNew.ValidarDescripcion(tpNew.Descripcion, 10, 200);
+                            if (descripcionValida)
+                            {
+                                bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
+                                if (altaTP)
+                                {
+                                    return RedirectToAction(nameof(Index));
+                                }
+                                else
+                                {
+                                    throw new Exception("No fue posible el alta de un nuevo Tipo de Planta.");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("El nombre del Tipo de Planta ya existe en la base de datos, ingrese otro.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("El nombre del Tipo de Planta tiene espacios embebidos o tiene números, verifíquelo.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Complete todos los campos.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+            
         }
 
         // GET: TipoPlantaController/Edit/5
