@@ -35,7 +35,8 @@ namespace Repositorios
 
         public IEnumerable<TipoPlanta> FindAll()
         {
-            return Contexto.TipoPlantas.ToList();
+            return Contexto.TipoPlantas.ToList()
+                                       .OrderBy(tp => tp.Nombre);
         }
 
         public TipoPlanta FindById(int id)

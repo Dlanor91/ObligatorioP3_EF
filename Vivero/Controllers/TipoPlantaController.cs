@@ -183,39 +183,38 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TipoPlanta tpAct)
         {
-            //try
-            //{
-            //    if (tpAct.descripcionTipo == null)
-            //    {
-            //        throw new Exception("El campo descripción no puede estar vacío.");
-            //    }
-            //    else
-            //    {
-            //        if (tpAct.descripcionTipo.Length >=10 && tpAct.descripcionTipo.Length <=200)
-            //        {
-            //            bool actTipoPlanta = ManejadorTipoPlantas.actDescripcionTipoPlanta(tpAct);
-            //            if (actTipoPlanta)
-            //            {
-            //                return RedirectToAction(nameof(Index));
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("No fue posible actualizar la descripcion del Tipo de Planta seleccionado.");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ViewBag.Error = ex.Message;
-            //    return View();
-            //}
-
-            return View();
+            try
+            {
+                if (tpAct.Descripcion == null)
+                {
+                    throw new Exception("El campo descripción no puede estar vacío.");
+                }
+                else
+                {
+                    if (tpAct.Descripcion.Length >=10 && tpAct.Descripcion.Length <=200)
+                    {
+                        bool actTipoPlanta = ManejadorTipoPlantas.actDescripcionTipoPlanta(tpAct);
+                        if (actTipoPlanta)
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            throw new Exception("No fue posible actualizar la descripcion del Tipo de Planta seleccionado.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+            
         }
 
         // GET: TipoPlantaController/Delete/5
