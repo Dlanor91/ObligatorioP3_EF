@@ -9,6 +9,7 @@ namespace Dominio.EntidadesVivero
     [Table("ParametroSistema")]
     public class ParametroSistema
     {
+        public int Id { get; set; }
         public decimal TasaIVA { get; set; }
         public decimal TasaImportacionDGI { get; set; }
         public decimal DescuentoAmericaSur { get; set; }

@@ -1,0 +1,199 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Vivero.Migrations
+{
+    public partial class init : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "Compra",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    OrigenAmericaSur = table.Column<bool>(nullable: true),
+                    DescripcionSanitaria = table.Column<string>(nullable: true),
+                    CostoFlete = table.Column<decimal>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Compra", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Iluminacion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoIluminacion = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Iluminacion", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoAmbiente",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ambiente = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoAmbiente", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoPlanta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(nullable: false),
+                    Descripcion = table.Column<string>(maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoPlanta", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(nullable: false),
+                    Contrasenia = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Planta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCientifico = table.Column<string>(nullable: false),
+                    Descripcion = table.Column<string>(maxLength: 500, nullable: false),
+                    AlturaMax = table.Column<decimal>(nullable: false),
+                    Foto = table.Column<string>(nullable: false),
+                    TipoAmbienteId = table.Column<int>(nullable: false),
+                    FrecuenciaRiego = table.Column<string>(nullable: false),
+                    Temperatura = table.Column<decimal>(nullable: false),
+                    TipoPlantaId = table.Column<int>(nullable: false),
+                    TipoIlumincacionId = table.Column<int>(nullable: false),
+                    NombresVulgares = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Planta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Planta_TipoAmbiente_TipoAmbienteId",
+                        column: x => x.TipoAmbienteId,
+                        principalTable: "TipoAmbiente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Planta_Iluminacion_TipoIlumincacionId",
+                        column: x => x.TipoIlumincacionId,
+                        principalTable: "Iluminacion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Planta_TipoPlanta_TipoPlantaId",
+                        column: x => x.TipoPlantaId,
+                        principalTable: "TipoPlanta",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cantidad = table.Column<int>(nullable: false),
+                    PrecioUnitario = table.Column<decimal>(nullable: false),
+                    PlantaId = table.Column<int>(nullable: true),
+                    CompraId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Item_Compra_CompraId",
+                        column: x => x.CompraId,
+                        principalTable: "Compra",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Item_Planta_PlantaId",
+                        column: x => x.PlantaId,
+                        principalTable: "Planta",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Item_CompraId",
+                table: "Item",
+                column: "CompraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Item_PlantaId",
+                table: "Item",
+                column: "PlantaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Planta_TipoAmbienteId",
+                table: "Planta",
+                column: "TipoAmbienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Planta_TipoIlumincacionId",
+                table: "Planta",
+                column: "TipoIlumincacionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Planta_TipoPlantaId",
+                table: "Planta",
+                column: "TipoPlantaId");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Item");
+
+            migrationBuilder.DropTable(
+                name: "Usuario");
+
+            migrationBuilder.DropTable(
+                name: "Compra");
+
+            migrationBuilder.DropTable(
+                name: "Planta");
+
+            migrationBuilder.DropTable(
+                name: "TipoAmbiente");
+
+            migrationBuilder.DropTable(
+                name: "Iluminacion");
+
+            migrationBuilder.DropTable(
+                name: "TipoPlanta");
+        }
+    }
+}
