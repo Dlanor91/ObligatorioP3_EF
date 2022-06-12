@@ -24,12 +24,7 @@ namespace LogicaDeAplicacion
         public IEnumerable<TipoPlanta> MostrarTodosTiposPlantas()
         {
             return RepoTipoPlantas.FindAll();
-        }
-
-        public bool ValidarNombreUnico(string nombreTP)
-        {
-            return RepoTipoPlantas.existeNombre(nombreTP);
-        }        
+        }              
 
         public TipoPlanta buscarUnaPlanta(int id)
         {

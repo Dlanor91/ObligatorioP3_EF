@@ -7,9 +7,6 @@ namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioTipoPlanta:IRepositorio<TipoPlanta>
     {
-        TipoPlanta buscarTipoPlanta(string nombreTipo);
-
-        bool existeNombre(string nombreTipoPlanta);
-        
+        TipoPlanta buscarTipoPlanta(string nombreTipo); 
     }
 }
