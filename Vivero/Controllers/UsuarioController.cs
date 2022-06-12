@@ -109,7 +109,7 @@ namespace Vivero.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
+                ViewBag.Error = "Usuarios ya existentes.";
                 return View();
             }            
         }
