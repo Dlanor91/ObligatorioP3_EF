@@ -12,21 +12,21 @@
     <div class="col-md-4">
 
         <form asp-action="Create" enctype="multipart/form-data" id="crearPlanta">
-            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Planta.nombreCientifico" class="control-label">Nombre </label>
-            <input asp-for="Planta.nombreCientifico" class="form-control" id="nombrePlanta" />
-            <span asp-validation-for="Planta.nombreCientifico" class="text-danger"></span>
+            <label asp-for="Planta.NombreCientifico" class="control-label">Nombre </label>
+            <input asp-for="Planta.NombreCientifico" class="form-control" id="nombrePlanta" />
+            <span asp-validation-for="Planta.NombreCientifico" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Planta.descripcionPlanta" class="control-label">Descripción </label>
-            <textarea asp-for="Planta.descripcionPlanta" class="form-control" id="descripcionPlanta" rows="5" cols="5"></textarea>
-            <span asp-validation-for="Planta.descripcionPlanta" class="text-danger"></span>
+            <label asp-for="Planta.Descripcion" class="control-label">Descripción </label>
+            <textarea asp-for="Planta.Descripcion" class="form-control" id="descripcionPlanta" rows="5" cols="5"></textarea>
+            <span asp-validation-for="Planta.Descripcion" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Planta.alturaMax" class="control-label">Altura Máxima (cm)</label>
-            <input type="number" asp-for="Planta.alturaMax" class="form-control" id="alturaMax" />
-            <span asp-validation-for="Planta.alturaMax" class="text-danger"></span>
+            <label asp-for="Planta.AlturaMax" class="control-label">Altura Máxima (cm)</label>
+            <input type="number" asp-for="Planta.AlturaMax" class="form-control" id="alturaMax" />
+            <span asp-validation-for="Planta.AlturaMax" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label class="control-label">Frecuencia de Riego</label>
@@ -40,14 +40,14 @@
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="Planta.temperatura" class="control-label">Temperatura (°C)</label>
-            <input type="number" asp-for="Planta.temperatura" class="form-control" id="tempPlanta" />
-            <span asp-validation-for="Planta.temperatura" class="text-danger"></span>
+            <label asp-for="Planta.Temperatura" class="control-label">Temperatura (°C)</label>
+            <input type="number" asp-for="Planta.Temperatura" class="form-control" id="tempPlanta" />
+            <span asp-validation-for="Planta.Temperatura" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Planta.nombresVulgares" class="control-label">Nombres Vulgares</label>
-            <textarea asp-for="Planta.nombresVulgares" class="form-control" id="nombresVulgares" rows="5" cols="5"></textarea>
-            <span asp-validation-for="Planta.nombresVulgares" class="text-danger"></span>
+            <label asp-for="Planta.NombresVulgares" class="control-label">Nombres Vulgares</label>
+            <textarea asp-for="Planta.NombresVulgares" class="form-control" id="nombresVulgares" rows="5" cols="5"></textarea>
+            <span asp-validation-for="Planta.NombresVulgares" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label>Imagen</label>
@@ -58,7 +58,7 @@
                 <option value="0">Seleccione Tipo de Planta</option>
                 @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
                 {
-                    <option value="@tp.id">@tp.nombre</option>
+                    <option value="@tp.Id">@tp.Nombre</option>
                 }
             </select>
         </div>
@@ -67,7 +67,7 @@
                 <option value="0">Seleccione Tipo de Ambiente</option>
                 @foreach (Dominio.EntidadesVivero.TipoAmbiente ta in ViewBag.TipoAmbientes)
                 {
-                    <option value="@ta.id">@ta.tipoAmbiente</option>
+                    <option value="@ta.Id">@ta.Ambiente</option>
                 }
             </select>
         </div>
@@ -76,10 +76,10 @@
                 <option value="0">Seleccione Tipo de Iluminación</option>
                 @foreach (Dominio.EntidadesVivero.Iluminacion ilu in ViewBag.Iluminaciones)
                 {
-                    <option value="@ilu.id">@ilu.tipoIluminacion</option>
+                    <option value="@ilu.Id">@ilu.TipoIluminacion</option>
                 }
             </select>
-        </div>*@
+        </div>
             <div class="form-group">
                 <input type="submit" value="Insertar" class="btn btn-primary" />
             </div>
