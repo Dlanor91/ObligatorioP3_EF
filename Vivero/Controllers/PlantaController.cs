@@ -55,7 +55,7 @@ namespace Vivero.Controllers
         public ActionResult BusqPorNombre()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
-            {
+            {                
                 return View();
             }
             else
@@ -76,6 +76,7 @@ namespace Vivero.Controllers
                 else
                 {
                     nombreBusqPlanta = nombreBusqPlanta.Trim();
+                    MostrarPlantaAtributos();
                     IEnumerable<Planta> plEncontradas = ManejadorPlanta.BusquedaNombre(nombreBusqPlanta);
                     if (plEncontradas.Count() == 0)
                     {
@@ -99,7 +100,7 @@ namespace Vivero.Controllers
         public ActionResult BusqTipoPlanta()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
-            {                
+            {
                 MostrarPlantaAtributos();
                 return View();
             }
@@ -121,6 +122,7 @@ namespace Vivero.Controllers
                 }
                 else
                 {
+                    MostrarPlantaAtributos();
                     IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasTipoPlanta(busqTipoPlanta);
                     if (plEncontradas.Count() == 0)
                     {
@@ -169,6 +171,7 @@ namespace Vivero.Controllers
                 }
                 else
                 {
+                    MostrarPlantaAtributos();
                     IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasTipoAmbiente(busqTipoAmbiente);
                     if (plEncontradas.Count() == 0)
                     {
@@ -176,8 +179,7 @@ namespace Vivero.Controllers
                         throw new Exception("No se encontraron plantas con ese criterio de búsqueda.");
                     }
                     else
-                    {
-                        MostrarPlantaAtributos();
+                    {                        
                         return View(plEncontradas);
                     }                    
                 }
@@ -194,7 +196,7 @@ namespace Vivero.Controllers
         public ActionResult BusqMenorAltura()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
-            {
+            {                
                 return View();
             }
             else
@@ -218,6 +220,7 @@ namespace Vivero.Controllers
                         throw new Exception("Introduzca una altura mayor que 0.");
                     } 
                     else {
+                        MostrarPlantaAtributos();
                         IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMenoresAlt(busqAlturaMinima);
                         if (plEncontradas.Count() == 0)
                         {
@@ -241,7 +244,7 @@ namespace Vivero.Controllers
         public ActionResult BusqMayorAltura()
         {
             if (HttpContext.Session.GetString("datosNombreUsuario") != null)
-            {
+            {                
                 return View();
             }
             else
@@ -267,6 +270,7 @@ namespace Vivero.Controllers
                     }
                     else
                     {
+                        MostrarPlantaAtributos();
                         IEnumerable<Planta> plEncontradas = ManejadorPlanta.buscarPlantasMayoresAlt(busqAlturaMaxima);
                         if (plEncontradas.Count() == 0)
                         {
