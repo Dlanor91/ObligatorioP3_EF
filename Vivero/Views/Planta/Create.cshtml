@@ -12,74 +12,74 @@
     <div class="col-md-4">
 
         <form asp-action="Create" enctype="multipart/form-data" id="crearPlanta">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Planta.nombreCientifico" class="control-label">Nombre </label>
-                <input asp-for="Planta.nombreCientifico" class="form-control" id="nombrePlanta" />
-                <span asp-validation-for="Planta.nombreCientifico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planta.descripcionPlanta" class="control-label">Descripción </label>
-                <textarea asp-for="Planta.descripcionPlanta" class="form-control" id="descripcionPlanta" rows="5" cols="5"></textarea>
-                <span asp-validation-for="Planta.descripcionPlanta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planta.alturaMax" class="control-label">Altura Máxima (cm)</label>
-                <input type="number" asp-for="Planta.alturaMax" class="form-control" id="alturaMax" />
-                <span asp-validation-for="Planta.alturaMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Frecuencia de Riego</label>
-                <input type="number" class="form-control" id="cantDiasRiego" name="cantDiasRiego" /><br />
-                <select name="frecSeleccionada" id="frecSeleccionada" class="control-label">
-                    <option value="0">Seleccione la Frecuencia de Riego</option>
-                    <option value="Día">Día</option>
-                    <option value="Semana">Semana</option>
-                    <option value="Mes">Mes</option>
-                    <option value="Año">Año</option>
-                </select>                
-            </div>
-            <div class="form-group">
-                <label asp-for="Planta.temperatura" class="control-label">Temperatura (°C)</label>
-                <input type="number" asp-for="Planta.temperatura" class="form-control" id="tempPlanta" />
-                <span asp-validation-for="Planta.temperatura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planta.nombresVulgares" class="control-label">Nombres Vulgares</label>
-                <textarea asp-for="Planta.nombresVulgares" class="form-control" id="nombresVulgares" rows="5" cols="5"></textarea>
-                <span asp-validation-for="Planta.nombresVulgares" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Imagen</label>
-                <input asp-for="Foto" class="form-control" id="fotoP" />
-            </div>
-            <div class="form-group">
-                <select name="idTipoPlanta" id="idTipoPlanta" class="control-label">
-                    <option value="0">Seleccione Tipo de Planta</option>
-                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
-                    {
-                        <option value="@tp.id">@tp.nombre</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <select name="idTipoAmbiente" id="idTipoAmbiente" class="control-label">
-                    <option value="0">Seleccione Tipo de Ambiente</option>
-                    @foreach (Dominio.EntidadesVivero.TipoAmbiente ta in ViewBag.TipoAmbientes)
-                    {
-                        <option value="@ta.id">@ta.tipoAmbiente</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <select name="idIluminacion" id="idIluminacion" class="control-label">
-                    <option value="0">Seleccione Tipo de Iluminación</option>
-                    @foreach (Dominio.EntidadesVivero.Iluminacion ilu in ViewBag.Iluminaciones)
-                    {
-                        <option value="@ilu.id">@ilu.tipoIluminacion</option>
-                    }
-                </select>
-            </div>
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Planta.nombreCientifico" class="control-label">Nombre </label>
+            <input asp-for="Planta.nombreCientifico" class="form-control" id="nombrePlanta" />
+            <span asp-validation-for="Planta.nombreCientifico" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Planta.descripcionPlanta" class="control-label">Descripción </label>
+            <textarea asp-for="Planta.descripcionPlanta" class="form-control" id="descripcionPlanta" rows="5" cols="5"></textarea>
+            <span asp-validation-for="Planta.descripcionPlanta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Planta.alturaMax" class="control-label">Altura Máxima (cm)</label>
+            <input type="number" asp-for="Planta.alturaMax" class="form-control" id="alturaMax" />
+            <span asp-validation-for="Planta.alturaMax" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Frecuencia de Riego</label>
+            <input type="number" class="form-control" id="cantDiasRiego" name="cantDiasRiego" /><br />
+            <select name="frecSeleccionada" id="frecSeleccionada" class="control-label">
+                <option value="0">Seleccione la Frecuencia de Riego</option>
+                <option value="Día">Día</option>
+                <option value="Semana">Semana</option>
+                <option value="Mes">Mes</option>
+                <option value="Año">Año</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Planta.temperatura" class="control-label">Temperatura (°C)</label>
+            <input type="number" asp-for="Planta.temperatura" class="form-control" id="tempPlanta" />
+            <span asp-validation-for="Planta.temperatura" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Planta.nombresVulgares" class="control-label">Nombres Vulgares</label>
+            <textarea asp-for="Planta.nombresVulgares" class="form-control" id="nombresVulgares" rows="5" cols="5"></textarea>
+            <span asp-validation-for="Planta.nombresVulgares" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Imagen</label>
+            <input asp-for="Foto" class="form-control" id="fotoP" />
+        </div>
+        <div class="form-group">
+            <select name="idTipoPlanta" id="idTipoPlanta" class="control-label">
+                <option value="0">Seleccione Tipo de Planta</option>
+                @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
+                {
+                    <option value="@tp.id">@tp.nombre</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="idTipoAmbiente" id="idTipoAmbiente" class="control-label">
+                <option value="0">Seleccione Tipo de Ambiente</option>
+                @foreach (Dominio.EntidadesVivero.TipoAmbiente ta in ViewBag.TipoAmbientes)
+                {
+                    <option value="@ta.id">@ta.tipoAmbiente</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="idIluminacion" id="idIluminacion" class="control-label">
+                <option value="0">Seleccione Tipo de Iluminación</option>
+                @foreach (Dominio.EntidadesVivero.Iluminacion ilu in ViewBag.Iluminaciones)
+                {
+                    <option value="@ilu.id">@ilu.tipoIluminacion</option>
+                }
+            </select>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Insertar" class="btn btn-primary" />
             </div>

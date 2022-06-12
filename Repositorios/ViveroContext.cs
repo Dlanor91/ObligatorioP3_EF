@@ -27,7 +27,6 @@ namespace Repositorios
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<TipoAmbiente>().HasKey(tp=> tp.Id);
             modelBuilder.Entity<TipoAmbiente>().Property(tp => tp.Id).ValueGeneratedOnAdd();
 
@@ -45,7 +44,7 @@ namespace Repositorios
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
-
+                   
 
             base.OnModelCreating(modelBuilder);
         }
