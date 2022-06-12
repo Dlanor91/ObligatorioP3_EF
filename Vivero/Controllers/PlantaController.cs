@@ -305,103 +305,105 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ViewModelPlanta VMPlanta,int cantDiasRiego,string frecSeleccionada, int minimaDesc, int maximaDesc)
         {
-            try
-            {
-                if (cantDiasRiego>0 && frecSeleccionada !="0") {
-                    if (cantDiasRiego == 1) {
-                        VMPlanta.Planta.frecuenciaRiego = cantDiasRiego + " vez por " + frecSeleccionada;
-                    } else {                    
-                        VMPlanta.Planta.frecuenciaRiego = cantDiasRiego + " veces por " + frecSeleccionada;
-                    }
+            //try
+            //{
+            //    if (cantDiasRiego>0 && frecSeleccionada !="0") {
+            //        if (cantDiasRiego == 1) {
+            //            VMPlanta.Planta.frecuenciaRiego = cantDiasRiego + " vez por " + frecSeleccionada;
+            //        } else {                    
+            //            VMPlanta.Planta.frecuenciaRiego = cantDiasRiego + " veces por " + frecSeleccionada;
+            //        }
 
-                    bool validarNewTp = VMPlanta.Planta.Validar();
+            //        bool validarNewTp = VMPlanta.Planta.Validar();
 
-                    if (validarNewTp && VMPlanta.idIluminacion != 0 && VMPlanta.idTipoAmbiente != 0 && VMPlanta.idTipoPlanta != 0 && VMPlanta.Foto!=null)
-                    {
-                        if (VMPlanta.Planta.alturaMax <= 0)
-                        {
-                            throw new Exception("La altura máxima no puede ser menor que 0cm.");
-                        }
-                        else
-                        {
-                            bool errorNombre = VMPlanta.Planta.ValidarFormatoNombre(VMPlanta.Planta.nombreCientifico);
-                            if (!errorNombre)
-                            {
-                                VMPlanta.Planta.nombreCientifico = VMPlanta.Planta.nombreCientifico.Trim();
-                                bool existeNombre = ManejadorPlanta.verificarNombreC(VMPlanta.Planta.nombreCientifico);
-                                if (!existeNombre)
-                                {
-                                    VMPlanta.Planta.descripcionPlanta = VMPlanta.Planta.descripcionPlanta.Trim();
-                                    VMPlanta.Planta.nombresVulgares = VMPlanta.Planta.nombresVulgares.Trim();
-                                    bool descripcionValida = VMPlanta.Planta.ValidarDescripcion(VMPlanta.Planta.descripcionPlanta, minimaDesc, maximaDesc);
-                                    if (descripcionValida)
-                                    {
-                                        if (VMPlanta.Foto.ContentType == "image/jpeg" || VMPlanta.Foto.ContentType == "image/png")
-                                        {
-                                            string extension;
-                                            if (VMPlanta.Foto.ContentType == "image/jpeg")
-                                            {
-                                                extension = ".jpg";
-                                            }
-                                            else
-                                            {
-                                                extension = ".png";
-                                            }
-                                            string nomArchivo = VMPlanta.Planta.nombreCientifico.Replace(" ", "_") + "_001"+extension;
-                                            VMPlanta.Planta.foto = nomArchivo;
-                                            bool altaTP = ManejadorPlanta.AgregarPlanta(VMPlanta.Planta, VMPlanta.idTipoPlanta, VMPlanta.idTipoAmbiente, VMPlanta.idIluminacion);
-                                            if (altaTP)
-                                            {
-                                                string rutaRaiz = WebHostEnvironment.WebRootPath;
-                                                string rutaImagenes = Path.Combine(rutaRaiz, "img");//aqui lo une solo sin ver orden e imagenes es la carpeta de imagenes
-                                                string rutaArchivo = Path.Combine(rutaImagenes, nomArchivo);
-                                                FileStream stream = new FileStream(rutaArchivo, FileMode.Create); //para hacer la ruta un stream
-                                                VMPlanta.Foto.CopyTo(stream);
-                                                return RedirectToAction(nameof(Index));
-                                            }
-                                            else
-                                            {
-                                                throw new Exception("No fue posible el alta de esta nueva Planta.");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            throw new Exception("El archivo de la foto subida no es válida, tiene que ser extensión jpeg o png.");
-                                        }
+            //        if (validarNewTp && VMPlanta.idIluminacion != 0 && VMPlanta.idTipoAmbiente != 0 && VMPlanta.idTipoPlanta != 0 && VMPlanta.Foto!=null)
+            //        {
+            //            if (VMPlanta.Planta.alturaMax <= 0)
+            //            {
+            //                throw new Exception("La altura máxima no puede ser menor que 0cm.");
+            //            }
+            //            else
+            //            {
+            //                bool errorNombre = VMPlanta.Planta.ValidarFormatoNombre(VMPlanta.Planta.nombreCientifico);
+            //                if (!errorNombre)
+            //                {
+            //                    VMPlanta.Planta.nombreCientifico = VMPlanta.Planta.nombreCientifico.Trim();
+            //                    bool existeNombre = ManejadorPlanta.verificarNombreC(VMPlanta.Planta.nombreCientifico);
+            //                    if (!existeNombre)
+            //                    {
+            //                        VMPlanta.Planta.descripcionPlanta = VMPlanta.Planta.descripcionPlanta.Trim();
+            //                        VMPlanta.Planta.nombresVulgares = VMPlanta.Planta.nombresVulgares.Trim();
+            //                        bool descripcionValida = VMPlanta.Planta.ValidarDescripcion(VMPlanta.Planta.descripcionPlanta, minimaDesc, maximaDesc);
+            //                        if (descripcionValida)
+            //                        {
+            //                            if (VMPlanta.Foto.ContentType == "image/jpeg" || VMPlanta.Foto.ContentType == "image/png")
+            //                            {
+            //                                string extension;
+            //                                if (VMPlanta.Foto.ContentType == "image/jpeg")
+            //                                {
+            //                                    extension = ".jpg";
+            //                                }
+            //                                else
+            //                                {
+            //                                    extension = ".png";
+            //                                }
+            //                                string nomArchivo = VMPlanta.Planta.nombreCientifico.Replace(" ", "_") + "_001"+extension;
+            //                                VMPlanta.Planta.foto = nomArchivo;
+            //                                bool altaTP = ManejadorPlanta.AgregarPlanta(VMPlanta.Planta, VMPlanta.idTipoPlanta, VMPlanta.idTipoAmbiente, VMPlanta.idIluminacion);
+            //                                if (altaTP)
+            //                                {
+            //                                    string rutaRaiz = WebHostEnvironment.WebRootPath;
+            //                                    string rutaImagenes = Path.Combine(rutaRaiz, "img");//aqui lo une solo sin ver orden e imagenes es la carpeta de imagenes
+            //                                    string rutaArchivo = Path.Combine(rutaImagenes, nomArchivo);
+            //                                    FileStream stream = new FileStream(rutaArchivo, FileMode.Create); //para hacer la ruta un stream
+            //                                    VMPlanta.Foto.CopyTo(stream);
+            //                                    return RedirectToAction(nameof(Index));
+            //                                }
+            //                                else
+            //                                {
+            //                                    throw new Exception("No fue posible el alta de esta nueva Planta.");
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                throw new Exception("El archivo de la foto subida no es válida, tiene que ser extensión jpeg o png.");
+            //                            }
 
-                                    }
-                                    else
-                                    {
-                                        throw new Exception("El campo descripción debe estar entre " + minimaDesc + " y " + maximaDesc + " caracteres.");
-                                    }
-                                }
-                                else
-                                {
-                                    throw new Exception("El nombre de la Planta ya existe en la base de datos, ingrese otro.");
-                                }
-                            }
-                            else
-                            {
-                                throw new Exception("El nombre de la Planta tiene espacios al principio o final y/o tiene números, verifíquelo.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Complete todos los campos.");
-                    }
-                } else {
-                    throw new Exception("La frecuencia de riego no puede ser negativa y seleccione una unidad de tiempo.");
-                }
+            //                        }
+            //                        else
+            //                        {
+            //                            throw new Exception("El campo descripción debe estar entre " + minimaDesc + " y " + maximaDesc + " caracteres.");
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        throw new Exception("El nombre de la Planta ya existe en la base de datos, ingrese otro.");
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("El nombre de la Planta tiene espacios al principio o final y/o tiene números, verifíquelo.");
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            throw new Exception("Complete todos los campos.");
+            //        }
+            //    } else {
+            //        throw new Exception("La frecuencia de riego no puede ser negativa y seleccione una unidad de tiempo.");
+            //    }
                 
-            }
-            catch (Exception ex)            
-            {                
-                MostrarPlantaAtributos();
-                ViewBag.Error = ex.Message;
+            //}
+            //catch (Exception ex)            
+            //{                
+            //    MostrarPlantaAtributos();
+            //    ViewBag.Error = ex.Message;
                 
-                return View();
-            }
+            //    return View();
+            //}
+
+            return View();
         }
                
         private void MostrarPlantaAtributos()
