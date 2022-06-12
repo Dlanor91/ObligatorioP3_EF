@@ -9,11 +9,12 @@ using System.Diagnostics.CodeAnalysis;
 namespace Dominio.EntidadesVivero
 {
     [Table("Planta")]
+    
     public class Planta :IValidar
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required]        
         public string NombreCientifico { get; set; }
         [Required] [StringLength(500, MinimumLength = 10, ErrorMessage = "La descripción debe estar entre 10 y 500 caracteres.")]
         public string Descripcion { get; set; }

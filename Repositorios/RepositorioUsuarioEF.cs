@@ -19,9 +19,9 @@ namespace Repositorios
             Contexto = cont;
         }
 
-        public bool Add(Usuario nuevoAutor)
+        public bool Add(Usuario nuevoUsuario)
         {
-            Contexto.Usuarios.Add(nuevoAutor);
+            Contexto.Usuarios.Add(nuevoUsuario);
             return Contexto.SaveChanges() >= 1;
         }
 
