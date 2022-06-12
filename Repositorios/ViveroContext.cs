@@ -20,6 +20,8 @@ namespace Repositorios
         public DbSet<Iluminacion> Iluminaciones { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Item> Items { get; set; }
+
+        public DbSet<ParametroSistema> ParametroSistema { get; set; }
         public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones) //aqui configuro el sistema para que inyecte al context
         {
 
@@ -27,7 +29,7 @@ namespace Repositorios
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TipoAmbiente>().HasKey(tp=> tp.Id);
+            modelBuilder.Entity<TipoAmbiente>().HasKey(tp => tp.Id);
             modelBuilder.Entity<TipoAmbiente>().Property(tp => tp.Id).ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Iluminacion>().HasKey(il => il.Id);
@@ -44,7 +46,9 @@ namespace Repositorios
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
-                   
+
+            modelBuilder.Entity<ParametroSistema>().HasKey(ps => ps.Id);
+            modelBuilder.Entity<ParametroSistema>().Property(ps => ps.Id).ValueGeneratedOnAdd();
 
             base.OnModelCreating(modelBuilder);
         }

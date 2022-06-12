@@ -21,15 +21,15 @@ namespace Dominio.EntidadesVivero
         public decimal AlturaMax { get; set; }
         [Required]
         public string Foto { get; set; }
-        [Required] [ForeignKey("Id")]
+        [Required]
         public TipoAmbiente TipoAmbiente { get; set; }
         [Required]
         public string FrecuenciaRiego { get; set; }
         [Required]
         public decimal Temperatura { get; set; }
-        [Required] [ForeignKey("Id")]
+        [Required]
         public TipoPlanta TipoPlanta { get; set; }
-        [Required] [ForeignKey("Id")]
+        [Required]
         public Iluminacion TipoIlumincacion { get; set; }
         [Required]
         public string NombresVulgares { get; set; }

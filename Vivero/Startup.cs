@@ -47,10 +47,18 @@ namespace Vivero
             services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
 
             //servicios para DbContext
-            services.AddDbContext<ViveroContext>
-                (opciones => opciones
-                    .UseSqlServer(Configuration.GetConnectionString("ConexionEF"))
-                );
+            //
+            //string strCon = Configuration.GetConnectionString("ConexionEF");
+            //services.AddDbContext<ViveroContext>(options => options.UseSqlServer(strCon));
+            services.AddDbContext<ViveroContext>(
+                                                        options =>
+                                                        options.UseSqlServer(
+                                                        Configuration.GetConnectionString("ConexionEF"),
+                                                        x => x.MigrationsAssembly("Vivero")));
+            //services.AddDbContext<ViveroContext>
+            //    (opciones => opciones
+            //        .UseSqlServer(Configuration.GetConnectionString("ConexionEF"))
+            //    );
 
         }
 
