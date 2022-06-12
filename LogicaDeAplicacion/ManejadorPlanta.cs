@@ -76,13 +76,14 @@ namespace LogicaDeAplicacion
             TipoAmbiente tipoAmb = RepoTipoAmbientes.FindById(idTipoAmbiente);
             Iluminacion ilum = RepoIluminacion.FindById(idIluminacion);
 
-            //if (tp != null && tipoAmb !=null && ilum !=null) {
-            //    p.tipoPlanta = tp;
-            //    p.tipoAmbiente = tipoAmb;
-            //    p.tipoIlumincacion = ilum;
-            //    puedeAgregar = RepoPlantas.Add(p);               
-            //}          
-           
+            if (tp != null && tipoAmb !=null && ilum !=null)
+            {
+                p.TipoPlanta = tp;
+                p.TipoAmbiente = tipoAmb;
+                p.TipoIlumincacion = ilum;
+                puedeAgregar = RepoPlantas.Add(p);
+            }
+
             return puedeAgregar;
         }
 

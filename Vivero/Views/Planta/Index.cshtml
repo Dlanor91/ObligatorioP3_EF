@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Dominio.EntidadesVivero.Planta>
-
 @{
     ViewData["Title"] = "Plantas";
 }
@@ -48,40 +47,40 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.nombreCientifico)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descripcionPlanta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.alturaMax)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tipoAmbiente.tipoAmbiente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombresVulgares)
-                </td>
-                <td>
-                    <img src="~/img/@item.foto" alt="@item.nombreCientifico" title="@item.nombreCientifico" width="200" height="200" />
-                </td>
-                <td>
-                    <p>
-                        <a class="btn btn-light" data-toggle="collapse" href="#collapseExample_@item.id" role="button" aria-expanded="false" aria-controls="collapseExample_@item.id">
-                            Ficha de Cuidados
-                        </a>
-                    </p>
-                    <div class="collapse" id="collapseExample_@item.id">
-                        <div class="card card-body">
-                            <p>Frecuencia de Riego : @Html.DisplayFor(modelItem => item.frecuenciaRiego)</p>
-                            <p>Iluminación : @Html.DisplayFor(modelItem => item.tipoIlumincacion.tipoIluminacion)</p>
-                            <p>Temperatura (°C) : @Html.DisplayFor(modelItem => item.temperatura)</p>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlturaMax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoAmbiente.Ambiente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombresVulgares)
+                    </td>
+                    <td>
+                        <img src="~/img/@item.Foto" alt="@item.NombreCientifico" title="@item.NombreCientifico" width="200" height="200" />
+                    </td>
+                    <td>
+                        <p>
+                            <a class="btn btn-light" data-toggle="collapse" href="#collapseExample_@item.Id" role="button" aria-expanded="false" aria-controls="collapseExample_@item.Id">
+                                Ficha de Cuidados
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample_@item.Id">
+                            <div class="card card-body">
+                                <p>Frecuencia de Riego : @Html.DisplayFor(modelItem => item.FrecuenciaRiego)</p>
+                                <p>Iluminación : @Html.DisplayFor(modelItem => item.TipoIlumincacion.TipoIluminacion)</p>
+                                <p>Temperatura (°C) : @Html.DisplayFor(modelItem => item.Temperatura)</p>
+                            </div>
                         </div>
-                    </div>
-                </td>*@
-            </tr>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

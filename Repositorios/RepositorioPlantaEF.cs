@@ -21,49 +21,8 @@ namespace Repositorios
         }
         public bool Add(Planta obj)
         {
-            bool agregar = false;
-
-            //SqlConnection con = Conexion.ObtenerConexion();
-            //string sql = "INSERT INTO Planta VALUES(@nombre,@desc, @altura, @foto, @ambiente, @riego, @temp, @tipoPlanta, @tipoIlu, @nombresV);";
-            //SqlCommand com = new SqlCommand(sql, con);
-
-            //com.Parameters.AddWithValue("@nombre", obj.nombreCientifico);
-            //com.Parameters.AddWithValue("@desc", obj.descripcionPlanta);
-            //com.Parameters.AddWithValue("@altura", obj.alturaMax);
-            //com.Parameters.AddWithValue("@foto", obj.foto);
-            //com.Parameters.AddWithValue("@ambiente", obj.tipoAmbiente.id);
-            //com.Parameters.AddWithValue("@riego", obj.frecuenciaRiego);
-            //com.Parameters.AddWithValue("@temp", obj.temperatura);
-            //com.Parameters.AddWithValue("@tipoPlanta", obj.tipoPlanta.id);
-            //com.Parameters.AddWithValue("@tipoIlu", obj.tipoIlumincacion.id);
-            //com.Parameters.AddWithValue("@nombresV", obj.nombresVulgares);
-            
-
-            //SqlTransaction transaccion = null;
-
-            //try
-            //{
-            //    Conexion.AbrirConexion(con);
-            //    transaccion = con.BeginTransaction();
-            //    com.Transaction = transaccion;
-            //    int filasAfectadas = com.ExecuteNonQuery();
-            //    agregar = filasAfectadas == 1;
-            //    transaccion.Commit();
-            //    Conexion.CerrarConexion(con);
-
-            //}
-            //catch
-            //{
-            //    if (transaccion != null) transaccion.Rollback();
-            //    agregar = false;
-
-            //}
-            //finally
-            //{
-            //    Conexion.CerrarYDisposeConexion(con);
-            //}
-
-            return agregar;
+            Contexto.Plantas.Add(obj);
+            return Contexto.SaveChanges() >=1;
         }
 
         public IEnumerable<Planta> buscarPlantasTipoAmbiente(int tipoAmbiente)
@@ -276,42 +235,8 @@ namespace Repositorios
 
         public IEnumerable<Planta> FindAll()
         {
-            List<Planta> plantas = new List<Planta>();
-
-            //SqlConnection con = Conexion.ObtenerConexion();
-
-            //string sql = "select pl.id, pl.nombreCientifico, pl.descripcionPlanta, pl.alturaMax, pl.foto, ta.tipoAmbiente, pl.frecuenciaRiego, pl.temperatura, tp.nombre,il.tipoIluminacion,pl.nombreVulgares from Planta pl " +
-            //             "left join TipoAmbiente ta on pl.tipoAmbiente = ta.id " +
-            //             "left join TipoPlanta tp on pl.tipoPlanta = tp.id " +
-            //             "left join Iluminacion il on pl.tipoIluminacion = il.id ";
-            //SqlCommand com = new SqlCommand(sql, con);
-
-            //try
-            //{
-            //    Conexion.AbrirConexion(con);
-            //    SqlDataReader reader = com.ExecuteReader();
-
-            //    while (reader.Read())
-            //    {
-            //        Planta p = CrearPlanta(reader);                    
-            //        p.tipoAmbiente = CrearTipoAmbiente(reader);
-            //        p.tipoPlanta = CrearTipoPlanta(reader);
-            //        p.tipoIlumincacion = CrearIluminacion(reader);
-            //        plantas.Add(p);   
-            //    }
-
-            //    Conexion.CerrarConexion(con);
-            //}
-            //catch(Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    Conexion.CerrarYDisposeConexion(con);
-            //}
-
-            return plantas;
+            return Contexto.Plantas.ToList()                           
+                           .OrderBy(tp => tp.NombreCientifico);
         }
 
         //private Iluminacion CrearIluminacion(SqlDataReader reader)
@@ -408,32 +333,9 @@ namespace Repositorios
         {
             bool plantaBuscada = false;
 
-            //SqlConnection con = Conexion.ObtenerConexion();
+            Planta existe = Contexto.Plantas.Where(pl => pl.NombreCientifico == nombreCPlanta).SingleOrDefault();
 
-            //string sql = "SELECT * FROM Planta WHERE nombreCientifico =@nombreCPlanta;";
-            //SqlCommand com = new SqlCommand(sql, con);
-            //com.Parameters.AddWithValue("@nombreCPlanta", nombreCPlanta);
-
-            //try
-            //{
-            //    Conexion.AbrirConexion(con);
-            //    SqlDataReader reader = com.ExecuteReader();
-
-            //    if (reader.Read())
-            //    {
-            //        plantaBuscada = true;
-            //    }
-
-            //    Conexion.CerrarConexion(con);
-            //}
-            //catch
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    Conexion.CerrarYDisposeConexion(con);
-            //}
+            if (existe != null) plantaBuscada = true;
 
             return plantaBuscada;
         }
