@@ -20,5 +20,12 @@ namespace LogicaDeAplicacion
         {
             return RepoUsuario.Ingreso(emailUsuario, contrasenia);
         }
+
+        public bool PrecargaUsuarios(string emailUsuario, string contrasenia)
+        {            
+            Usuario nuevoUsuario = new Usuario() { Email=emailUsuario, Contrasenia = contrasenia };
+            
+            return RepoUsuario.Add(nuevoUsuario); 
+        }
     }
 }

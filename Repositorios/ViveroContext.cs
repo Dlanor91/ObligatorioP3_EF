@@ -37,12 +37,15 @@ namespace Repositorios
 
             modelBuilder.Entity<Usuario>().HasKey(user => user.Id);
             modelBuilder.Entity<Usuario>().Property(user => user.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Usuario>().HasIndex(user => user.Email).IsUnique();
 
             modelBuilder.Entity<TipoPlanta>().HasKey(tp => tp.Id);
             modelBuilder.Entity<TipoPlanta>().Property(tp => tp.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<TipoPlanta>().HasIndex(tp => tp.Nombre).IsUnique();
 
             modelBuilder.Entity<Planta>().HasKey(pl => pl.Id);
             modelBuilder.Entity<Planta>().Property(pl => pl.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Planta>().HasIndex(pl => pl.NombreCientifico).IsUnique();
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();

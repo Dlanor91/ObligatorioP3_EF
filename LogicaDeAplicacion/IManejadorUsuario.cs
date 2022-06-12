@@ -9,5 +9,6 @@ namespace LogicaDeAplicacion
     public interface IManejadorUsuario
     {
         public Usuario IngresoExitoso(string emailUsuario, string contrasenia);
+        public bool PrecargaUsuarios(string emailUsuario, string contrasenia);
     }
 }

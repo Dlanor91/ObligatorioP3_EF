@@ -12,7 +12,7 @@ namespace Dominio.EntidadesVivero
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required]        
         public string Email { get; set; }
         [Required]
         public string Contrasenia { get; set; }
