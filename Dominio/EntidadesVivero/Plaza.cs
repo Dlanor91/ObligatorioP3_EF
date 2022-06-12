@@ -9,7 +9,7 @@ namespace Dominio.EntidadesVivero
     [Table("Plaza")]
 	public class Plaza : Compra
     { 
-    [Required]
+    
     public static decimal TasaIVA { get; set; }
     [Required]	
     public decimal CostoFlete { get; set; }

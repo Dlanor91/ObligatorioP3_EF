@@ -12,7 +12,7 @@ namespace Dominio.EntidadesVivero
         [Key]
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public List<Item> items { get; set; }
+        public IEnumerable<Item> items { get; set; }
 
         public abstract decimal PrecioFinal();
         public abstract bool CompraValida();

@@ -22,6 +22,32 @@ namespace Repositorios
         public DbSet<Item> Items { get; set; }
         public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones) //aqui configuro el sistema para que inyecte al context
         {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<TipoAmbiente>().HasKey(tp=> tp.Id);
+            modelBuilder.Entity<TipoAmbiente>().Property(tp => tp.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Iluminacion>().HasKey(il => il.Id);
+            modelBuilder.Entity<Iluminacion>().Property(il => il.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Usuario>().HasKey(user => user.Id);
+            modelBuilder.Entity<Usuario>().Property(user => user.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<TipoPlanta>().HasKey(tp => tp.Id);
+            modelBuilder.Entity<TipoPlanta>().Property(tp => tp.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Planta>().HasKey(pl => pl.Id);
+            modelBuilder.Entity<Planta>().Property(pl => pl.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
+            modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
+
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
