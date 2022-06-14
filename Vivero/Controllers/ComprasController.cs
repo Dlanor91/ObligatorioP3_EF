@@ -59,6 +59,7 @@ namespace Vivero.Controllers
         }
 
         // POST api/<ComprasController>
+        [Route("Alta")]
         [HttpPost]
         public ActionResult<Compra> Post([FromBody] Compra compra)
         {
