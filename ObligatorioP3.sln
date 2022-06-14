@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vivero", "Vivero\Vivero.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaDeAplicacion", "LogicaDeAplicacion\LogicaDeAplicacion.csproj", "{199AAC2C-BBD6-4204-9BBE-0CA94A23FD92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViveroWebApi", "ViveroWebApi\ViveroWebApi.csproj", "{9323DE66-E744-4E12-B9DA-6FE54986DFC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{199AAC2C-BBD6-4204-9BBE-0CA94A23FD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{199AAC2C-BBD6-4204-9BBE-0CA94A23FD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{199AAC2C-BBD6-4204-9BBE-0CA94A23FD92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9323DE66-E744-4E12-B9DA-6FE54986DFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9323DE66-E744-4E12-B9DA-6FE54986DFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9323DE66-E744-4E12-B9DA-6FE54986DFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9323DE66-E744-4E12-B9DA-6FE54986DFC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

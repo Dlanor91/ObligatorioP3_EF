@@ -15,9 +15,13 @@ namespace Dominio.EntidadesVivero
 
 	public int Cantidad { get; set; }
 
-	public decimal PrecioUnitario { get; set; }     
-    
+	public decimal PrecioUnitario { get; set; }
+    public Compra Compra { get; set; }
+
     public Planta Planta { get; set; }
 
-	}
+	[ForeignKey("Compra")]
+    public int CompraId { get; set; }
+
+    }
 }

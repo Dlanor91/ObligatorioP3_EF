@@ -14,29 +14,38 @@ namespace Repositorios
 {
     public class RepositorioCompraEF : IRepositorioCompra
     {
+        public ViveroContext Contexto { get; set; }
+
+        public RepositorioCompraEF(ViveroContext cont)
+        {
+            Contexto = cont;
+        }
         public bool Add(Compra obj)
         {
-            throw new NotImplementedException();
+            Contexto.Compras.Add(obj);
+            return Contexto.SaveChanges() >=1;
         }
 
         public bool Remove(int id)
-        {
-            throw new NotImplementedException();
+        {            
+            throw new NotImplementedException();            
         }
 
         public bool Update(Compra obj)
         {
-            throw new NotImplementedException();
+            Contexto.Compras.Update(obj);
+            return Contexto.SaveChanges()>=1;
         }
 
         public IEnumerable<Compra> FindAll()
         {
-            throw new NotImplementedException();
+            return Contexto.Compras.ToList()
+                                       .OrderBy(cp => cp.Fecha);
         }
 
         public Compra FindById(int id)
         {
-            throw new NotImplementedException();
+            return Contexto.Compras.Find(id);
         }
     }
     

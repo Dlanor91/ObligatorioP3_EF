@@ -22,6 +22,7 @@ namespace Repositorios
         {
             Contexto = cont;
         }
+
         public bool Add(TipoPlanta obj)
         {
             Contexto.TipoPlantas.Add(obj);

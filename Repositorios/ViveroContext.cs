@@ -49,9 +49,16 @@ namespace Repositorios
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Compra>().HasMany(cp => cp.items).WithOne(it => it.Compra);
+
+            modelBuilder.Entity<Item>().HasKey(it => it.Id);
+            modelBuilder.Entity<Item>().Property(it => it.Id).ValueGeneratedOnAdd();
+            
 
             modelBuilder.Entity<ParametroSistema>().HasKey(ps => ps.Id);
             modelBuilder.Entity<ParametroSistema>().Property(ps => ps.Id).ValueGeneratedOnAdd();
+
+            
 
             base.OnModelCreating(modelBuilder);
         }

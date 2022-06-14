@@ -8,9 +8,7 @@ using Dominio.EntidadesVivero;
 namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioCompra : IRepositorio<Compra>
-    {
-        
-  
+    {  
         
     }
 }
