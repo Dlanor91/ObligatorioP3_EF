@@ -60,8 +60,21 @@ namespace Vivero.Controllers
 
         // POST api/<ComprasController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Compra> Post([FromBody] Compra compra)
         {
+            try 
+            {
+                if (compra == null)
+                    return BadRequest("No se puede pasar una compra en null");
+                if (RepoCompras.Add(compra))
+                    return CreatedAtRoute("Get", new { id = compra.Id }, compra);
+                return Conflict(compra);
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500);
+            }
+            
         }
 
         // PUT api/<ComprasController>/5
