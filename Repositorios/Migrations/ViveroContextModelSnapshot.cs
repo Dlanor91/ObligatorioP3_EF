@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositorios;
 
-namespace Vivero.Migrations
+namespace Repositorios.Migrations
 {
     [DbContext(typeof(ViveroContext))]
     partial class ViveroContextModelSnapshot : ModelSnapshot
@@ -69,7 +69,7 @@ namespace Vivero.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlantaId")
+                    b.Property<int>("PlantaId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecioUnitario")
@@ -268,8 +268,10 @@ namespace Vivero.Migrations
                         .IsRequired();
 
                     b.HasOne("Dominio.EntidadesVivero.Planta", "Planta")
-                        .WithMany()
-                        .HasForeignKey("PlantaId");
+                        .WithMany("items")
+                        .HasForeignKey("PlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.EntidadesVivero.Planta", b =>

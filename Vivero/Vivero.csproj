@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220612042613_init.cs" />
-    <Compile Remove="Migrations\20220612042613_init.Designer.cs" />
-    <Compile Remove="Migrations\20220612042743_init.cs" />
-    <Compile Remove="Migrations\20220612042743_init.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.25">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -68,7 +68,8 @@ namespace Vivero.Controllers
                 if (compra == null)
                     return BadRequest("No se puede pasar una compra en null");
                 if (RepoCompras.Add(compra))
-                    return CreatedAtRoute("Get", new { id = compra.Id }, compra);
+                    return Created("Alta"+compra.Id,compra);
+                    //return CreatedAtRoute("Alta", new { id = compra.Id }, compra);
                 return Conflict(compra);
             }
             catch (Exception ex) 

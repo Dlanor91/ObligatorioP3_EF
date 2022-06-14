@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositorios;
 
-namespace Vivero.Migrations
+namespace Repositorios.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220612153952_tres")]
-    partial class tres
+    [Migration("20220614230643_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,10 +68,10 @@ namespace Vivero.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompraId")
+                    b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlantaId")
+                    b.Property<int>("PlantaId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecioUnitario")
@@ -263,13 +263,17 @@ namespace Vivero.Migrations
 
             modelBuilder.Entity("Dominio.EntidadesVivero.Item", b =>
                 {
-                    b.HasOne("Dominio.EntidadesVivero.Compra", null)
+                    b.HasOne("Dominio.EntidadesVivero.Compra", "Compra")
                         .WithMany("items")
-                        .HasForeignKey("CompraId");
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Dominio.EntidadesVivero.Planta", "Planta")
-                        .WithMany()
-                        .HasForeignKey("PlantaId");
+                        .WithMany("items")
+                        .HasForeignKey("PlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.EntidadesVivero.Planta", b =>

@@ -34,7 +34,7 @@ namespace Dominio.EntidadesVivero
         public Iluminacion TipoIlumincacion { get; set; }
         [Required]
         public string NombresVulgares { get; set; }
-
+        public IEnumerable<Item> items { get; set; }
         public bool Equals([AllowNull] Planta other)
         {
             if (other ==null)

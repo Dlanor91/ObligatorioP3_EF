@@ -22,6 +22,8 @@ namespace Dominio.EntidadesVivero
 
 	[ForeignKey("Compra")]
     public int CompraId { get; set; }
+	[ForeignKey("Planta")]
+	public int PlantaId { get; set; }
 
-    }
+	}
 }

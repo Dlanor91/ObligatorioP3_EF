@@ -49,12 +49,16 @@ namespace Vivero
             services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
 
             //servicios para DbContext            
-            services.AddDbContext<ViveroContext>(
-                                                        options =>
-                                                        options.UseSqlServer(
-                                                        Configuration.GetConnectionString("ConexionEF"),
-                                                        x => x.MigrationsAssembly("Vivero")));
-           
+            //services.AddDbContext<ViveroContext>(
+            //                                            options =>
+            //                                            options.UseSqlServer(
+            //                                            Configuration.GetConnectionString("ConexionEF"),
+            //                                            x => x.MigrationsAssembly("Vivero")));
+            services.AddDbContext<ViveroContext>
+                (opciones => opciones
+                            .UseSqlServer(Configuration.GetConnectionString("ConexionEF"))
+                            .EnableSensitiveDataLogging());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

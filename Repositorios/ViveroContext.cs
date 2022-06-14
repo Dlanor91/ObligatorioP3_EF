@@ -46,6 +46,7 @@ namespace Repositorios
             modelBuilder.Entity<Planta>().HasKey(pl => pl.Id);
             modelBuilder.Entity<Planta>().Property(pl => pl.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Planta>().HasIndex(pl => pl.NombreCientifico).IsUnique();
+            modelBuilder.Entity<Planta>().HasMany(pl => pl.items).WithOne(it => it.Planta);
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
