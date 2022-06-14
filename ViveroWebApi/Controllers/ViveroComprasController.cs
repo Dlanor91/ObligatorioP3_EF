@@ -3,44 +3,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Vivero;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ViveroWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Compras")]
     [ApiController]
-    public class ViveroAPI : ControllerBase
+    public class ViveroComprasController : ControllerBase
     {
-        // GET: api/<ViveroAPI>
+
+
+        // GET: api/<ViveroComprasController>
+        [Route("FindAll")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
+
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<ViveroAPI>/5
+        // GET api/<ViveroComprasController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<ViveroAPI>
+        // POST api/<ViveroComprasController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<ViveroAPI>/5
+        // PUT api/<ViveroComprasController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ViveroAPI>/5
+        // DELETE api/<ViveroComprasController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
