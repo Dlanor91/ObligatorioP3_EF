@@ -414,7 +414,6 @@ namespace Vivero.Controllers
                 return View();
             }
 
-            return View();
         }
                
         private void MostrarPlantaAtributos()

@@ -38,6 +38,8 @@ namespace Vivero
             services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
             services.AddScoped<IRepositorioTipoAmbiente, RepositorioTipoAmbienteEF>();
             services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionEF>();
+            services.AddScoped<IRepositorioCompra, RepositorioCompraEF>();
+            //services.AddScoped<IRepositorioItems, RepositorioItemsEF>();
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
