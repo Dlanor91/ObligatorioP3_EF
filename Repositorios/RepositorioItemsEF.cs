@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositorios
 {
-    public class RepositorioItemsEF : IRepositorio<Item>
+    public class RepositorioItemsEF : IRepositorioItems
     {
         public ViveroContext Contexto { get; set; }
 
