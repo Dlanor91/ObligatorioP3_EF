@@ -24,5 +24,15 @@ namespace LogicaDeAplicacion
         {
             return RepoCompra.FindAll();
         }
+
+        public bool AgregarCompra(Compra cp)
+        {
+            return RepoCompra.Add(cp);
+        }
+
+        public Compra MostrarCompraId(int id)
+        {
+            return RepoCompra.FindById(id);
+        }
     }
 }

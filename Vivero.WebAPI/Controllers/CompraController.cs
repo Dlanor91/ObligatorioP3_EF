@@ -14,14 +14,7 @@ namespace Vivero.WebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CompraController : ControllerBase
-    {
-        //public IRepositorioCompra RepoCompra { get; set; }
-
-        //public CompraController(IRepositorioCompra repo)
-        //{
-        //    RepoCompra=repo;
-        //}
-
+    {      
         public IManejadorCompra ManejadorCompra { get; set; }
 
         public CompraController(IManejadorCompra manejadorCompra)
@@ -39,15 +32,45 @@ namespace Vivero.WebAPI.Controllers
 
         // GET api/<CompraController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Route("{id}", Name = "Get")]
+        public IActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                if (id ==0) return BadRequest();
+                Compra buscado = ManejadorCompra.MostrarCompraId(id);
+                if (buscado == null) return NotFound();
+
+                return Ok(buscado);
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
         }
 
         // POST api/<CompraController>
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("Plaza")]
+        public IActionResult Post([FromBody] Plaza plazaCompra)
         {
+            try
+            {                
+                if (!plazaCompra.Validar()) return BadRequest();
+                bool ok = ManejadorCompra.AgregarCompra(plazaCompra); 
+
+                if (!ok) return Conflict();
+
+                return Created("api/Compras"+plazaCompra.Id, plazaCompra);
+                
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         // PUT api/<CompraController>/5

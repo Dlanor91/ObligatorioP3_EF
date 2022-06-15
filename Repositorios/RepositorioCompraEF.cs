@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore; 
 
 
 namespace Repositorios
@@ -42,12 +43,12 @@ namespace Repositorios
 
         public IEnumerable<Compra> FindAll()
         {
-            return Contexto.Compras.ToList();
+            return Contexto.Compras.Include(c=> c.Item).ThenInclude(it=>it.Planta).ThenInclude(cp=>cp.TipoPlanta).ToList();
         }
 
         public Compra FindById(int id)
         {
-            return Contexto.Compras.Find(id);
+            return Contexto.Compras.Include(c => c.Item).ThenInclude(it => it.Planta).ThenInclude(cp => cp.TipoPlanta).Where(cp => cp.Id == id).SingleOrDefault();
         }
     }
     

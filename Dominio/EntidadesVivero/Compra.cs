@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Dominio.EntidadesVivero
 {
     [Table("Compra")]
-    public abstract class Compra 
+    public abstract class Compra :IValidar
     {
         [Key]
         public int Id { get; set; }
@@ -17,5 +17,19 @@ namespace Dominio.EntidadesVivero
         public abstract decimal PrecioFinal();
         public abstract bool CompraValida();
 
+        public bool Validar()
+        {
+            return true;
+        }
+
+        public bool ValidarFormatoNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ValidarDescripcion(string descripcion, int minimoDesc, int maxDesc)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

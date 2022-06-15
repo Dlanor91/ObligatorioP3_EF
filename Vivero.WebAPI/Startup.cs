@@ -31,6 +31,11 @@ namespace Vivero.WebAPI
         {
             services.AddControllers();
 
+            services.AddControllersWithViews()
+                                    .AddNewtonsoftJson(options =>
+                                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                        );
+
             services.AddDbContext<ViveroContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionEF")));
 
             services.AddScoped<IRepositorioCompra, RepositorioCompraEF>();
