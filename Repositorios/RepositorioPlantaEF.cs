@@ -19,6 +19,7 @@ namespace Repositorios
         {
             Contexto = cont;
         }
+
         public bool Add(Planta obj)
         {
             Contexto.Plantas.Add(obj);

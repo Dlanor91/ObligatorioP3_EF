@@ -14,12 +14,15 @@ namespace Repositorios
 {
     public class RepositorioCompraEF : IRepositorioCompra
     {
+        public IRepositorioItems RepositorioItems { get; set; }
         public ViveroContext Contexto { get; set; }
 
-        public RepositorioCompraEF(ViveroContext cont)
+        public RepositorioCompraEF(IRepositorioItems repositorioItems, ViveroContext contexto)
         {
-            Contexto = cont;
+            RepositorioItems=repositorioItems;
+            Contexto=contexto;
         }
+
         public bool Add(Compra obj)
         {
             Contexto.Compras.Add(obj);

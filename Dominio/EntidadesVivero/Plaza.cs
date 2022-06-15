@@ -8,10 +8,8 @@ namespace Dominio.EntidadesVivero
 {
     [Table("Plaza")]
 	public class Plaza : Compra
-    {    
-    
-    
-    public decimal CostoFlete { get; set; }
+    {  
+        public decimal CostoFlete { get; set; }
 
         public override bool CompraValida()
         {

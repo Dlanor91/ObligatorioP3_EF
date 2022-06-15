@@ -14,15 +14,16 @@ namespace Repositorios
         public DbSet<Planta> Plantas { get; set; }
         public DbSet<TipoPlanta> TipoPlantas { get; set; }
         public DbSet<TipoAmbiente> TipoAmbientes { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Plaza> Plazas { get; set; }
-        public DbSet<Importacion> Importaciones { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }  
         public DbSet<Iluminacion> Iluminaciones { get; set; }
-        public DbSet<Compra> Compras { get; set; }
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Plaza> Plazas { get; set; }
+        public DbSet<Importacion> Importaciones { get; set; }
+
         public DbSet<ParametroSistema> ParametroSistema { get; set; }
-        public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones) //aqui configuro el sistema para que inyecte al context
+        public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones)
         {
 
         }
@@ -46,20 +47,18 @@ namespace Repositorios
             modelBuilder.Entity<Planta>().HasKey(pl => pl.Id);
             modelBuilder.Entity<Planta>().Property(pl => pl.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Planta>().HasIndex(pl => pl.NombreCientifico).IsUnique();
-            modelBuilder.Entity<Planta>().HasMany(pl => pl.Item).WithOne(pl => pl.Planta);
+            modelBuilder.Entity<Planta>().HasMany(pl => pl.Item).WithOne(it => it.Planta);
 
             modelBuilder.Entity<Compra>().HasKey(cp => cp.Id);
             modelBuilder.Entity<Compra>().Property(cp => cp.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Compra>().HasMany(cp => cp.Item).WithOne(cp => cp.Compra);
+            modelBuilder.Entity<Compra>().HasMany(cp => cp.Item).WithOne(it => it.Compra);
             
             modelBuilder.Entity<Item>().HasKey(it => new { it.CompraId, it.PlantaId });
             modelBuilder.Entity<Item>().Property(it => it.Id).ValueGeneratedOnAdd();
             
 
             modelBuilder.Entity<ParametroSistema>().HasKey(ps => ps.Id);
-            modelBuilder.Entity<ParametroSistema>().Property(ps => ps.Id).ValueGeneratedOnAdd();
-
-            
+            modelBuilder.Entity<ParametroSistema>().Property(ps => ps.Id).ValueGeneratedOnAdd();            
 
             base.OnModelCreating(modelBuilder);
         }
