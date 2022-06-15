@@ -9,8 +9,7 @@ namespace Dominio.EntidadesVivero
 {
 	[Table("Item")]
 	public class Item
-	{
-	[Key]
+	{	
 	public int Id { get; set; }
 
 	public int Cantidad { get; set; }

@@ -139,16 +139,16 @@ namespace Repositorios.Migrations
                 name: "Item",
                 columns: table => new
                 {
+                    CompraId = table.Column<int>(nullable: false),
+                    PlantaId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cantidad = table.Column<int>(nullable: false),
-                    PrecioUnitario = table.Column<decimal>(nullable: false),
-                    CompraId = table.Column<int>(nullable: false),
-                    PlantaId = table.Column<int>(nullable: false)
+                    PrecioUnitario = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_Item", x => new { x.CompraId, x.PlantaId });
                     table.ForeignKey(
                         name: "FK_Item_Compra_CompraId",
                         column: x => x.CompraId,
@@ -162,11 +162,6 @@ namespace Repositorios.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_CompraId",
-                table: "Item",
-                column: "CompraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Item_PlantaId",

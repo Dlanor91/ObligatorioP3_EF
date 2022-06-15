@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
+using LogicaDeAplicacion;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,19 +15,26 @@ namespace Vivero.WebAPI.Controllers
     [ApiController]
     public class CompraController : ControllerBase
     {
-        public IRepositorioCompra RepoCompra { get; set; }
+        //public IRepositorioCompra RepoCompra { get; set; }
 
-        public CompraController(IRepositorioCompra repo)
+        //public CompraController(IRepositorioCompra repo)
+        //{
+        //    RepoCompra=repo;
+        //}
+
+        public IManejadorCompra ManejadorCompra { get; set; }
+
+        public CompraController(IManejadorCompra manejadorCompra)
         {
-            RepoCompra=repo;
+            ManejadorCompra=manejadorCompra;
         }
 
 
         // GET: api/<CompraController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(ManejadorCompra.MostrarTodasCompras());
         }
 
         // GET api/<CompraController>/5

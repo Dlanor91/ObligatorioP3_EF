@@ -10,11 +10,8 @@ namespace Dominio.EntidadesVivero
     public class Importacion:Compra
     {
         
-        
-        [Required]
         public bool OrigenAmericaSur { get; set; }        
-        
-        [Required]
+       
         public string DescripcionSanitaria { get; set; }
         
         public override decimal PrecioFinal()
