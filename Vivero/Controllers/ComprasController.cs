@@ -17,19 +17,19 @@ namespace Vivero.Controllers
     {
         private IRepositorioCompra RepoCompras;
 
-        public ComprasController(IRepositorioCompra repoCompras)
+        public ComprasController(IRepositorioCompra repo)
         {
-            RepoCompras=repoCompras;
+            RepoCompras=repo;
         }
 
 
         // GET: api/<ComprasController>
         [Route("FindAll")]
         [HttpGet]
-        public ActionResult<Compra> Get()
+        public IActionResult Get()
         {
-            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
-            {
+            //if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            //{
                 try
                 {
                     var compras = RepoCompras.FindAll();
@@ -39,15 +39,15 @@ namespace Vivero.Controllers
                     }
                     return Ok(compras);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return StatusCode(500);
                 }
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //}
+            //else
+            //{
+               // return RedirectToAction("Index", "Home");
+            //}
            
         }
 
@@ -61,7 +61,7 @@ namespace Vivero.Controllers
         // POST api/<ComprasController>
         [Route("Alta")]
         [HttpPost]
-        public ActionResult<Compra> Post([FromBody] Compra compra)
+        public IActionResult Post([FromBody] Compra compra)
         {
             try 
             {

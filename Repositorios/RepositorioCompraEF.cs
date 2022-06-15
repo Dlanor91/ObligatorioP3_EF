@@ -39,8 +39,7 @@ namespace Repositorios
 
         public IEnumerable<Compra> FindAll()
         {
-            return Contexto.Compras.ToList()
-                                       .OrderBy(cp => cp.Fecha);
+            return Contexto.Compras.ToList();
         }
 
         public Compra FindById(int id)
