@@ -9,6 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dominio.InterfacesRepositorio;
+using Dominio.EntidadesVivero;
+using LogicaDeAplicacion;
+using Repositorios;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vivero.WebAPI
 {
@@ -25,6 +30,15 @@ namespace Vivero.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<ViveroContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionEF")));
+
+            services.AddScoped<IRepositorioCompra, RepositorioCompraEF>();
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
+            services.AddScoped<IRepositorioItems, RepositorioItemsEF>();
+
+            services.AddScoped<IManejadorCompra, ManejadorCompra>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

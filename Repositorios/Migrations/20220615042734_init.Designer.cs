@@ -10,7 +10,7 @@ using Repositorios;
 namespace Repositorios.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220614230643_init")]
+    [Migration("20220615042734_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,26 +60,24 @@ namespace Repositorios.Migrations
 
             modelBuilder.Entity("Dominio.EntidadesVivero.Item", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
                     b.Property<int>("PlantaId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<decimal>("PrecioUnitario")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompraId");
+                    b.HasKey("CompraId", "PlantaId");
 
                     b.HasIndex("PlantaId");
 
@@ -238,7 +236,6 @@ namespace Repositorios.Migrations
                     b.HasBaseType("Dominio.EntidadesVivero.Compra");
 
                     b.Property<string>("DescripcionSanitaria")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("OrigenAmericaSur")
@@ -264,13 +261,13 @@ namespace Repositorios.Migrations
             modelBuilder.Entity("Dominio.EntidadesVivero.Item", b =>
                 {
                     b.HasOne("Dominio.EntidadesVivero.Compra", "Compra")
-                        .WithMany("items")
+                        .WithMany("Item")
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.EntidadesVivero.Planta", "Planta")
-                        .WithMany("items")
+                        .WithMany("Item")
                         .HasForeignKey("PlantaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

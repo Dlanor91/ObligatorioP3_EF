@@ -10,7 +10,7 @@ namespace Dominio.EntidadesVivero
 	public class Plaza : Compra
     {    
     
-    [Required]	
+    
     public decimal CostoFlete { get; set; }
 
         public override bool CompraValida()
