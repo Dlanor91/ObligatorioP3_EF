@@ -34,5 +34,10 @@ namespace LogicaDeAplicacion
         {
             return RepoCompra.FindById(id);
         }
+
+        public IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta)
+        {
+            return RepoCompra.BuscarComprasPorIdPlanta(idPlanta);
+        }
     }
 }

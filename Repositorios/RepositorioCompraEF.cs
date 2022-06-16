@@ -53,8 +53,16 @@ namespace Repositorios
         {
             return Contexto.Compras.Include(c => c.Item)
                                             .ThenInclude(it => it.Planta)
-                                                    .ThenInclude(cp => cp.TipoPlanta).Where(cp => cp.Id == id)
+                                                    .ThenInclude(pl => pl.TipoPlanta).Where(cp => cp.Id == id)
                                     .SingleOrDefault();
+        }
+
+        public IEnumerable<Compra> BuscarComprasPorIdPlanta(int idPlanta)
+        {
+            return Contexto.Compras.Include(c => c.Item)
+                                            .ThenInclude(it => it.Planta.Id == idPlanta)
+                                    .ToList();
+
         }
     }
     

@@ -10,7 +10,7 @@ namespace LogicaDeAplicacion
     {
         public IEnumerable<Compra> MostrarTodasCompras();
         bool AgregarCompra(Compra cp);
-
         public Compra MostrarCompraId(int id);
+        public IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta);
     }
 }

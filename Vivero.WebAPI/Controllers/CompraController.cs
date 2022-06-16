@@ -106,5 +106,23 @@ namespace Vivero.WebAPI.Controllers
         public void Delete(int id)
         {
         }
+
+        // GET api/<CompraController>/idPlanta
+        [HttpGet("{idPlanta}")]
+        [Route("{idPlanta}", Name = "BuscarPlanta")]
+        public IActionResult BuscarPlanta(int idPlanta)
+        {
+            try
+            {
+                if (idPlanta ==0) return BadRequest();                
+
+                return Ok(ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta));
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
