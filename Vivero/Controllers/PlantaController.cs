@@ -17,12 +17,14 @@ namespace Vivero.Controllers
     {
         
         public IManejadorPlanta ManejadorPlanta { get; set; }
+        public IManejadorParametroSistema ManejadorPS { get; set; }
         public IWebHostEnvironment WebHostEnvironment { get; set; }
 
-        public PlantaController(IManejadorPlanta manejadorPlanta, IWebHostEnvironment webHostEnvironment)
+        public PlantaController(IManejadorPlanta manejadorPlanta, IWebHostEnvironment webHostEnvironment, IManejadorParametroSistema manejadorParametro)
         {
             ManejadorPlanta=manejadorPlanta;
             WebHostEnvironment=webHostEnvironment;
+            ManejadorPS = manejadorParametro;
         }
 
         // GET: PlantaController
@@ -308,7 +310,7 @@ namespace Vivero.Controllers
         // POST: PlantaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ViewModelPlanta VMPlanta,int cantDiasRiego,string frecSeleccionada, int minimaDesc, int maximaDesc)
+        public ActionResult Create(ViewModelPlanta VMPlanta,int cantDiasRiego,string frecSeleccionada)
         {
             try
             {
@@ -342,6 +344,8 @@ namespace Vivero.Controllers
                                 {
                                     VMPlanta.Planta.Descripcion = VMPlanta.Planta.Descripcion.Trim();
                                     VMPlanta.Planta.NombresVulgares = VMPlanta.Planta.NombresVulgares.Trim();
+                                    int minimaDesc = ManejadorPS.descMinima();
+                                    int maximaDesc = ManejadorPS.descMaxima();
                                     bool descripcionValida = VMPlanta.Planta.ValidarDescripcion(VMPlanta.Planta.Descripcion, minimaDesc, maximaDesc);
                                     if (descripcionValida)
                                     {
