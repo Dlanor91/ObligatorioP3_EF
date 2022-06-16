@@ -73,6 +73,26 @@ namespace Vivero.WebAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Importacion")]
+        public IActionResult Post([FromBody] Importacion impoCompra)
+        {
+            try
+            {
+                if (!impoCompra.Validar()) return BadRequest();
+                bool ok = ManejadorCompra.AgregarCompra(impoCompra);
+
+                if (!ok) return Conflict();
+
+                return Created("api/Compras" + impoCompra.Id, impoCompra);
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
         // PUT api/<CompraController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

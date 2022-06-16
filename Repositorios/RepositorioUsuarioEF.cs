@@ -51,5 +51,16 @@ namespace Repositorios
             Contexto.Usuarios.Update(obj);
             return Contexto.SaveChanges() >= 1;
         }
+
+        public bool buscarEmailUsuario(string emailBuscado)
+        {
+            bool email = false;
+
+            Usuario existe = Contexto.Usuarios.Where(u => u.Email == emailBuscado).SingleOrDefault();
+
+            if (existe != null) email = true;
+
+            return email;
+        }
     }
 }
