@@ -27,5 +27,10 @@ namespace LogicaDeAplicacion
             
             return RepoUsuario.Add(nuevoUsuario); 
         }
+
+        public bool busquedadEmail(string buscarEmail)
+        {
+            return RepoUsuario.buscarEmailUsuario(buscarEmail);
+        }
     }
 }
