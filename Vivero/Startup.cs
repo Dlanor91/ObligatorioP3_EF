@@ -37,8 +37,9 @@ namespace Vivero
             services.AddScoped<IRepositorioUsuario, RepositorioUsuarioEF>();
             services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
             services.AddScoped<IRepositorioTipoAmbiente, RepositorioTipoAmbienteEF>();
-            services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionEF>();            
-            
+            services.AddScoped<IRepositorioIluminacion, RepositorioIluminacionEF>();
+            services.AddScoped<IRepositorioParametroSistema, RepositorioParametroSistemaEF>();
+
 
             //servicios de manejadoras  
             services.AddScoped<IManejadorTipoPlantas, ManejadorTipoPlantas>();
@@ -46,9 +47,11 @@ namespace Vivero
             services.AddScoped<IManejadorTipoAmbiente, ManejadorTipoAmbiente>();
             services.AddScoped<IManejadorIluminacion, ManejadorIluminacion>();
             services.AddScoped<IManejadorPlanta, ManejadorPlanta>();
+            services.AddScoped<IManejadorParametroSistema, ManejadorParametroSistema>();
+
 
             //servicios para DbContext           
-            
+
             services.AddDbContext<ViveroContext>
                 (opciones => opciones
                             .UseSqlServer(Configuration.GetConnectionString("ConexionEF"))
