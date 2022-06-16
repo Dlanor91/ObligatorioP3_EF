@@ -23,6 +23,7 @@ namespace Vivero.WebAPI.Controllers
         }
 
 
+
         // GET: api/<CompraController>
         [HttpGet]
         public IActionResult Get()
@@ -60,6 +61,7 @@ namespace Vivero.WebAPI.Controllers
             try
             {                
                 if (!plazaCompra.Validar()) return BadRequest();
+                
                 bool ok = ManejadorCompra.AgregarCompra(plazaCompra); 
 
                 if (!ok) return Conflict();

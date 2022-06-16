@@ -91,5 +91,10 @@ namespace LogicaDeAplicacion
         {
             return RepoPlantas.existeNombre(nombreC);
         }
+
+        public Planta TraerPlanta(int id)
+        {
+            return RepoPlantas.FindById(id);
+        }
     }
 }
