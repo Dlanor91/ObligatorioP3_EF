@@ -13,5 +13,6 @@ namespace Dominio.InterfacesRepositorio
         IEnumerable<Planta> buscarPlantaMenorAlt(decimal altura);
         IEnumerable<Planta> buscarPlantaMayorAlt(decimal altura);
         bool existeNombre(string nombreCPlanta);
+        
     }
 }

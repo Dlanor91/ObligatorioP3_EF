@@ -14,8 +14,7 @@ namespace Dominio.EntidadesVivero
         public DateTime Fecha { get; set; }
         public IEnumerable<Item> Item { get; set; }
 
-        public abstract decimal PrecioFinal();
-        public abstract bool CompraValida();
+        public abstract decimal PrecioFinal();        
 
         public bool Validar()
         {

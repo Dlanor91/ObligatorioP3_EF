@@ -19,9 +19,5 @@ namespace Dominio.EntidadesVivero
             throw new NotImplementedException();
         }
 
-        public override bool CompraValida()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

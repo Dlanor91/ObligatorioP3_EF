@@ -11,11 +11,6 @@ namespace Dominio.EntidadesVivero
     {  
         public decimal CostoFlete { get; set; }
 
-        public override bool CompraValida()
-        {
-            throw new NotImplementedException();
-        }
-
         public override decimal PrecioFinal()
         {
             throw new NotImplementedException();
