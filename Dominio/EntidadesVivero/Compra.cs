@@ -19,7 +19,28 @@ namespace Dominio.EntidadesVivero
 
         public bool Validar()
         {
-            return true;
+            bool ret = false;   
+            // falta validacion de id de compras duplicados
+            if( Fecha != null)
+            {
+                if(Item != null)
+                {
+                    foreach (var it in Item)
+                    {
+                        if (it.Planta.NombreCientifico == null)
+                        {
+                            // si llega a este punto no debe continuar y  debe retornar false
+                            return ret;
+                        }
+                    }
+                    // caso positivo
+                    ret = true;
+                }
+           
+            }
+
+          return ret;
+            
         }
 
         public bool ValidarFormatoNombre(string nombre)
