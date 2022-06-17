@@ -37,7 +37,7 @@ namespace LogicaDeAplicacion
 
         public IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta)
         {
-            return RepoCompra.BuscarComprasPorIdPlanta(idPlanta);
+            return RepoCompra.BuscarComprasPorIdTipoPlanta(idPlanta);
         }
     }
 }

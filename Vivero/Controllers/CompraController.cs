@@ -47,16 +47,30 @@ namespace Vivero.Controllers
                 }
                 else
                 {                   
-                    //MostrarPlantaAtributos();
-                    //IEnumerable<Planta> plEncontradas = ManejadorPlanta.BusquedaNombre(nombreBusqPlanta);
-                    //if (plEncontradas.Count() == 0)
-                    //{
-                    //    throw new Exception("No se encontraron coincidencias con " + nombreBusqPlanta + " .");
-                    //}
-                    //else
-                    //{
-                    //    return View(plEncontradas);
-                    //}
+                    MostrarPlantaAtributos();
+                    List<DTOCompra> listCompras = new List<DTOCompra>();
+
+                    HttpClient cliente = new HttpClient();
+                   
+                    Task<HttpResponseMessage> respuesta =
+                        cliente.GetAsync("http://localhost:49178/api/Compra/Planta/"+idTipoPlanta);
+
+                    respuesta.Wait();
+
+                    if (respuesta.Result.IsSuccessStatusCode)
+                    {
+                        Task<string> contenido = respuesta.Result.Content.ReadAsStringAsync();
+                        contenido.Wait();
+
+                        string json = contenido.Result;
+                        listCompras = JsonConvert.DeserializeObject<List<DTOCompra>>(json);
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No se pueden mostrar todas las compras.";
+                    }
+
+                    return View(listCompras);
 
                 }
             }

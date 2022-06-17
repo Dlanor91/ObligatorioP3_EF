@@ -9,5 +9,6 @@ namespace Dominio.InterfacesRepositorio
     {
         public int descripcionMin();
         public int descripcionMax();
+        public ParametroSistema TraerElementosFilaUno();
     }
 }

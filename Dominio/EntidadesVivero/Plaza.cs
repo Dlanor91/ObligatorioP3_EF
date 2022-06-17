@@ -22,6 +22,7 @@ namespace Dominio.EntidadesVivero
             if (PrecioFinalPlaza>0) {
                 PrecioFinalPlaza += CostoFlete;
             }
+
             return PrecioFinalPlaza;
         }
 
