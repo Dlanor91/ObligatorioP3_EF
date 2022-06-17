@@ -20,7 +20,7 @@ namespace Dominio.EntidadesVivero
         {
             bool ret = false;
 
-            if (Fecha != null && CostoFlete > 0)
+            if (Fecha > DateTime.Now && CostoFlete > 0)
             {
                 if (Item != null)
                 {
