@@ -70,7 +70,7 @@ namespace Repositorios
                                    .SingleOrDefault();
         }
 
-        public IEnumerable<Compra> BuscarComprasPorIdPlanta(int idPlanta)
+        public IEnumerable<Compra> BuscarComprasPorIdTipoPlanta(int idTipoPlanta)
         {
             return Contexto.Compras.Include(c => c.Item)
                                    .ThenInclude(it => it.Planta)
@@ -81,7 +81,7 @@ namespace Repositorios
                                    .Include(c => c.Item)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoAmbiente)
-                                   .Where(c => c.Item.Any(pl => pl.PlantaId == idPlanta))
+                                   .Where(c => c.Item.Any(pl => pl.Planta.TipoPlanta.Id == idTipoPlanta))
                                    .ToList();
 
         }

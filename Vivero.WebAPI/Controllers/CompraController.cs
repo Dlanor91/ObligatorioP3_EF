@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dominio.EntidadesVivero;
 using Dominio.InterfacesRepositorio;
 using LogicaDeAplicacion;
+using ViveroDTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,10 +17,12 @@ namespace Vivero.WebAPI.Controllers
     public class CompraController : ControllerBase
     {      
         public IManejadorCompra ManejadorCompra { get; set; }
+        public IManejadorParametroSistema ManejadorParametrosSist { get; set; }
 
-        public CompraController(IManejadorCompra manejadorCompra)
+        public CompraController(IManejadorCompra manejadorCompra, IManejadorParametroSistema manejadorParametrosSist)
         {
-            ManejadorCompra=manejadorCompra;
+            ManejadorCompra = manejadorCompra;
+            ManejadorParametrosSist = manejadorParametrosSist;
         }
 
 
@@ -115,7 +118,25 @@ namespace Vivero.WebAPI.Controllers
         {
             try
             {
-                if (idPlanta ==0) return BadRequest();                
+                if (idPlanta ==0) return BadRequest();
+
+                IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);
+               
+                IEnumerable<ParametroSistema> datosSistema = ManejadorParametrosSist.TodosLosParametros();
+                IEnumerable<DTOParametroSistema> paraSistema = datosSistema.Select(datosSistema => new DTOParametroSistema()
+                {
+                    DescuentoAmericaSur = datosSistema.DescuentoAmericaSur,
+                    TasaImportacionDGI = datosSistema.TasaImportacionDGI,
+                    TasaIVA = datosSistema.TasaIVA
+                });
+                IEnumerable<DTOCompra> datosCompra = compras.Select(compras => new DTOCompra()
+                {
+                    Id = compras.Id,
+                    Fecha = compras.Fecha,
+                    TotalCompra = compras.PrecioFinal(),
+                   NombreCientifico = compras.Item.Where(it => it.Planta.NombreCientifico),
+                    Cantidad = compras.Item.Select(it => it.Cantidad)
+                }) ;
 
                 return Ok(ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta));
 

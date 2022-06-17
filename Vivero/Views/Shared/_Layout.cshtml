@@ -31,6 +31,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Registro">Registro</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Compra" asp-action="Index">Buscar Compra</a>
+                            </li>
                         }
                         else
                         {
@@ -41,7 +44,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Planta" asp-action="Index">Plantas</a>
                             </li>
                         }
-                        </ul>
+                    </ul>
                 </div>
                     @if (Context.Session.GetString("datosNombreUsuario") != null) //Para cuando se loguean se vea quien esta logueado
                     {

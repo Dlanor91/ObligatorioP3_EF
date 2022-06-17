@@ -24,5 +24,10 @@ namespace LogicaDeAplicacion
         {
             return repoPS.descripcionMin();
         }
+
+        public IEnumerable<ParametroSistema> TodosLosParametros()
+        {
+            return repoPS.FindAll();
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace LogicaDeAplicacion
     {
         public int descMaxima();
         public int descMinima();
+
+        public IEnumerable<ParametroSistema> TodosLosParametros();
     }
 }

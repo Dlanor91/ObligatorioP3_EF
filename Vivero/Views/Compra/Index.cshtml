@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ViveroDTO.DTOCompra>
+
+@{
+    ViewData["Title"] = "Busqueda Compra - Planta";
+}
+
+    <h2>Búsqueda de Plantas por Tipo de Planta</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" id="formBusqTipoPlanta">
+                <div class="form-group">
+                    <select name="busqTipoPlanta" id="busqTipoPlanta">
+                        <option value="0">Seleccione Tipo de Planta</option>
+                        @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
+                        {
+                            <option value="@tp.Id">@tp.Nombre</option>
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Buscar" />
+            </form>
+        </div>
+    </div>
+
+    @if (Model == null)
+    {
+
+    }
+    else
+    {
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalCompra)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreCientifico)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCompra)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreCientifico)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+<p id="pMensaje">@ViewBag.Error</p>
+
