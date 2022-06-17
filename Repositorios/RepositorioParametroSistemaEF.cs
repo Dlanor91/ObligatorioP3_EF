@@ -54,5 +54,10 @@ namespace Repositorios
         {
             throw new NotImplementedException();
         }
+
+        public ParametroSistema TraerElementosFilaUno()
+        {
+            return Contexto.ParametroSistema.First();
+        }
     }
 }

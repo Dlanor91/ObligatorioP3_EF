@@ -21,7 +21,7 @@ namespace Dominio.EntidadesVivero
             {
                 PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
             }
-            
+           
             return PrecioFinalPlaza;
         }
 

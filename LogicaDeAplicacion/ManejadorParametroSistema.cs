@@ -29,5 +29,10 @@ namespace LogicaDeAplicacion
         {
             return repoPS.FindAll();
         }
+
+        public ParametroSistema ParametrosFilaUno()
+        {
+            return repoPS.TraerElementosFilaUno();
+        }
     }
 }

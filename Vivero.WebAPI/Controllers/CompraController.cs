@@ -8,26 +8,21 @@ using Dominio.InterfacesRepositorio;
 using LogicaDeAplicacion;
 using ViveroDTO;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Vivero.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CompraController : ControllerBase
-    {      
+    {
         public IManejadorCompra ManejadorCompra { get; set; }
-        public IManejadorParametroSistema ManejadorParametrosSist { get; set; }
 
-        public CompraController(IManejadorCompra manejadorCompra, IManejadorParametroSistema manejadorParametrosSist)
+        public CompraController(IManejadorCompra manejadorCompra)
         {
-            ManejadorCompra = manejadorCompra;
-            ManejadorParametrosSist = manejadorParametrosSist;
+            ManejadorCompra=manejadorCompra;
         }
 
-
-
-        // GET: api/Compra/Plaza
+        // GET: api/Compra
         [HttpGet]
         public IActionResult Get()
         {
@@ -62,15 +57,15 @@ namespace Vivero.WebAPI.Controllers
         public IActionResult Post([FromBody] Plaza plazaCompra)
         {
             try
-            {                
+            {
                 if (!plazaCompra.Validar()) return BadRequest();
-                
-                bool ok = ManejadorCompra.AgregarCompra(plazaCompra); 
+
+                bool ok = ManejadorCompra.AgregarCompra(plazaCompra);
 
                 if (!ok) return Conflict();
 
                 return Created("api/Compra/Buscar/"+plazaCompra.Id, plazaCompra);
-                
+
             }
             catch (Exception)
             {
@@ -113,32 +108,32 @@ namespace Vivero.WebAPI.Controllers
 
         // GET api/Compra/Planta/idPlanta
         [HttpGet("{idPlanta}")]
-        [Route("Planta/{idPlanta}", Name = "BuscarPlanta")]
-        public IActionResult BuscarPlanta(int idPlanta)
+        [Route("Planta/{idPlanta}", Name = "Planta")]
+        public IActionResult Planta(int idPlanta)
         {
             try
             {
                 if (idPlanta ==0) return BadRequest();
 
                 IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);
-               
-                IEnumerable<ParametroSistema> datosSistema = ManejadorParametrosSist.TodosLosParametros();
-                IEnumerable<DTOParametroSistema> paraSistema = datosSistema.Select(datosSistema => new DTOParametroSistema()
-                {
-                    DescuentoAmericaSur = datosSistema.DescuentoAmericaSur,
-                    TasaImportacionDGI = datosSistema.TasaImportacionDGI,
-                    TasaIVA = datosSistema.TasaIVA
-                });
+                //ParametroSistema datosSistema = ManejadorParametrosSist.ParametrosFilaUno();
+
+                //decimal descAmeSur = datosSistema.DescuentoAmericaSur;
+                //decimal tasaImp = datosSistema.TasaImportacionDGI;
+                //decimal tasaIva = datosSistema.TasaIVA;
+
                 IEnumerable<DTOCompra> datosCompra = compras.Select(compras => new DTOCompra()
                 {
                     Id = compras.Id,
                     Fecha = compras.Fecha,
                     TotalCompra = compras.PrecioFinal(),
-                   NombreCientifico = compras.Item.Where(it => it.Planta.NombreCientifico),
-                    Cantidad = compras.Item.Select(it => it.Cantidad)
-                }) ;
+                    //NombreCientifico = compras.Item.Select(it => it.Planta.NombreCientifico).Single(),
+                    //Cantidad = compras.Item.Select(it => it.Cantidad).Single()                    
+                    NombreCientifico = "Ramon",
+                    Cantidad = 10
+                }); 
 
-                return Ok(ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta));
+                return Ok(datosCompra);
 
             }
             catch (Exception)
@@ -148,3 +143,4 @@ namespace Vivero.WebAPI.Controllers
         }
     }
 }
+

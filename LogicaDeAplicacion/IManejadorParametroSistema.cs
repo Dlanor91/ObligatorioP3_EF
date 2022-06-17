@@ -12,5 +12,6 @@ namespace LogicaDeAplicacion
         public int descMinima();
 
         public IEnumerable<ParametroSistema> TodosLosParametros();
+        public ParametroSistema ParametrosFilaUno();
     }
 }
