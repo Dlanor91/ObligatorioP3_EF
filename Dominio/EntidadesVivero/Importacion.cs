@@ -29,7 +29,7 @@ namespace Dominio.EntidadesVivero
                 {
                     foreach (var it in Item)
                     {
-                        if (it.Planta == null)
+                        if (it.PlantaId == null)
                         {
                             return ret;
                         }
