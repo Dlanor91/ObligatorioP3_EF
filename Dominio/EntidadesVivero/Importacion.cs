@@ -16,7 +16,13 @@ namespace Dominio.EntidadesVivero
         
         public override decimal PrecioFinal()
         {
-            throw new NotImplementedException();
+            decimal PrecioFinalPlaza = 0;
+            foreach (var it in Item)
+            {
+                PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
+            }
+            
+            return PrecioFinalPlaza;
         }
 
         public bool Validar()

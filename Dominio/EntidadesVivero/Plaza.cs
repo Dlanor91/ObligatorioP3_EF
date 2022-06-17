@@ -13,9 +13,16 @@ namespace Dominio.EntidadesVivero
 
         public override decimal PrecioFinal()
         {
+            decimal PrecioFinalPlaza = 0;
+            foreach (var it in Item)
+            {
+                PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
+            }
 
-            //precio final = Sum de Item(cant*precioUnico) + CostoFlete
-            throw new NotImplementedException();
+            if (PrecioFinalPlaza>0) {
+                PrecioFinalPlaza += CostoFlete;
+            }
+            return PrecioFinalPlaza;
         }
 
         public bool Validar()

@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
     <ProjectReference Include="..\LogicaDeAplicacion\LogicaDeAplicacion.csproj" />
     <ProjectReference Include="..\Repositorios\Repositorios.csproj" />
+    <ProjectReference Include="..\ViveroDTO\ViveroDTO.csproj" />
   </ItemGroup>
 
 

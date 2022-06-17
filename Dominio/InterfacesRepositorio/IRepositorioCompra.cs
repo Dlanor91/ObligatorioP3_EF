@@ -9,6 +9,6 @@ namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioCompra : IRepositorio<Compra>
     {
-        IEnumerable<Compra> BuscarComprasPorIdPlanta(int idPlanta);
+        IEnumerable<Compra> BuscarComprasPorIdTipoPlanta(int idTipoPlanta);
     }
 }

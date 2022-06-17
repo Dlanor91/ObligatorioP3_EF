@@ -30,5 +30,29 @@ namespace Repositorios
             return Contexto.ParametroSistema.Select(ps => ps.ValorMinimoDescripcion).Single();
         }
 
+        public bool Add(ParametroSistema obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(ParametroSistema obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ParametroSistema> FindAll()
+        {
+            return Contexto.ParametroSistema.ToList();
+        }
+
+        public ParametroSistema FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
