@@ -107,7 +107,7 @@ namespace Vivero.Controllers
                     throw new Exception("Usuarios ya existentes.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ViewBag.Error = "Usuarios ya existentes.";
                 return View();
