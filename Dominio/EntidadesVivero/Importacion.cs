@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Dominio.EntidadesVivero
 {
     [Table("Importacion")]
-    public class Importacion:Compra
+    public class Importacion:Compra, IValidar
     {
         
         public bool OrigenAmericaSur { get; set; }        
@@ -19,5 +19,38 @@ namespace Dominio.EntidadesVivero
             throw new NotImplementedException();
         }
 
+        public bool Validar()
+        {
+            bool ret = false;
+
+            if (Fecha != null)
+            {
+                if (Item != null)
+                {
+                    foreach (var it in Item)
+                    {
+                        if (it.Planta == null)
+                        {
+                            return ret;
+                        }
+                    }
+
+                    ret = true;
+                }
+
+            }
+
+            return ret;
+        }
+
+        public bool ValidarDescripcion(string descripcion, int minimoDesc, int maxDesc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ValidarFormatoNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
