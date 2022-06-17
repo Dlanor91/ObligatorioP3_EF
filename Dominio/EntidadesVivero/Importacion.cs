@@ -23,7 +23,7 @@ namespace Dominio.EntidadesVivero
         {
             bool ret = false;
 
-            if (Fecha != null)
+            if (Fecha > DateTime.Now && DescripcionSanitaria != null && OrigenAmericaSur != null)
             {
                 if (Item != null)
                 {
