@@ -44,24 +44,26 @@ namespace Repositorios
         public IEnumerable<Compra> FindAll()
         {
             return Contexto.Compras.Include(c=> c.Item)
-                                            .ThenInclude(it=>it.Planta)
-                                                        .ThenInclude(cp=>cp.TipoPlanta)
+                                   .ThenInclude(it=>it.Planta )
+                                   .ThenInclude(pl=>pl.TipoPlanta)                                   
                                    .ToList();
         }
 
         public Compra FindById(int id)
         {
             return Contexto.Compras.Include(c => c.Item)
-                                            .ThenInclude(it => it.Planta)
-                                                    .ThenInclude(pl => pl.TipoPlanta).Where(cp => cp.Id == id)
-                                    .SingleOrDefault();
+                                   .ThenInclude(it => it.Planta)                                   
+                                   .ThenInclude(pl => pl.TipoPlanta).Where(cp => cp.Id == id)
+                                   .SingleOrDefault();
         }
 
         public IEnumerable<Compra> BuscarComprasPorIdPlanta(int idPlanta)
         {
             return Contexto.Compras.Include(c => c.Item)
-                                            .ThenInclude(it => it.Planta.Id == idPlanta)
-                                    .ToList();
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoPlanta)
+                                   .Where(c => c.Item.Any(pl => pl.PlantaId == idPlanta))
+                                   .ToList();
 
         }
     }

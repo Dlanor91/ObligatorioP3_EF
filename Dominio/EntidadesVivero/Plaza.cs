@@ -13,6 +13,8 @@ namespace Dominio.EntidadesVivero
 
         public override decimal PrecioFinal()
         {
+
+            //precio final = Sum de Item(cant*precioUnico) + CostoFlete
             throw new NotImplementedException();
         }
 

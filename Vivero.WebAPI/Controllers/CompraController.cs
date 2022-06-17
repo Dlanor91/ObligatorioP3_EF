@@ -24,14 +24,14 @@ namespace Vivero.WebAPI.Controllers
 
 
 
-        // GET: api/<CompraController>
+        // GET: api/Compra/Plaza
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(ManejadorCompra.MostrarTodasCompras());
         }
 
-        // GET api/<CompraController>/5
+        // GET api/Compra/Plaza/5
         [HttpGet("{id}")]
         [Route("{id}", Name = "Get")]
         public IActionResult Get(int id)
@@ -52,7 +52,7 @@ namespace Vivero.WebAPI.Controllers
             }
         }
 
-        // POST api/<CompraController>
+        // POST api/Compra/Plaza
 
         [HttpPost]
         [Route("Plaza")]
@@ -75,6 +75,7 @@ namespace Vivero.WebAPI.Controllers
             }
         }
 
+        // POST api/Compra/Importacion
         [HttpPost]
         [Route("Importacion")]
         public IActionResult Post([FromBody] Importacion impoCompra)
@@ -95,21 +96,21 @@ namespace Vivero.WebAPI.Controllers
             }
         }
 
-        // PUT api/<CompraController>/5
+        // PUT api/Compra/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CompraController>/5
+        // DELETE api/Compra/5 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
 
-        // GET api/<CompraController>/idPlanta
+        // GET api/Compra/Planta/idPlanta
         [HttpGet("{idPlanta}")]
-        [Route("{idPlanta}", Name = "BuscarPlanta")]
+        [Route("Planta/{idPlanta}", Name = "BuscarPlanta")]
         public IActionResult BuscarPlanta(int idPlanta)
         {
             try
