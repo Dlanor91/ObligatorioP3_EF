@@ -31,9 +31,9 @@ namespace Vivero.WebAPI.Controllers
             return Ok(ManejadorCompra.MostrarTodasCompras());
         }
 
-        // GET api/Compra/Plaza/5
+        // GET api/Compra/5
         [HttpGet("{id}")]
-        [Route("{id}", Name = "Get")]
+        [Route("Buscar/{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
             try
@@ -66,7 +66,7 @@ namespace Vivero.WebAPI.Controllers
 
                 if (!ok) return Conflict();
 
-                return Created("api/Compras"+plazaCompra.Id, plazaCompra);
+                return Created("api/Compra/Buscar/"+plazaCompra.Id, plazaCompra);
                 
             }
             catch (Exception)
@@ -87,7 +87,7 @@ namespace Vivero.WebAPI.Controllers
 
                 if (!ok) return Conflict();
 
-                return Created("api/Compras" + impoCompra.Id, impoCompra);
+                return Created("api/Compra/Buscar/" + impoCompra.Id, impoCompra);
 
             }
             catch (Exception)

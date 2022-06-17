@@ -44,8 +44,14 @@ namespace Repositorios
         public IEnumerable<Compra> FindAll()
         {
             return Contexto.Compras.Include(c=> c.Item)
-                                   .ThenInclude(it=>it.Planta )
-                                   .ThenInclude(pl=>pl.TipoPlanta)                                   
+                                   .ThenInclude(it=>it.Planta )                                   
+                                   .ThenInclude(pl=>pl.TipoPlanta)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoIlumincacion)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoAmbiente)
                                    .ToList();
         }
 
@@ -53,7 +59,14 @@ namespace Repositorios
         {
             return Contexto.Compras.Include(c => c.Item)
                                    .ThenInclude(it => it.Planta)                                   
-                                   .ThenInclude(pl => pl.TipoPlanta).Where(cp => cp.Id == id)
+                                   .ThenInclude(pl => pl.TipoPlanta)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoIlumincacion)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoAmbiente)
+                                   .Where(cp => cp.Id == id)
                                    .SingleOrDefault();
         }
 
@@ -62,6 +75,12 @@ namespace Repositorios
             return Contexto.Compras.Include(c => c.Item)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoPlanta)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoIlumincacion)
+                                   .Include(c => c.Item)
+                                   .ThenInclude(it => it.Planta)
+                                   .ThenInclude(pl => pl.TipoAmbiente)
                                    .Where(c => c.Item.Any(pl => pl.PlantaId == idPlanta))
                                    .ToList();
 
