@@ -18,17 +18,7 @@ namespace Repositorios
         public RepositorioParametroSistemaEF(ViveroContext cont)
         {
             Contexto = cont;
-        }
-
-        public int descripcionMax()
-        {
-            return Contexto.ParametroSistema.Select(ps => ps.ValorMaximoDescripcion).Single();
-        }
-
-        public int descripcionMin()
-        {
-            return Contexto.ParametroSistema.Select(ps => ps.ValorMinimoDescripcion).Single();
-        }
+        }      
 
         public bool Add(ParametroSistema obj)
         {
@@ -59,6 +49,7 @@ namespace Repositorios
         public ParametroSistema TraerElementosFilaUno()
         {
             return Contexto.ParametroSistema.First();
-        }
+        }              
+
     }
 }

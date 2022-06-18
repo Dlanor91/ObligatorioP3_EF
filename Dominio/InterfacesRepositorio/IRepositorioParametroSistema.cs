@@ -6,9 +6,7 @@ using Dominio.EntidadesVivero;
 namespace Dominio.InterfacesRepositorio
 {
     public interface IRepositorioParametroSistema : IRepositorio<ParametroSistema>
-    {
-        public int descripcionMin();
-        public int descripcionMax();
-        public ParametroSistema TraerElementosFilaUno();
+    {       
+       ParametroSistema TraerElementosFilaUno();
     }
 }

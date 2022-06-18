@@ -12,10 +12,12 @@ namespace Vivero.Controllers
     public class UsuarioController : Controller
     {
         public IManejadorUsuario ManejadorUsuario { get; set; }
+        public IManejadorParametroSistema ManejadorPS { get; set; }
 
-        public UsuarioController(IManejadorUsuario manejadorUsuario)
+        public UsuarioController(IManejadorUsuario manejadorUsuario, IManejadorParametroSistema manejadorPS)
         {
             ManejadorUsuario=manejadorUsuario;
+            ManejadorPS=manejadorPS;
         }
 
         public IActionResult Login()
@@ -95,21 +97,32 @@ namespace Vivero.Controllers
         {
             try
             {
-                bool usuario1 = ManejadorUsuario.PrecargaUsuarios("rl8506@gmail.com", "Rl2022");
-                bool usuario2 = ManejadorUsuario.PrecargaUsuarios("mauri@gmail.com", "Mf2022");
-                bool usuario3 = ManejadorUsuario.PrecargaUsuarios("naty@gmail.com", "Nd2022");
-                if (usuario1 && usuario2 && usuario3)
+                bool usuario1 = ManejadorUsuario.PrecargaUsuarios(new Usuario {Email = "rl8506@gmail.com", Contrasenia = "Rl2022"});
+                bool usuario2 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "mauri@gmail.com", Contrasenia = "MF2022" });
+                bool usuario3 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "naty@gmail.com", Contrasenia = "Nd2022" });
+                bool usuario4 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "admin@gmail.com", Contrasenia = "Admin2022" });               
+                bool precarga = ManejadorPS.AltaParametros(new ParametroSistema
+                {
+                    TasaIVA = 22,
+                    TasaDescuentoAmericaSur = 10,
+                    TasaImportacionDGI = 20,
+                    ValorMinimoDescripcionTP = 10,
+                    ValorMaximoDescripcionTP = 200,
+                    ValorMinimoDescripcionPL = 10,
+                    ValorMaximoDescripcionPL = 500
+                });
+                if (usuario1 && usuario2 && usuario3 && usuario4 && precarga)
                 {
                     return RedirectToAction("Login", "Usuario");                    
                 }
                 else
                 {
-                    throw new Exception("Usuarios ya existentes.");
+                    throw new Exception("Usuarios ya existentes y precarga ya realizada.");
                 }
             }
             catch (Exception)
             {
-                ViewBag.Error = "Usuarios ya existentes.";
+                ViewBag.Error = "Usuarios ya existentes y precarga ya realizada.";
                 return View();
             }            
         }

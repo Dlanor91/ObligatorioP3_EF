@@ -8,9 +8,10 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorCompra
     {
-        public IEnumerable<Compra> MostrarTodasCompras();
+        IEnumerable<Compra> MostrarTodasCompras();
         bool AgregarCompra(Compra cp);
-        public Compra MostrarCompraId(int id);
-        public IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta);
+        Compra MostrarCompraId(int id);
+        void ParametrosCompra();
+        IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta);
     }
 }

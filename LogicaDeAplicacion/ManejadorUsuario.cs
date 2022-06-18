@@ -21,11 +21,9 @@ namespace LogicaDeAplicacion
             return RepoUsuario.Ingreso(emailUsuario, contrasenia);
         }
 
-        public bool PrecargaUsuarios(string emailUsuario, string contrasenia)
+        public bool PrecargaUsuarios(Usuario user)
         {            
-            Usuario nuevoUsuario = new Usuario() { Email=emailUsuario, Contrasenia = contrasenia };
-            
-            return RepoUsuario.Add(nuevoUsuario); 
+             return RepoUsuario.Add(user); 
         }
 
         public bool busquedadEmail(string buscarEmail)

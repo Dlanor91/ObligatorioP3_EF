@@ -14,6 +14,7 @@ namespace Repositorios.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fecha = table.Column<DateTime>(nullable: false),
+                    PrecioFinalCalculado = table.Column<decimal>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     OrigenAmericaSur = table.Column<bool>(nullable: true),
                     DescripcionSanitaria = table.Column<string>(nullable: true),
@@ -43,11 +44,13 @@ namespace Repositorios.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TasaIVA = table.Column<decimal>(nullable: false),
-                    TasaImportacionDGI = table.Column<decimal>(nullable: false),
-                    DescuentoAmericaSur = table.Column<decimal>(nullable: false),
-                    ValorMinimoDescripcion = table.Column<int>(nullable: false),
-                    ValorMaximoDescripcion = table.Column<int>(nullable: false)
+                    TasaIVA = table.Column<int>(nullable: false),
+                    TasaImportacionDGI = table.Column<int>(nullable: false),
+                    TasaDescuentoAmericaSur = table.Column<int>(nullable: false),
+                    ValorMinimoDescripcionPL = table.Column<int>(nullable: false),
+                    ValorMaximoDescripcionPL = table.Column<int>(nullable: false),
+                    ValorMinimoDescripcionTP = table.Column<int>(nullable: false),
+                    ValorMaximoDescripcionTP = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,7 +112,7 @@ namespace Repositorios.Migrations
                     FrecuenciaRiego = table.Column<string>(nullable: false),
                     Temperatura = table.Column<decimal>(nullable: false),
                     TipoPlantaId = table.Column<int>(nullable: false),
-                    TipoIlumincacionId = table.Column<int>(nullable: false),
+                    TipoIluminacionId = table.Column<int>(nullable: false),
                     NombresVulgares = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -122,8 +125,8 @@ namespace Repositorios.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Planta_Iluminacion_TipoIlumincacionId",
-                        column: x => x.TipoIlumincacionId,
+                        name: "FK_Planta_Iluminacion_TipoIluminacionId",
+                        column: x => x.TipoIluminacionId,
                         principalTable: "Iluminacion",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -180,9 +183,9 @@ namespace Repositorios.Migrations
                 column: "TipoAmbienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Planta_TipoIlumincacionId",
+                name: "IX_Planta_TipoIluminacionId",
                 table: "Planta",
-                column: "TipoIlumincacionId");
+                column: "TipoIluminacionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Planta_TipoPlantaId",

@@ -344,9 +344,9 @@ namespace Vivero.Controllers
                                 {
                                     VMPlanta.Planta.Descripcion = VMPlanta.Planta.Descripcion.Trim();
                                     VMPlanta.Planta.NombresVulgares = VMPlanta.Planta.NombresVulgares.Trim();
-                                    int minimaDesc = ManejadorPS.descMinima();
-                                    int maximaDesc = ManejadorPS.descMaxima();
-                                    bool descripcionValida = VMPlanta.Planta.ValidarDescripcion(VMPlanta.Planta.Descripcion, minimaDesc, maximaDesc);
+                                    int minimaDescPL = ManejadorPS.ParametrosFilaUno().ValorMinimoDescripcionPL;
+                                    int maximaDescPL = ManejadorPS.ParametrosFilaUno().ValorMaximoDescripcionPL;
+                                    bool descripcionValida = VMPlanta.Planta.ValidarDescripcion(VMPlanta.Planta.Descripcion, minimaDescPL, maximaDescPL);
                                     if (descripcionValida)
                                     {
                                         if (VMPlanta.Foto.ContentType == "image/jpeg" || VMPlanta.Foto.ContentType == "image/png")
@@ -385,7 +385,7 @@ namespace Vivero.Controllers
                                     }
                                     else
                                     {
-                                        throw new Exception("El campo descripción debe estar entre " + minimaDesc + " y " + maximaDesc + " caracteres.");
+                                        throw new Exception("El campo descripción debe estar entre " + minimaDescPL + " y " + maximaDescPL + " caracteres.");
                                     }
                                 }
                                 else

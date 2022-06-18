@@ -9,23 +9,22 @@ namespace Dominio.EntidadesVivero
     [Table("Plaza")]
 	public class Plaza : Compra, IValidar 
     {  
+       
         public decimal CostoFlete { get; set; }
-        private decimal tasaIVA;
-        public decimal TasaIVA
-        {            
-            set { tasaIVA = value; }
-        }
+        private static int tasaIVA;
+        public int TasaIVA { get { return tasaIVA; } }
 
-        public override decimal PrecioFinal(decimal TasaIVA)
+         public override decimal PrecioFinal()
         {
             decimal PrecioFinalPlaza =0;            
-            foreach (var it in Item)
+            foreach (var it in Items)
             {
                 PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
             }
             
             if (PrecioFinalPlaza>0) {
-                PrecioFinalPlaza += CostoFlete;                
+                PrecioFinalPlaza += CostoFlete;
+                PrecioFinalPlaza = PrecioFinalPlaza + PrecioFinalPlaza* TasaIVA/100;
             }
 
             return PrecioFinalPlaza;
@@ -37,9 +36,9 @@ namespace Dominio.EntidadesVivero
 
             if (Fecha < DateTime.Now && Fecha != null && CostoFlete > 0)
             {
-                if (Item != null)
+                if (Items != null)
                 {
-                    foreach (var it in Item)
+                    foreach (var it in Items)
                     {
                         if (it.PlantaId == null)
                         {
@@ -63,6 +62,10 @@ namespace Dominio.EntidadesVivero
         public bool ValidarFormatoNombre(string nombre)
         {
             throw new NotImplementedException();
+        }
+
+        public static void nuevaTasaIVA(int ntIVA) {
+            tasaIVA = ntIVA;
         }
     }
 }

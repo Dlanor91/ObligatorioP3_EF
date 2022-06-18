@@ -20,6 +20,7 @@ namespace LogicaDeAplicacion
             RepoItem=repoItem;
             RepoCompra=repoCompra;
             RepoPS=repoPS;
+            ParametrosCompra();
         }
 
         public IEnumerable<Compra> MostrarTodasCompras()
@@ -28,9 +29,7 @@ namespace LogicaDeAplicacion
         }
 
         public bool AgregarCompra(Compra cp)
-        {
-            ParametroSistema datos =  RepoPS.TraerElementosFilaUno();            
-            cp.PrecioFinal(datos.TasaIVA);
+        {            
             return RepoCompra.Add(cp);
         }
 
@@ -42,6 +41,16 @@ namespace LogicaDeAplicacion
         public IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta)
         {
             return RepoCompra.BuscarComprasPorIdTipoPlanta(idPlanta);
+        }
+
+        public void ParametrosCompra()
+        {
+            int tsIVA = RepoCompra.CargarParametrosSistema().TasaIVA;
+            int tsDGI = RepoCompra.CargarParametrosSistema().TasaImportacionDGI;
+            int tsAmSur = RepoCompra.CargarParametrosSistema().TasaDescuentoAmericaSur;
+            Plaza.nuevaTasaIVA(tsIVA);
+            Importacion.nuevaTasaDGI(tsDGI);
+            Importacion.nuevaTasaAmericaSUR(tsAmSur);
         }
     }
 }
