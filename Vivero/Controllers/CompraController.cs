@@ -37,7 +37,7 @@ namespace Vivero.Controllers
         }
         //Post
         [HttpPost]
-        public ActionResult Index(int idTipoPlanta)
+        public ActionResult Index(int ? idTipoPlanta)
         {
             try
             {
@@ -46,14 +46,14 @@ namespace Vivero.Controllers
                     throw new Exception("Complete el campo de búsqueda.");
                 }
                 else
-                {                   
+                {
                     MostrarPlantaAtributos();
                     List<DTOCompra> listCompras = new List<DTOCompra>();
 
                     HttpClient cliente = new HttpClient();
-                   
+                    string URL = "http://localhost:49178/api/Compra/Planta/"+idTipoPlanta;
                     Task<HttpResponseMessage> respuesta =
-                        cliente.GetAsync("http://localhost:49178/api/Compra/Planta/"+idTipoPlanta);
+                        cliente.GetAsync(URL);
 
                     respuesta.Wait();
 
