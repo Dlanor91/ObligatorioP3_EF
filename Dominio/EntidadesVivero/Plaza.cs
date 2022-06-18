@@ -10,17 +10,22 @@ namespace Dominio.EntidadesVivero
 	public class Plaza : Compra, IValidar 
     {  
         public decimal CostoFlete { get; set; }
+        private decimal tasaIVA;
+        public decimal TasaIVA
+        {            
+            set { tasaIVA = value; }
+        }
 
-        public override decimal PrecioFinal()
+        public override decimal PrecioFinal(decimal TasaIVA)
         {
-            decimal PrecioFinalPlaza = 0;
+            decimal PrecioFinalPlaza =0;            
             foreach (var it in Item)
             {
                 PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
             }
-
+            
             if (PrecioFinalPlaza>0) {
-                PrecioFinalPlaza += CostoFlete;
+                PrecioFinalPlaza += CostoFlete;                
             }
 
             return PrecioFinalPlaza;

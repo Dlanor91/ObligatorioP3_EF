@@ -14,7 +14,7 @@ namespace Dominio.EntidadesVivero
         public DateTime Fecha { get; set; }
         public IEnumerable<Item> Item { get; set; }
 
-        public abstract decimal PrecioFinal();   
+        public abstract decimal PrecioFinal(decimal TasaIVA); 
        
     }
 }
