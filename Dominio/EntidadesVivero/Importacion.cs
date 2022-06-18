@@ -9,22 +9,36 @@ namespace Dominio.EntidadesVivero
     [Table("Importacion")]
     public class Importacion:Compra, IValidar
     {
-        
         public bool OrigenAmericaSur { get; set; }        
        
         public string DescripcionSanitaria { get; set; }
-        
-        public override decimal PrecioFinal(decimal TasaIVA)
-        {
-            decimal PrecioFinalPlaza = 0;
-            
-            foreach (var it in Item)
-            {
-                PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
-            }
 
+        private static int tasaDGI;
+        public int TasaDGI { get { return tasaDGI; } }
+
+        private static int tasaAmericaSur;
+        public int TasaAmericaSur { get { return tasaAmericaSur; } }
+
+        public override decimal PrecioFinal()
+        {
+            decimal PrecioFinalImp = 0;
             
-            return PrecioFinalPlaza;
+            foreach (var it in Items)
+            {
+                PrecioFinalImp += it.PrecioUnitario * it.Cantidad;
+            }
+            if (PrecioFinalImp >0)
+            {
+                PrecioFinalImp = PrecioFinalImp + PrecioFinalImp * TasaDGI;
+                if (OrigenAmericaSur)
+                {
+                    PrecioFinalImp = PrecioFinalImp - PrecioFinalImp * TasaAmericaSur;
+                }
+            }
+            
+
+
+            return PrecioFinalImp;
         }
 
         public bool Validar()
@@ -33,9 +47,9 @@ namespace Dominio.EntidadesVivero
 
             if (Fecha < DateTime.Now && Fecha != null && DescripcionSanitaria != null)
             {
-                if (Item != null)
+                if (Items != null)
                 {
-                    foreach (var it in Item)
+                    foreach (var it in Items)
                     {
                         if (it.PlantaId == null)
                         {
@@ -59,6 +73,15 @@ namespace Dominio.EntidadesVivero
         public bool ValidarFormatoNombre(string nombre)
         {
             throw new NotImplementedException();
+        }
+
+        public static void nuevaTasaDGI(int ntDGI)
+        {
+            tasaDGI = ntDGI;
+        }
+        public static void nuevaTasaAmericaSUR(int ntAmSur)
+        {
+            tasaAmericaSur = ntAmSur;
         }
     }
 }

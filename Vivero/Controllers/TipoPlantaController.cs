@@ -17,12 +17,16 @@ namespace Vivero.Controllers
         
         public IManejadorPlanta ManejadorPlantas { get; set; }
 
-        public TipoPlantaController(IManejadorTipoPlantas manejadorTipoPlantas, IManejadorPlanta manejadorPlantas)
+        public IManejadorParametroSistema ManejadorPS { get; set; }
+
+        public TipoPlantaController(IManejadorTipoPlantas manejadorTipoPlantas, IManejadorPlanta manejadorPlantas, IManejadorParametroSistema manejadorPS)
         {
-            ManejadorTipoPlantas = manejadorTipoPlantas;
-            ManejadorPlantas = manejadorPlantas;
+            ManejadorTipoPlantas=manejadorTipoPlantas;
+            ManejadorPlantas=manejadorPlantas;
+            ManejadorPS=manejadorPS;
         }
-        
+
+
         // GET: TipoPlantaController, en el index listamos todos los tipos de planta disponible
         public ActionResult Index()
         {
@@ -122,7 +126,9 @@ namespace Vivero.Controllers
                         if (existeNombre == null)
                         {
                             tpNew.Descripcion = tpNew.Descripcion.Trim();
-                            bool descripcionValida = tpNew.ValidarDescripcion(tpNew.Descripcion, 10, 200);
+                            int minimaDescTP = ManejadorPS.ParametrosFilaUno().ValorMinimoDescripcionTP;
+                            int maximaDescTP = ManejadorPS.ParametrosFilaUno().ValorMaximoDescripcionTP;
+                            bool descripcionValida = tpNew.ValidarDescripcion(tpNew.Descripcion, minimaDescTP, maximaDescTP);
                             if (descripcionValida)
                             {
                                 bool altaTP = ManejadorTipoPlantas.AgregarTipoPlanta(tpNew);
@@ -137,7 +143,7 @@ namespace Vivero.Controllers
                             }
                             else
                             {
-                                throw new Exception("El campo descripción debe estar entre 10 y 200 caracteres.");
+                                throw new Exception("El campo descripción debe estar entre " + minimaDescTP + " y " + maximaDescTP + " caracteres.");
                             }
                         }
                         else

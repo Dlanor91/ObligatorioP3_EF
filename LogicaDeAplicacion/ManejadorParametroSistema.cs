@@ -15,16 +15,7 @@ namespace LogicaDeAplicacion
 
             repoPS = repoParametroSistema;
         }
-        public int descMaxima()
-        {
-            return repoPS.descripcionMax();
-        }
-
-        public int descMinima()
-        {
-            return repoPS.descripcionMin();
-        }
-
+        
         public IEnumerable<ParametroSistema> TodosLosParametros()
         {
             return repoPS.FindAll();
@@ -34,5 +25,11 @@ namespace LogicaDeAplicacion
         {
             return repoPS.TraerElementosFilaUno();
         }
+
+        public bool AltaParametros(ParametroSistema ps)
+        {
+            return repoPS.Add(ps);
+        }
+
     }
 }

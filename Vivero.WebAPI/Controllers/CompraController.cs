@@ -37,7 +37,7 @@ namespace Vivero.WebAPI.Controllers
         {
             try
             {
-                if (id ==0) return BadRequest();
+                if (id ==0) return BadRequest();                
                 Compra buscado = ManejadorCompra.MostrarCompraId(id);
                 if (buscado == null) return NotFound();
 
@@ -59,15 +59,11 @@ namespace Vivero.WebAPI.Controllers
         {
             try
             {
-                if (!plazaCompra.Validar()) return BadRequest();
-
-                bool ok = ManejadorCompra.AgregarCompra(plazaCompra);
-
+                if (!plazaCompra.Validar()) return BadRequest();                
+                bool ok = ManejadorCompra.AgregarCompra(plazaCompra);                
                 if (!ok) return Conflict();
 
-                return CreatedAtRoute("Get", new { id = plazaCompra.Id }, plazaCompra);
-                //return Created("api/Compra/Buscar/"+plazaCompra.Id, plazaCompra);
-
+                return CreatedAtRoute("Get", new { id = plazaCompra.Id }, plazaCompra); 
             }
             catch (Exception)
             {
@@ -123,8 +119,8 @@ namespace Vivero.WebAPI.Controllers
                 {
                     Id = compras.Id,
                     Fecha = compras.Fecha,
-                    TotalCompra = compras.PrecioFinal(22),
-                    Items = compras.Item.Select(it => new DTOItem { Cantidad = it.Cantidad, 
+                    TotalCompra = compras.PrecioFinalCalculado,
+                    Items = compras.Items.Select(it => new DTOItem { Cantidad = it.Cantidad, 
                                                                     PrecioUnitario = it.PrecioUnitario ,
                                                                     Planta = new DTOPlanta { NombreCientifico = it.Planta.NombreCientifico,
                                                                                              Descripcion = it.Planta.Descripcion,
@@ -133,17 +129,20 @@ namespace Vivero.WebAPI.Controllers
                                                                                              FrecuenciaRiego = it.Planta.FrecuenciaRiego,
                                                                                              Temperatura = it.Planta.Temperatura,
                                                                                              TipoAmbiente = new DTOTipoAmbiente { Ambiente = it.Planta.TipoAmbiente.Ambiente},
-                                                                                             TipoIlumincacion = new DTOIluminacion { TipoIluminacion = it.Planta.TipoIlumincacion.TipoIluminacion },
+                                                                                             TipoIluminacion = new DTOIluminacion { TipoIluminacion = it.Planta.TipoIluminacion.TipoIluminacion },
                                                                                              TipoPlanta = new DTOTipoPlanta {Nombre = it.Planta.TipoPlanta.Nombre, Descripcion = it.Planta.TipoPlanta.Descripcion},
                                                                                              NombresVulgares = it.Planta.NombresVulgares
                                                                     } }),                   
 
                     //Importacion
                     DescripcionSanitaria = compras is Importacion ? (compras as Importacion).DescripcionSanitaria : null,
-                    //Plaza
-                   CostoFlete = compras is Plaza ? (compras as Plaza).CostoFlete: 0
+                    OrigenAmericaSur = compras is Importacion ? (compras as Importacion).OrigenAmericaSur : false,
+                    TasaDGI = compras is Importacion ? (compras as Importacion).TasaDGI : 0,
+                    TasaAmericaSur = compras is Importacion ? (compras as Importacion).TasaAmericaSur : 0,
 
-                   
+                    //Plaza
+                    CostoFlete = compras is Plaza ? (compras as Plaza).CostoFlete: 0,
+                    TasaIva = compras is Plaza ? (compras as Plaza).TasaIVA : 0
                 }); 
 
                 return Ok(datosCompra);

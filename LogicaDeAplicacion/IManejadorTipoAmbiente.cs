@@ -8,6 +8,6 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorTipoAmbiente
     {
-        public IEnumerable<TipoAmbiente> MostrarTodosTipoAmbiente();
+        IEnumerable<TipoAmbiente> MostrarTodosTipoAmbiente();
     }
 }

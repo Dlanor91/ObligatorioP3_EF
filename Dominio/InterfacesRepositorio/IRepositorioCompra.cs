@@ -10,5 +10,6 @@ namespace Dominio.InterfacesRepositorio
     public interface IRepositorioCompra : IRepositorio<Compra>
     {
         IEnumerable<Compra> BuscarComprasPorIdTipoPlanta(int idTipoPlanta);
+        ParametroSistema CargarParametrosSistema();
     }
 }

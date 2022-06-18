@@ -12,9 +12,17 @@ namespace Dominio.EntidadesVivero
         [Key]
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public IEnumerable<Item> Item { get; set; }
+        public IEnumerable<Item> Items { get; set; }
 
-        public abstract decimal PrecioFinal(decimal TasaIVA); 
-       
+        private static decimal precioFinalCalculado;
+        public decimal PrecioFinalCalculado { get { return precioFinalCalculado; } }   
+
+        public abstract decimal PrecioFinal();
+        
+        public static void nuevoPrecioFinal(decimal PrecioCalculado)
+        {
+            precioFinalCalculado = PrecioCalculado;
+        }
+
     }
 }

@@ -7,11 +7,9 @@ using Dominio.EntidadesVivero;
 namespace LogicaDeAplicacion
 {
     public interface IManejadorParametroSistema
-    {
-        public int descMaxima();
-        public int descMinima();
-
-        public IEnumerable<ParametroSistema> TodosLosParametros();
-        public ParametroSistema ParametrosFilaUno();
+    {    
+        IEnumerable<ParametroSistema> TodosLosParametros();
+        bool AltaParametros(ParametroSistema ps);
+        ParametroSistema ParametrosFilaUno();
     }
 }

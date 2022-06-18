@@ -10,7 +10,7 @@ using Repositorios;
 namespace Repositorios.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220615042734_init")]
+    [Migration("20220618232150_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace Repositorios.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("PrecioFinalCalculado")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -63,7 +66,7 @@ namespace Repositorios.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlantaId")
+                    b.Property<int?>("PlantaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cantidad")
@@ -91,19 +94,25 @@ namespace Repositorios.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("DescuentoAmericaSur")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TasaIVA")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TasaImportacionDGI")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ValorMaximoDescripcion")
+                    b.Property<int>("TasaDescuentoAmericaSur")
                         .HasColumnType("int");
 
-                    b.Property<int>("ValorMinimoDescripcion")
+                    b.Property<int>("TasaIVA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TasaImportacionDGI")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorMaximoDescripcionPL")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorMaximoDescripcionTP")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorMinimoDescripcionPL")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorMinimoDescripcionTP")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -148,7 +157,7 @@ namespace Repositorios.Migrations
                     b.Property<int>("TipoAmbienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoIlumincacionId")
+                    b.Property<int>("TipoIluminacionId")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoPlantaId")
@@ -161,7 +170,7 @@ namespace Repositorios.Migrations
 
                     b.HasIndex("TipoAmbienteId");
 
-                    b.HasIndex("TipoIlumincacionId");
+                    b.HasIndex("TipoIluminacionId");
 
                     b.HasIndex("TipoPlantaId");
 
@@ -261,13 +270,13 @@ namespace Repositorios.Migrations
             modelBuilder.Entity("Dominio.EntidadesVivero.Item", b =>
                 {
                     b.HasOne("Dominio.EntidadesVivero.Compra", "Compra")
-                        .WithMany("Item")
+                        .WithMany("Items")
                         .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.EntidadesVivero.Planta", "Planta")
-                        .WithMany("Item")
+                        .WithMany("Items")
                         .HasForeignKey("PlantaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,9 +290,9 @@ namespace Repositorios.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.EntidadesVivero.Iluminacion", "TipoIlumincacion")
+                    b.HasOne("Dominio.EntidadesVivero.Iluminacion", "TipoIluminacion")
                         .WithMany()
-                        .HasForeignKey("TipoIlumincacionId")
+                        .HasForeignKey("TipoIluminacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

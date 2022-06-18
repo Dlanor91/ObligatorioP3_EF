@@ -1,108 +1,108 @@
 ﻿@model IEnumerable<ViveroDTO.DTOCompra>
 
-@{
+    @{
     ViewData["Title"] = "Busqueda Compra - Planta";
-}
+    }
 
-<h2>Búsqueda de Plantas por Tipo de Planta</h2>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" id="formBusqTipoPlanta">
-            <div class="form-group">
-                <select name="idTipoPlanta" id="idTipoPlanta">
-                    <option value="0">Seleccione Tipo de Planta</option>
-                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
-                    {
+    <h2>Búsqueda de Plantas por Tipo de Planta</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" id="formBusqTipoPlanta">
+                <div class="form-group">
+                    <select name="idTipoPlanta" id="idTipoPlanta">
+                        <option value="0">Seleccione Tipo de Planta</option>
+                        @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
+                        {
                         <option value="@tp.Id">@tp.Nombre</option>
-                    }
-                </select>
-            </div>
-            <input type="submit" value="Buscar" />
-        </form>
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Buscar" />
+            </form>
+        </div>
     </div>
-</div>
 
-@if (Model == null)
-{
-
-}
-else
-{
-    if (Model.Count() == 0)
+    @if (Model == null)
     {
-        <p>No hay compras para mostrar.</p>
+
     }
     else
     {
-        <table class="table" id="tblCompras">
-            <thead>
-                <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Fecha
-                    </th>
-                    <th>
-                        Total de la Compra
-                    </th>
-                    <th>
-                        Nombre Científico
-                    </th>
-                    <th>
-                        Cantidad
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Fecha)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalCompra)
-                        </td>
-                        <td>
-                            @foreach (ViveroDTO.DTOItem it in item.Items)
-                            {
-                                <table width="100%">
-                                    <tr>
-                                        <td>
-                                            @it.Planta.NombreCientifico
-                                        </td>
-                                    </tr>
-                                </table>
-                            }
-                        </td>
-                        <td>
-                            @foreach (ViveroDTO.DTOItem it in item.Items)
-                            {
-                                <table width="100%">
-                                    <tr>
-                                        <td>
-                                            @it.Cantidad
-                                        </td>
-                                    </tr>
-                                </table>
-                            }
-                        </td>
+    if (Model.Count() == 0)
+    {
+    <p>No hay compras para mostrar.</p>
+    }
+    else
+    {
+    <table class="table" id="tblCompras">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Total de la Compra
+                </th>
+                <th>
+                    Nombre Científico
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCompra)
+                </td>
+                <td>
+                    @foreach (ViveroDTO.DTOItem it in item.Items)
+                    {
+                    <table width="100%" class="tablaExtra">
+                        <tr>
+                            <td>
+                                @it.Planta.NombreCientifico
+                            </td>
+                        </tr>
+                    </table>
+                    }
+                </td>
+                <td>
+                    @foreach (ViveroDTO.DTOItem it in item.Items)
+                    {
+                    <table width="100%" class="tablaExtra">
+                        <tr>
+                            <td>
+                                @it.Cantidad
+                            </td>
+                        </tr>
+                    </table>
+                    }
+                </td>
 
-                    </tr>
-                }
-            </tbody>
-        </table>
+            </tr>
+            }
+        </tbody>
+    </table>
     }
 
-}
+    }
 
-<p id="pMensaje">@ViewBag.Error</p>
+    <p id="pMensaje">@ViewBag.Error</p>
 
-@section Scripts{
+    @section Scripts{
     <script>
         document.querySelector("#formBusqTipoPlanta").addEventListener('submit', evaluarBusqueda)
 
@@ -122,4 +122,13 @@ else
 
         }
     </script>
-}
+    }
+
+    <style>
+        .tablaExtra {
+            border-color: white;
+            border: 0px;
+        }
+    </style>
+
+

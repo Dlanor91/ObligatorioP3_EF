@@ -80,7 +80,7 @@ namespace LogicaDeAplicacion
             {
                 p.TipoPlanta = tp;
                 p.TipoAmbiente = tipoAmb;
-                p.TipoIlumincacion = ilum;
+                p.TipoIluminacion = ilum;
                 puedeAgregar = RepoPlantas.Add(p);
             }
 

@@ -14,7 +14,7 @@ namespace ViveroDTO
         public string FrecuenciaRiego { get; set; }        
         public decimal Temperatura { get; set; }        
         public DTOTipoPlanta TipoPlanta { get; set; }       
-        public DTOIluminacion TipoIlumincacion { get; set; }        
+        public DTOIluminacion TipoIluminacion { get; set; }        
         public string NombresVulgares { get; set; }
     }
 }

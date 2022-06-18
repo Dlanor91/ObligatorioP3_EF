@@ -67,6 +67,7 @@ namespace Vivero.Controllers
                     }
                     else
                     {
+                        MostrarPlantaAtributos();
                         ViewBag.Error = "No se pueden mostrar todas las compras.";
                     }
 
@@ -76,6 +77,7 @@ namespace Vivero.Controllers
             }
             catch (Exception ex)
             {
+                MostrarPlantaAtributos();
                 ViewBag.Error = ex.Message;
                 return View();
             }

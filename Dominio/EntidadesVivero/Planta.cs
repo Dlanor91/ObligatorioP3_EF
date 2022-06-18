@@ -31,10 +31,10 @@ namespace Dominio.EntidadesVivero
         [Required]
         public TipoPlanta TipoPlanta { get; set; }
         [Required]
-        public Iluminacion TipoIlumincacion { get; set; }
+        public Iluminacion TipoIluminacion { get; set; }
         [Required]
         public string NombresVulgares { get; set; }
-        public IEnumerable<Item> Item { get; set; }
+        public IEnumerable<Item> Items { get; set; }
         public bool Equals([AllowNull] Planta other)
         {
             if (other ==null)

@@ -8,17 +8,17 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorPlanta
     {
-        public IEnumerable<Planta> MostrarTodasPlantas();
-        public IEnumerable<Planta> BusquedaNombre(string nombreBusqPlanta);
-        public IEnumerable<Planta> buscarPlantasMenoresAlt(decimal alturaBuscar);
-        public IEnumerable<Planta> buscarPlantasMayoresAlt(decimal alturaBuscar);
-        public IEnumerable<Planta> buscarPlantasTipoAmbiente(int idTipoAmbiente);
-        public IEnumerable<Planta> buscarPlantasTipoPlanta(int idTipoPlanta);
-        public IEnumerable<TipoPlanta> TraerTodosTiposPlantas();
-        public IEnumerable<TipoAmbiente> TraerTodosTiposAmbientes();
-        public IEnumerable<Iluminacion> TraerTodosIluminaciones();
-        public bool AgregarPlanta(Planta p, int idTipoPlanta, int idTipoAmbiente, int idIluminacion);
-        public bool verificarNombreC(string nombreC);
-        public Planta TraerPlanta(int id);
+        IEnumerable<Planta> MostrarTodasPlantas();
+        IEnumerable<Planta> BusquedaNombre(string nombreBusqPlanta);
+        IEnumerable<Planta> buscarPlantasMenoresAlt(decimal alturaBuscar);
+        IEnumerable<Planta> buscarPlantasMayoresAlt(decimal alturaBuscar);
+        IEnumerable<Planta> buscarPlantasTipoAmbiente(int idTipoAmbiente);
+        IEnumerable<Planta> buscarPlantasTipoPlanta(int idTipoPlanta);
+        IEnumerable<TipoPlanta> TraerTodosTiposPlantas();
+        IEnumerable<TipoAmbiente> TraerTodosTiposAmbientes();
+        IEnumerable<Iluminacion> TraerTodosIluminaciones();
+        bool AgregarPlanta(Planta p, int idTipoPlanta, int idTipoAmbiente, int idIluminacion);
+        bool verificarNombreC(string nombreC);
+        Planta TraerPlanta(int id);
     }
 }

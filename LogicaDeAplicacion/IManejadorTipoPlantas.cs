@@ -8,12 +8,12 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorTipoPlantas
     {
-        public IEnumerable<TipoPlanta> MostrarTodosTiposPlantas();
+        IEnumerable<TipoPlanta> MostrarTodosTiposPlantas();
         bool AgregarTipoPlanta(TipoPlanta tp);             
-        public TipoPlanta buscarUnaPlanta(int id);
-        public TipoPlanta buscarPlantaNombre(string nombreTP);
-        public bool actDescripcionTipoPlanta(TipoPlanta tp);
-        public bool eliminarTipoPlanta(int id);
+        TipoPlanta buscarUnaPlanta(int id);
+        TipoPlanta buscarPlantaNombre(string nombreTP);
+        bool actDescripcionTipoPlanta(TipoPlanta tp);
+        bool eliminarTipoPlanta(int id);
 
     }
 }

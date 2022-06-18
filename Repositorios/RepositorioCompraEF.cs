@@ -43,13 +43,13 @@ namespace Repositorios
 
         public IEnumerable<Compra> FindAll()
         {
-            return Contexto.Compras.Include(c=> c.Item)
+            return Contexto.Compras.Include(c=> c.Items)
                                    .ThenInclude(it=>it.Planta )                                   
                                    .ThenInclude(pl=>pl.TipoPlanta)
-                                   .Include(c => c.Item)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
-                                   .ThenInclude(pl => pl.TipoIlumincacion)
-                                   .Include(c => c.Item)
+                                   .ThenInclude(pl => pl.TipoIluminacion)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoAmbiente)
                                    .ToList();
@@ -57,13 +57,13 @@ namespace Repositorios
 
         public Compra FindById(int id)
         {
-            return Contexto.Compras.Include(c => c.Item)
+            return Contexto.Compras.Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)                                   
                                    .ThenInclude(pl => pl.TipoPlanta)
-                                   .Include(c => c.Item)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
-                                   .ThenInclude(pl => pl.TipoIlumincacion)
-                                   .Include(c => c.Item)
+                                   .ThenInclude(pl => pl.TipoIluminacion)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoAmbiente)
                                    .Where(cp => cp.Id == id)
@@ -72,18 +72,25 @@ namespace Repositorios
 
         public IEnumerable<Compra> BuscarComprasPorIdTipoPlanta(int idTipoPlanta)
         {
-            return Contexto.Compras.Include(c => c.Item)
+            return Contexto.Compras.Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoPlanta)
-                                   .Include(c => c.Item)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
-                                   .ThenInclude(pl => pl.TipoIlumincacion)
-                                   .Include(c => c.Item)
+                                   .ThenInclude(pl => pl.TipoIluminacion)
+                                   .Include(c => c.Items)
                                    .ThenInclude(it => it.Planta)
                                    .ThenInclude(pl => pl.TipoAmbiente)
-                                   .Where(c => c.Item.Any(pl => pl.Planta.TipoPlanta.Id == idTipoPlanta))
+                                   .Where(c => c.Items.Any(pl => pl.Planta.TipoPlanta.Id == idTipoPlanta))
                                    .ToList();
 
+        }
+
+        public ParametroSistema CargarParametrosSistema()
+        {
+            ParametroSistema ps = Contexto.ParametroSistema.FirstOrDefault();
+            
+            return ps;
         }
     }
     

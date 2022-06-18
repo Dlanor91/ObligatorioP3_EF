@@ -8,8 +8,8 @@ namespace LogicaDeAplicacion
 {
     public interface IManejadorUsuario
     {
-        public Usuario IngresoExitoso(string emailUsuario, string contrasenia);
-        public bool PrecargaUsuarios(string emailUsuario, string contrasenia);
-        public bool busquedadEmail(string buscarEmail);
+        Usuario IngresoExitoso(string emailUsuario, string contrasenia);
+        bool PrecargaUsuarios(Usuario user);
+        bool busquedadEmail(string buscarEmail);
     }
 }
