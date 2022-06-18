@@ -29,6 +29,8 @@ namespace LogicaDeAplicacion
 
         public bool AgregarCompra(Compra cp)
         {
+            ParametroSistema datos =  RepoPS.TraerElementosFilaUno();            
+            cp.PrecioFinal(datos.TasaIVA);
             return RepoCompra.Add(cp);
         }
 

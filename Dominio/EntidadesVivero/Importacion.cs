@@ -14,14 +14,16 @@ namespace Dominio.EntidadesVivero
        
         public string DescripcionSanitaria { get; set; }
         
-        public override decimal PrecioFinal()
+        public override decimal PrecioFinal(decimal TasaIVA)
         {
             decimal PrecioFinalPlaza = 0;
+            
             foreach (var it in Item)
             {
                 PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
             }
-           
+
+            
             return PrecioFinalPlaza;
         }
 

@@ -65,7 +65,8 @@ namespace Vivero.WebAPI.Controllers
 
                 if (!ok) return Conflict();
 
-                return Created("api/Compra/Buscar/"+plazaCompra.Id, plazaCompra);
+                return CreatedAtRoute("Get", new { id = plazaCompra.Id }, plazaCompra);
+                //return Created("api/Compra/Buscar/"+plazaCompra.Id, plazaCompra);
 
             }
             catch (Exception)
@@ -114,7 +115,7 @@ namespace Vivero.WebAPI.Controllers
         {
             try
             {
-                if (idPlanta ==0) return BadRequest();
+                if (idPlanta ==0) return BadRequest();                
 
                 IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);               
 
@@ -122,7 +123,7 @@ namespace Vivero.WebAPI.Controllers
                 {
                     Id = compras.Id,
                     Fecha = compras.Fecha,
-                    TotalCompra = compras.PrecioFinal(),
+                    TotalCompra = compras.PrecioFinal(22),
                     Items = compras.Item.Select(it => new DTOItem { Cantidad = it.Cantidad, 
                                                                     PrecioUnitario = it.PrecioUnitario ,
                                                                     Planta = new DTOPlanta { NombreCientifico = it.Planta.NombreCientifico,

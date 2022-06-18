@@ -32,7 +32,8 @@ namespace Repositorios
 
         public bool Add(ParametroSistema obj)
         {
-            throw new NotImplementedException();
+            Contexto.ParametroSistema.Add(obj);
+            return Contexto.SaveChanges() >=1;
         }
 
         public bool Remove(int id)
