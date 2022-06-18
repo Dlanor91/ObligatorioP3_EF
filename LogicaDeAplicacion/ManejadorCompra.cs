@@ -12,12 +12,14 @@ namespace LogicaDeAplicacion
         public IRepositorioPlantas RepoPlantas { get; set; }
         public IRepositorioItems RepoItem { get; set; }
         public IRepositorioCompra RepoCompra { get; set; }
+        public IRepositorioParametroSistema RepoPS { get; set; }
 
-        public ManejadorCompra(IRepositorioPlantas repoPlantas, IRepositorioItems repoItem, IRepositorioCompra repoCompra)
+        public ManejadorCompra(IRepositorioPlantas repoPlantas, IRepositorioItems repoItem, IRepositorioCompra repoCompra, IRepositorioParametroSistema repoPS)
         {
             RepoPlantas=repoPlantas;
             RepoItem=repoItem;
             RepoCompra=repoCompra;
+            RepoPS=repoPS;
         }
 
         public IEnumerable<Compra> MostrarTodasCompras()

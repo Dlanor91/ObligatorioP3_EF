@@ -9,6 +9,7 @@ using LogicaDeAplicacion;
 using ViveroDTO;
 
 
+
 namespace Vivero.WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -115,22 +116,33 @@ namespace Vivero.WebAPI.Controllers
             {
                 if (idPlanta ==0) return BadRequest();
 
-                IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);
-                //ParametroSistema datosSistema = ManejadorParametrosSist.ParametrosFilaUno();
-
-                //decimal descAmeSur = datosSistema.DescuentoAmericaSur;
-                //decimal tasaImp = datosSistema.TasaImportacionDGI;
-                //decimal tasaIva = datosSistema.TasaIVA;
+                IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);               
 
                 IEnumerable<DTOCompra> datosCompra = compras.Select(compras => new DTOCompra()
                 {
                     Id = compras.Id,
                     Fecha = compras.Fecha,
                     TotalCompra = compras.PrecioFinal(),
-                    //NombreCientifico = compras.Item.Select(it => it.Planta.NombreCientifico).Single(),
-                    //Cantidad = compras.Item.Select(it => it.Cantidad).Single()                    
-                    NombreCientifico = "Ramon",
-                    Cantidad = 10
+                    Items = compras.Item.Select(it => new DTOItem { Cantidad = it.Cantidad, 
+                                                                    PrecioUnitario = it.PrecioUnitario ,
+                                                                    Planta = new DTOPlanta { NombreCientifico = it.Planta.NombreCientifico,
+                                                                                             Descripcion = it.Planta.Descripcion,
+                                                                                             AlturaMax = it.Planta.AlturaMax,
+                                                                                             Foto = it.Planta.Foto,
+                                                                                             FrecuenciaRiego = it.Planta.FrecuenciaRiego,
+                                                                                             Temperatura = it.Planta.Temperatura,
+                                                                                             TipoAmbiente = new DTOTipoAmbiente { Ambiente = it.Planta.TipoAmbiente.Ambiente},
+                                                                                             TipoIlumincacion = new DTOIluminacion { TipoIluminacion = it.Planta.TipoIlumincacion.TipoIluminacion },
+                                                                                             TipoPlanta = new DTOTipoPlanta {Nombre = it.Planta.TipoPlanta.Nombre, Descripcion = it.Planta.TipoPlanta.Descripcion},
+                                                                                             NombresVulgares = it.Planta.NombresVulgares
+                                                                    } }),                   
+
+                    //Importacion
+                    DescripcionSanitaria = compras is Importacion ? (compras as Importacion).DescripcionSanitaria : null,
+                    //Plaza
+                   CostoFlete = compras is Plaza ? (compras as Plaza).CostoFlete: 0
+
+                   
                 }); 
 
                 return Ok(datosCompra);

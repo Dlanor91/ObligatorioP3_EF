@@ -38,9 +38,10 @@ namespace Vivero.WebAPI
 
             services.AddDbContext<ViveroContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionEF")));
 
-            services.AddScoped<IRepositorioCompra, RepositorioCompraEF>();
-            services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
+            services.AddScoped<IRepositorioCompra, RepositorioCompraEF>();            
             services.AddScoped<IRepositorioItems, RepositorioItemsEF>();
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantaEF>();
+            services.AddScoped<IRepositorioParametroSistema, RepositorioParametroSistemaEF>();
 
             services.AddScoped<IManejadorCompra, ManejadorCompra>();
             
