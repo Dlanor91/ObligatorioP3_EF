@@ -15,14 +15,11 @@ namespace Dominio.EntidadesVivero
         public IEnumerable<Item> Items { get; set; }
 
         private static decimal precioFinalCalculado;
-        public decimal PrecioFinalCalculado { get { return precioFinalCalculado; } }   
+        public decimal PrecioFinalCalculado { get; set; }
 
         public abstract decimal PrecioFinal();
         
-        public static void nuevoPrecioFinal(decimal PrecioCalculado)
-        {
-            precioFinalCalculado = PrecioCalculado;
-        }
+       
 
     }
 }
