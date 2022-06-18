@@ -4,63 +4,115 @@
     ViewData["Title"] = "Busqueda Compra - Planta";
 }
 
-    <h2>Búsqueda de Plantas por Tipo de Planta</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <form method="post" id="formBusqTipoPlanta">
-                <div class="form-group">
-                    <select name="idTipoPlanta" id="idTipoPlanta">
-                        <option value="0">Seleccione Tipo de Planta</option>
-                        @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
-                        {
-                            <option value="@tp.Id">@tp.Nombre</option>
-                        }
-                    </select>
-                </div>
-                <input type="submit" value="Buscar" />
-            </form>
-        </div>
+<h2>Búsqueda de Plantas por Tipo de Planta</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="formBusqTipoPlanta">
+            <div class="form-group">
+                <select name="idTipoPlanta" id="idTipoPlanta">
+                    <option value="0">Seleccione Tipo de Planta</option>
+                    @foreach (Dominio.EntidadesVivero.TipoPlanta tp in ViewBag.TipoPlantas)
+                    {
+                        <option value="@tp.Id">@tp.Nombre</option>
+                    }
+                </select>
+            </div>
+            <input type="submit" value="Buscar" />
+        </form>
     </div>
+</div>
 
-    @if (Model == null)
-    {
+@if (Model == null)
+{
 
-    }
-    else
-    {
+}
+else
+{
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fecha)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TotalCompra)
-                    </th>                                      
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Fecha)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalCompra)
-                        </td>                                               
-                    </tr>
+<table class="table" id="tblCompras">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Total de la Compra
+            </th>
+            <th>
+                Nombre Científico
+            </th>
+            <th>
+                Cantidad
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCompra)
+                </td>
+                <td>
+                    @foreach (ViveroDTO.DTOItem it in item.Items)
+                    {
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    @it.Planta.NombreCientifico
+                                </td>
+                            </tr>
+                        </table>
+                     }
+                 </td>
+                <td>
+                    @foreach (ViveroDTO.DTOItem it in item.Items)
+                    {
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    @it.Cantidad
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+                    
+                 </tr>
                 }
-            </tbody>
-        </table>
-    }
+        </tbody>
+</table>
+}
 
 <p id="pMensaje">@ViewBag.Error</p>
 
+@section Scripts{
+    <script>
+        document.querySelector("#formBusqTipoPlanta").addEventListener('submit', evaluarBusqueda)
+
+        function evaluarBusqueda(evento) {
+            evento.preventDefault();
+            let selectBusqueda = document.querySelector("#idTipoPlanta").value;
+
+            if (selectBusqueda != "0") {
+
+                this.submit();
+
+            } else {
+
+                document.querySelector("#pMensaje").innerHTML = "Seleccione un elemento de la lista para poder continuar.";
+                document.querySelector("#tblCompras").innerHTML = "";
+            }
+
+        }
+    </script>
+}
