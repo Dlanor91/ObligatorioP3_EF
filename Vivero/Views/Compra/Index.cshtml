@@ -28,69 +28,76 @@
 }
 else
 {
+    if (Model.Count() == 0)
+    {
+        <p>No hay compras para mostrar.</p>
+    }
+    else
+    {
+        <table class="table" id="tblCompras">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Total de la Compra
+                    </th>
+                    <th>
+                        Nombre Científico
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCompra)
+                        </td>
+                        <td>
+                            @foreach (ViveroDTO.DTOItem it in item.Items)
+                            {
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            @it.Planta.NombreCientifico
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </td>
+                        <td>
+                            @foreach (ViveroDTO.DTOItem it in item.Items)
+                            {
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            @it.Cantidad
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </td>
 
-<table class="table" id="tblCompras">
-    <thead>
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Fecha
-            </th>
-            <th>
-                Total de la Compra
-            </th>
-            <th>
-                Nombre Científico
-            </th>
-            <th>
-                Cantidad
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalCompra)
-                </td>
-                <td>
-                    @foreach (ViveroDTO.DTOItem it in item.Items)
-                    {
-                        <table width="100%">
-                            <tr>
-                                <td>
-                                    @it.Planta.NombreCientifico
-                                </td>
-                            </tr>
-                        </table>
-                     }
-                 </td>
-                <td>
-                    @foreach (ViveroDTO.DTOItem it in item.Items)
-                    {
-                        <table width="100%">
-                            <tr>
-                                <td>
-                                    @it.Cantidad
-                                </td>
-                            </tr>
-                        </table>
-                    }
-                </td>
-                    
-                 </tr>
+                    </tr>
                 }
-        </tbody>
-</table>
+            </tbody>
+        </table>
+    }
+
 }
 
 <p id="pMensaje">@ViewBag.Error</p>
