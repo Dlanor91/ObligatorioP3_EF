@@ -17,7 +17,8 @@ namespace Dominio.EntidadesVivero
         public int TasaDGI { get { return tasaDGI; } }
 
         private static int tasaAmericaSur;
-        public int TasaAmericaSur { get { return tasaAmericaSur; } }
+        public int TasaAmericaSur { get { return tasaAmericaSur; } }       
+
 
         public override decimal PrecioFinal()
         {
@@ -36,11 +37,9 @@ namespace Dominio.EntidadesVivero
                 }
             }
             
-
-
             return PrecioFinalImp;
         }
-
+        
         public bool Validar()
         {
             bool ret = false;
