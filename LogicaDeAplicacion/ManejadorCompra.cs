@@ -50,7 +50,7 @@ namespace LogicaDeAplicacion
             int tsAmSur = RepoCompra.CargarParametrosSistema().TasaDescuentoAmericaSur;
             Plaza.nuevaTasaIVA(tsIVA);
             Importacion.nuevaTasaDGI(tsDGI);
-            Importacion.nuevaTasaAmericaSUR(tsAmSur);
+            Importacion.nuevaTasaAmericaSUR(tsAmSur);           
         }
     }
 }

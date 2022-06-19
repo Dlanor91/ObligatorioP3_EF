@@ -59,7 +59,8 @@ namespace Vivero.WebAPI.Controllers
         {
             try
             {
-                if (!plazaCompra.Validar()) return BadRequest();                
+                if (!plazaCompra.Validar()) return BadRequest();
+                plazaCompra.PrecioFinalCalculado = plazaCompra.PrecioFinal();               
                 bool ok = ManejadorCompra.AgregarCompra(plazaCompra);                
                 if (!ok) return Conflict();
 
@@ -79,6 +80,7 @@ namespace Vivero.WebAPI.Controllers
             try
             {
                 if (!impoCompra.Validar()) return BadRequest();
+                impoCompra.PrecioFinalCalculado = impoCompra.PrecioFinal();
                 bool ok = ManejadorCompra.AgregarCompra(impoCompra);
 
                 if (!ok) return Conflict();
@@ -113,8 +115,8 @@ namespace Vivero.WebAPI.Controllers
             {
                 if (idPlanta ==0) return BadRequest();                
 
-                IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);               
-
+                IEnumerable<Compra> compras = ManejadorCompra.MostrarComprarPorIdPlanta(idPlanta);
+                ManejadorCompra.ParametrosCompra();
                 IEnumerable<DTOCompra> datosCompra = compras.Select(compras => new DTOCompra()
                 {
                     Id = compras.Id,

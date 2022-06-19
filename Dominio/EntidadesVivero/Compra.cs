@@ -15,7 +15,6 @@ namespace Dominio.EntidadesVivero
         public IEnumerable<Item> Items { get; set; }
         public decimal PrecioFinalCalculado { get; set; }
         public abstract decimal PrecioFinal();
-
-        public virtual decimal calcPRecio => PrecioFinalCalculado = PrecioFinal();
+                
     }
 }
