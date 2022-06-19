@@ -13,13 +13,9 @@ namespace Dominio.EntidadesVivero
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public IEnumerable<Item> Items { get; set; }
-
-        private static decimal precioFinalCalculado;
         public decimal PrecioFinalCalculado { get; set; }
-
         public abstract decimal PrecioFinal();
-        
-       
 
+        public virtual decimal calcPRecio => PrecioFinalCalculado = PrecioFinal();
     }
 }

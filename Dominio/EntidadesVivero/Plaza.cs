@@ -13,23 +13,24 @@ namespace Dominio.EntidadesVivero
         public decimal CostoFlete { get; set; }
         private static int tasaIVA;
         public int TasaIVA { get { return tasaIVA; } }
-
-         public override decimal PrecioFinal()
-        {
+        
+        public override decimal PrecioFinal()
+        {           
             decimal PrecioFinalPlaza =0;            
             foreach (var it in Items)
             {
-                PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
+                PrecioFinalPlaza += PrecioFinalPlaza * it.Cantidad;
             }
             
             if (PrecioFinalPlaza>0) {
                 PrecioFinalPlaza += CostoFlete;
                 PrecioFinalPlaza = PrecioFinalPlaza + PrecioFinalPlaza* TasaIVA/100;
             }
-
+          
             return PrecioFinalPlaza;
         }
 
+        public override decimal calcPRecio => PrecioFinalCalculado = PrecioFinal();
         public bool Validar()
         {
             bool ret = false;
