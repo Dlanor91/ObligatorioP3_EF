@@ -19,18 +19,16 @@ namespace Dominio.EntidadesVivero
             decimal PrecioFinalPlaza =0;            
             foreach (var it in Items)
             {
-                PrecioFinalPlaza += PrecioFinalPlaza * it.Cantidad;
+                PrecioFinalPlaza += it.PrecioUnitario * it.Cantidad;
             }
+                        
+             PrecioFinalPlaza += CostoFlete;
+             PrecioFinalPlaza = PrecioFinalPlaza + PrecioFinalPlaza * TasaIVA/100;
             
-            if (PrecioFinalPlaza>0) {
-                PrecioFinalPlaza += CostoFlete;
-                PrecioFinalPlaza = PrecioFinalPlaza + PrecioFinalPlaza* TasaIVA/100;
-            }
           
             return PrecioFinalPlaza;
         }
-
-        public override decimal calcPRecio => PrecioFinalCalculado = PrecioFinal();
+                
         public bool Validar()
         {
             bool ret = false;

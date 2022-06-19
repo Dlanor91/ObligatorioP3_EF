@@ -26,7 +26,8 @@ namespace Repositorios
 
         public bool Add(Compra obj)
         {
-            Contexto.Compras.Add(obj);
+            
+            Contexto.Compras.Add(obj);            
             return Contexto.SaveChanges() >=1;
         }
 

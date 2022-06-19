@@ -19,7 +19,6 @@ namespace Dominio.EntidadesVivero
         private static int tasaAmericaSur;
         public int TasaAmericaSur { get { return tasaAmericaSur; } }       
 
-
         public override decimal PrecioFinal()
         {
             decimal PrecioFinalImp = 0;
@@ -28,14 +27,13 @@ namespace Dominio.EntidadesVivero
             {
                 PrecioFinalImp += it.PrecioUnitario * it.Cantidad;
             }
-            if (PrecioFinalImp >0)
+            
+            PrecioFinalImp = PrecioFinalImp + PrecioFinalImp * TasaDGI/100;
+            if (OrigenAmericaSur)
             {
-                PrecioFinalImp = PrecioFinalImp + PrecioFinalImp * TasaDGI;
-                if (OrigenAmericaSur)
-                {
-                    PrecioFinalImp = PrecioFinalImp - PrecioFinalImp * TasaAmericaSur;
-                }
+                    PrecioFinalImp = PrecioFinalImp - PrecioFinalImp * TasaAmericaSur/100;
             }
+            
             
             return PrecioFinalImp;
         }
