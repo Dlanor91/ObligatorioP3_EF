@@ -52,5 +52,10 @@ namespace LogicaDeAplicacion
             Importacion.nuevaTasaDGI(tsDGI);
             Importacion.nuevaTasaAmericaSUR(tsAmSur);           
         }
+
+        public bool EliminarCompra(int id)
+        {
+            return RepoCompra.Remove(id);
+        }
     }
 }
