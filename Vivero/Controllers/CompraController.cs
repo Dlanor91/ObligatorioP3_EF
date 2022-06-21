@@ -30,14 +30,14 @@ namespace Vivero.Controllers
         }
 
         // GET: CompraController
-        public ActionResult Index()
+        public ActionResult BusqIdTipoPlanta()
         {
             MostrarPlantaAtributos();
             return View();
         }
         //Post
         [HttpPost]
-        public ActionResult Index(int ? idTipoPlanta)
+        public ActionResult BusqIdTipoPlanta(int ? idTipoPlanta)
         {
             try
             {
