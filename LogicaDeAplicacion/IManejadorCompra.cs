@@ -13,5 +13,6 @@ namespace LogicaDeAplicacion
         Compra MostrarCompraId(int id);
         void ParametrosCompra();
         IEnumerable<Compra> MostrarComprarPorIdPlanta(int idPlanta);
+        bool EliminarCompra(int id);
     }
 }

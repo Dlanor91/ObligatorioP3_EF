@@ -102,8 +102,23 @@ namespace Vivero.WebAPI.Controllers
 
         // DELETE api/Compra/5 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                if (id ==0) return BadRequest();
+                Compra buscarCompra = ManejadorCompra.MostrarCompraId(id);
+                if (buscarCompra == null) return NotFound();
+
+                bool ok = ManejadorCompra.EliminarCompra(id);
+                if (!ok) return Conflict();
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         // GET api/Compra/Planta/idPlanta
