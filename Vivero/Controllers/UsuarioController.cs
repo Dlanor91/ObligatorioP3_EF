@@ -97,32 +97,64 @@ namespace Vivero.Controllers
         {
             try
             {
-                bool usuario1 = ManejadorUsuario.PrecargaUsuarios(new Usuario {Email = "rl8506@gmail.com", Contrasenia = "Rl2022"});
-                bool usuario2 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "mauri@gmail.com", Contrasenia = "MF2022" });
-                bool usuario3 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "naty@gmail.com", Contrasenia = "Nd2022" });
-                bool usuario4 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "admin@gmail.com", Contrasenia = "Admin2022" });               
-                bool precarga = ManejadorPS.AltaParametros(new ParametroSistema
+                bool usuario1 = false;
+                bool existeUsuario1 = ManejadorUsuario.busquedadEmail("rl8506@gmail.com");
+                if (!existeUsuario1) { 
+                    usuario1 = ManejadorUsuario.PrecargaUsuarios(new Usuario {Email = "rl8506@gmail.com", Contrasenia = "Rl2022"});
+                }
+
+                bool usuario2 = false;
+                bool existeUsuario2 = ManejadorUsuario.busquedadEmail("mauri@gmail.com");
+                if (!existeUsuario2)
                 {
-                    TasaIVA = 22,
-                    TasaDescuentoAmericaSur = 10,
-                    TasaImportacionDGI = 20,
-                    ValorMinimoDescripcionTP = 10,
-                    ValorMaximoDescripcionTP = 200,
-                    ValorMinimoDescripcionPL = 10,
-                    ValorMaximoDescripcionPL = 500
-                });
+                    usuario2 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "mauri@gmail.com", Contrasenia = "MF2022" });
+                }
+
+                bool usuario3 = false;
+                bool existeUsuario3 = ManejadorUsuario.busquedadEmail("naty@gmail.com");
+                if (!existeUsuario3)
+                {
+                    usuario3 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "naty@gmail.com", Contrasenia = "Nd2022" });
+                }
+
+                bool usuario4 = false;
+                bool existeUsuario4 = ManejadorUsuario.busquedadEmail("admin@gmail.com");
+                if (!existeUsuario4)
+                {
+                    usuario4 = ManejadorUsuario.PrecargaUsuarios(new Usuario { Email = "admin@gmail.com", Contrasenia = "Admin2022" });
+                }
+
+                bool precarga = false;
+                ParametroSistema ps = ManejadorPS.ParametrosFilaUno();
+
+                if(ps == null) 
+                {               
+                
+                    precarga = ManejadorPS.AltaParametros(new ParametroSistema
+                    {
+                        TasaIVA = 22,
+                        TasaDescuentoAmericaSur = 10,
+                        TasaImportacionDGI = 20,
+                        ValorMinimoDescripcionTP = 10,
+                        ValorMaximoDescripcionTP = 200,
+                        ValorMinimoDescripcionPL = 10,
+                        ValorMaximoDescripcionPL = 500
+                    });
+
+                }
+
                 if (usuario1 && usuario2 && usuario3 && usuario4 && precarga)
                 {
                     return RedirectToAction("Login", "Usuario");                    
                 }
                 else
                 {
-                    throw new Exception("Usuarios ya existentes y precarga ya realizada.");
+                    throw new Exception("Usuarios ya existentes y precarga ya realizada, puede ingresar a la aplicación.");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ViewBag.Error = "Usuarios ya existentes y precarga ya realizada.";
+                ViewBag.Error = ex.Message; 
                 return View();
             }            
         }
