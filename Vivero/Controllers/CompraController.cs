@@ -32,8 +32,15 @@ namespace Vivero.Controllers
         // GET: CompraController
         public ActionResult BusqIdTipoPlanta()
         {
-            MostrarPlantaAtributos();
-            return View();
+            if (HttpContext.Session.GetString("datosNombreUsuario") != null)
+            {
+                MostrarPlantaAtributos();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }           
         }
         //Post
         [HttpPost]

@@ -23,9 +23,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Compra" asp-action="BusqIdTipoPlanta">Buscar Compra</a>
-                        </li>
                         @if (Context.Session.GetString("datosNombreUsuario") == null)
                         {
                             <li class="nav-item">
@@ -42,6 +39,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Planta" asp-action="Index">Plantas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Compra" asp-action="BusqIdTipoPlanta">Buscar Compra</a>
                             </li>
                         }
                     </ul>
