@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
+                    @Html.ValueFor(modelItem => item.Fecha, "{0:dd/MM/yyyy}")                   
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalCompra)
@@ -125,9 +125,8 @@
     }
 
     <style>
-        .tablaExtra {
-            border-color: white;
-            border: 0px;
+        .tablaExtra td{            
+            border: 0px  !important;
         }
     </style>
 

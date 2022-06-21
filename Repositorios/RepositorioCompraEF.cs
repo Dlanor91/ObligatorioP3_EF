@@ -32,8 +32,11 @@ namespace Repositorios
         }
 
         public bool Remove(int id)
-        {            
-            throw new NotImplementedException();            
+        {
+            Compra cp = Contexto.Compras.Find(id);
+            if (cp == null) return false;
+            Contexto.Compras.Remove(cp);
+            return Contexto.SaveChanges() == 1;
         }
 
         public bool Update(Compra obj)
