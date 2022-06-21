@@ -33,7 +33,7 @@ namespace Repositorios
 
         public IEnumerable<Planta> buscarPlantaMayorAlt(decimal altura)
         {
-            return Contexto.Plantas.Where(pl => pl.AlturaMax > altura).ToList();
+            return Contexto.Plantas.Where(pl => pl.AlturaMax >= altura).ToList();
         }
 
         public IEnumerable<Planta> buscarPlantaMenorAlt(decimal altura)
