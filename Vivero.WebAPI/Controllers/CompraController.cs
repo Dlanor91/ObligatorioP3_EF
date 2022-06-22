@@ -93,13 +93,7 @@ namespace Vivero.WebAPI.Controllers
                 return StatusCode(500);
             }
         }
-
-        // PUT api/Compra/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
+         
         // DELETE api/Compra/5 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

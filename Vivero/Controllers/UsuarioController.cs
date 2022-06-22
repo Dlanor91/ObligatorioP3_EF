@@ -90,8 +90,16 @@ namespace Vivero.Controllers
         }
 
         public IActionResult Registro() {
-            return View();
+            if (HttpContext.Session.GetString("datosNombreUsuario") == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }            
         }
+
         [HttpPost]
         public IActionResult Registro(string Usuario)
         {
